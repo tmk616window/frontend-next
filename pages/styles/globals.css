@@ -6,6 +6,10 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.Login {
+  background-color: rgba(76, 207, 254, 0.9);
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -11803,7 +11807,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../img/freelancer.jpg");
+  background-image: url("./img/freelancer-4952214_1920.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -12256,88 +12260,4 @@ max-height: 120px; */
   .card {
     margin: 20px;
   }
-}
-
-.list-item {
-  display: flex;
-  justify-content: space-between;
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-bottom: 50px;
-  padding: 30px 30px 30px 30px;
-}
-
-@media (max-width: 990px) {
-  .list-item {
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-}
-
-@media (max-width: 800px) {
-  .list-item {
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 10px 10px 10px;
-  }
-  .item-image {
-    width: 100%;
-    margin-top: 20px;
-  }
-  .logo-image {
-    margin-right: 0;
-  }
-}
-
-.item-content {
-  width: 74%;
-  padding: 10px 10px 10px 10px;
-}
-
-.item-image {
-  width: 40%;
-  margin-right: 40px;
-}
-
-.logo-image {
-  /* padding: 100px 100px 100px 100px; */
-  border-radius: 60%;
-}
-
-.article {
-  background-color: rgba(255, 173, 173, 0.955);
-  padding: 0px 5px 0px 10px;
-  border-radius: 7%;
-  margin-right: 10px;
-  display: inline-block;
-  margin-bottom: 5px;
-  font-size: large;
-  font-weight: bold;
-  color: white;
-}
-
-.toolArticle {
-  background-color: rgb(111, 111, 255);
-  padding: 0px 5px 0px 10px;
-  border-radius: 7%;
-  margin-right: 10px;
-  display: inline-block;
-  margin-bottom: 5px;
-  font-size: large;
-  font-weight: bold;
-  color: white;
-}
-
-.profile-details {
-  background-color: rgb(251, 251, 251);
-  margin: 5px 5px 5px 5px;
-}
-
-.langArticle {
-  margin: 1px;
-  display: inline-block;
-}
-
-.taskComment {
-  border-bottom: #000 1px ;
 }
