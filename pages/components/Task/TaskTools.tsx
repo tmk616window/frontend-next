@@ -17,7 +17,8 @@ import {
 
   
 
-  export const TaskTools = () => {
+  
+ const TaskTools = () => {
 
     const [toolForm, setToolForm] = useState<string>("")
     const [tools, setTools] = useState<string[]>([])
@@ -54,5 +55,5 @@ import {
   )
 };
   
-  
+export default TaskTools
   

@@ -1,12 +1,11 @@
-import {TransitionsModal} from './modal'
 import {
     Box,
     Container,
     Grid
   } from '@material-ui/core';
-  import {NewTaskDetails} from '../components/Task/NewTaskDetails';
-  import {TaskProlangs} from '../components/Task/TaskProlangs'
-  import {TaskTools} from '../components/Task/TaskTools'
+  import NewTaskDetails from '../components/Task/NewTaskDetails';
+  import TaskProlangs from '../components/Task/TaskProlangs'
+  import TaskTools from '../components/Task/TaskTools'
 
   export default function Task() {
 
@@ -47,7 +46,6 @@ import {
                 <TaskTools/>
               </Grid>
             </Grid>
-            <TransitionsModal/>
             <br/>
             <br/>
             <br/>

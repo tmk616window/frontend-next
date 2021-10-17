@@ -20,7 +20,7 @@ import {
     timezone: 'GTM-7'
   };
   
-  export const TaskProfile = () => (
+ const TaskProfile = () => (
     <>
     <Card>
       <CardContent>
@@ -65,5 +65,5 @@ import {
     </>
   );
   
-  
+  export default TaskProfile
   

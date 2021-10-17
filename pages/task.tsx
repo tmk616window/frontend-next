@@ -5,11 +5,11 @@ import {
     Container,
     Grid
   } from '@material-ui/core';
-  import {TaskProfile} from './components/Task/TaskProfile';
-  import {TaskDetails} from './components/Task/TaskDetails';
-  import {TaskProlangs} from './components/Task/TaskProlangs'
-  import {TaskTools} from './components/Task/TaskTools'
-  import {TaskComment} from './components/Task/TaskComment'
+  import TaskProfile from './components/Task/TaskProfile';
+  import TaskDetails from './components/Task/TaskDetails';
+  import TaskProlangs from './components/Task/TaskProlangs'
+  import TaskTools from './components/Task/TaskTools'
+  import TaskComment from './components/Task/TaskComment'
 
 
   export default function Task() {

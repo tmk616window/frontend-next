@@ -10,7 +10,7 @@ import {
   } from '@material-ui/core';
 import {createComment} from '../../../src/api/task/comment/CreateComment'
 
-export const TaskComment = () => {
+const TaskComment = () => {
   
   const[comment, setComment] = useState<string[]>([])
   const [form, setForm] = useState<string>("")
@@ -59,3 +59,5 @@ export const TaskComment = () => {
         </>
     );
   }
+
+  export default TaskComment

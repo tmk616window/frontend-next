@@ -33,7 +33,7 @@ type content = {
     text: string
 }
 
-export const NewTaskDetails = () => {
+ const NewTaskDetails = () => {
   const [contents, setContents] = useState<content[]>([{title:"", text:""}])
   const [image, setImage] = useState<string>("")
   const addContent = () => {
@@ -62,7 +62,7 @@ export const NewTaskDetails = () => {
   });
 
 
-  const handleChange = (event: any) => {
+const handleChange = (event: any) => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
@@ -202,6 +202,4 @@ export const NewTaskDetails = () => {
   );
 };
 
-
-
-
+export default NewTaskDetails

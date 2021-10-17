@@ -3,8 +3,8 @@ import {
   Container,
   Grid
 } from '@material-ui/core';
-import {AccountProfile} from './components/Account/AccountProfile';
-import {AccountProfileDetails} from './components/Account/AccountProfileDetails';
+import AccountProfile from './components/Account/AccountProfile';
+import AccountProfileDetails from './components/Account/AccountProfileDetails';
 
 export default function ProfilePage() {
 

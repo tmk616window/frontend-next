@@ -17,7 +17,7 @@ import {
   import DeleteIcon from '@material-ui/icons/Delete';
   
 
-  export const TaskProlangs = () => {
+ const TaskProlangs = () => {
 
       const [form, setForm] = useState<string>("")
       const [proLangs, setProLangs] = useState<string[]>([])
@@ -61,4 +61,4 @@ import {
 };
   
   
-  
+export default TaskProlangs

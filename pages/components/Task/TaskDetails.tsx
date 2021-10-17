@@ -28,7 +28,7 @@ const states = [
   }
 ];
 
-export const TaskDetails = (props: any) => {
+ const TaskDetails = (props: any) => {
   const [values, setValues] = useState({
     firstName: 'Katarina',
     lastName: 'Smith',
@@ -110,3 +110,4 @@ export const TaskDetails = (props: any) => {
   );
 };
 
+export default TaskDetails

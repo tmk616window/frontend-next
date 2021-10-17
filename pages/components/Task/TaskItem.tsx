@@ -6,7 +6,7 @@ interface TaskItemProps {
 }
 
 
-export const TaskItem: React.FC<TaskItemProps> = ({taskItem}) => {
+ const TaskItem: React.FC<TaskItemProps> = ({taskItem}) => {
   
     return (
             <li className="list-group-item list-group-item-primary">
@@ -15,3 +15,4 @@ export const TaskItem: React.FC<TaskItemProps> = ({taskItem}) => {
     );
   }
 
+  export default TaskItem

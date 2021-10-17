@@ -2,7 +2,7 @@
 import { Box, Container } from '@material-ui/core';
 import UserListResults from '../components/Admin/UserListResults';
 import UserListToolbar from '../components/Admin/UserListToolbar';
-import users from '../../__mocks__/users';
+// import users from '../../__mocks__/users';
 
 const UserList = () => (
   <>
