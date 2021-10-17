@@ -44,7 +44,7 @@ const Login: React.FC = () => {
         Cookies.set("_uid", res.headers["uid"])
 
         setIsSignedIn(true)
-        setCurrentUser(res.data.user)
+        setCurrentUser(res.data)
 
         // history.push("/")
 

@@ -45,7 +45,7 @@ const handleSubmit = async (params:any) => {
       Cookies.set("_uid", res.headers["uid"])
 
       setIsSignedIn(true)
-      setCurrentUser(res.data.data)
+      setCurrentUser(res.data)
       console.log(currentUser)
 
       // histroy.push("/")
