@@ -1,10 +1,8 @@
 import Post from '../img/post.jpg'
 import Ranking from '../img/ranking.jpg'
 import Hire from '../img/hire.jpg'
-// import { Card, Icon,  } from 'semantic-ui-react'
 import Image from 'next/image'
 import Link from 'next/link';
-// import '../styles/globals.css'
 
 export default function Top() {
   return (
@@ -26,7 +24,6 @@ export default function Top() {
                         <a className="btn btn-primary btn-xl text-uppercase" href="#services">エンジョブとは</a>
                     </div>
                 </header>
-                {/* <!-- Services--> */}
                 <section className="page-section" id="services">
                     <div className="container">
                         <div className="text-center">
@@ -56,76 +53,50 @@ export default function Top() {
                 <section className="page-section bg-light" id="portfolio">
                     <div className="container">
                         <div className="text-center">
-                            <h2 className="section-heading text-uppercase">ポートフォリ総合オランキング</h2>
+                            <h2 className="section-heading text-uppercase">ポートフォリオランキング</h2>
                         </div>
                         <div className="container">
-  <div className="row">
-    <div className="col-md-4">
-      <p>１位</p>
-      <div className="card card-1">
-      <Image alt="alt" src={Post} width="100%" height="100%" />
-        <h3>Ionic Native</h3>
-        <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-        <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-        <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-        <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-        <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-        <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-        <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
+                    <div className="row">
+                        <div className="col-md-4">
+                        <p>１位</p>
+                        <div className="card card-1">
+                        <Image alt="alt" src={Post} width="100%" height="200%" />
+                        <div className="cardContent">
+                            <h3>Ionic Native</h3>
+                            <p className="article" >vue.js</p>
+                            <p className="article" >vue.js</p>
+                            <p className="article" >vue.js</p>
+                            <p className="article" >vue.js</p>
 
-      </div>
-    </div>
-    <div className="col-md-4">
-    <p>２位</p>
-      <div className="card card-1">
-      <Image alt="post" src={Post} width="100%" height="100%"  />
-        <h3>Ionic Native</h3>
-        <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-      </div>
-    </div>
-    <div className="col-md-4">
-    <p>３位</p>
-      <div className="card card-1">
-      <Image alt="post" src={Post} width="100%" height="100%" />
-        <h3>Ionic Native</h3>
-        <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
-      </div>
-    </div>
-  </div>
-  {/* <a className="btn btn-primary btn-xl text-uppercase" href="/">他の作品を見る</a> */}
-
-</div>
-
-                    </div>
-                </section>
-                {/* <!-- About--> */}
-                <section className="page-section" id="about">
-                    <div className="container">
-                        <div className="text-center">
-                            <h2 className="section-heading text-uppercase">ポートフォリオ未経験者ランキング</h2>
-                            <h3 className="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                         </div>
-                        <ul className="timeline">
-                            <li className="timeline-inverted">
-                                <div className="timeline-image">
-                                    <h4>
-                                        Be Part
-                                        <br />
-                                        Of Our
-                                        <br />
-                                        Story!
-                                    </h4>
-                                </div>
-                            </li>
-                        </ul>
+                        <h4>ユーザー名</h4>
+                        </div>
+                        </div>
+                        <div className="col-md-4">
+                        <p>２位</p>
+                        <div className="card card-1">
+                        <Image alt="post" src={Post} width="100%" height="100%"  />
+                            <h3>Ionic Native</h3>
+                            <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
+                        </div>
+                        </div>
+                        <div className="col-md-4">
+                        <p>３位</p>
+                        <div className="card card-1">
+                        <Image alt="post" src={Post} width="100%" height="100%" />
+                            <h3>Ionic Native</h3>
+                            <p>A curated set of   ES5/ES6/TypeScript wrappers for plugins to easily add any native functionality to your Ionic apps.</p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
                     </div>
                 </section>
-                {/* <!-- Team--> */}
                 <section className="page-section bg-light" id="team">
+                <a className="taskButton btn">作品をみる</a>
+
                 </section>
-                {/* <!-- Clients--> */}
-                {/* <!-- Contact--> */}
-                {/* <!-- Footer--> */}
                 <footer className="footer py-4">
                     <div className="container">
                         <div className="row align-items-center">
@@ -142,22 +113,6 @@ export default function Top() {
                         </div>
                     </div>
                 </footer>
-                {/* <!-- Portfolio Modals-->
-                <!-- Portfolio item 1 modal popup--> */}
-                {/* <!-- Portfolio item 2 modal popup--> */}
-                {/* <!-- Portfolio item 3 modal popup--> */}
-                {/* <!-- Portfolio item 4 modal popup--> */}
-                {/* <!-- Portfolio item 5 modal popup--> */}
-                {/* <!-- Portfolio item 6 modal popup--> */}
-                {/* <!-- Bootstrap core JS-->
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-                <!-- Core theme JS-->
-                <script src="js/scripts.js"></script>
-                <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-                <!-- * *                               SB Forms JS                               * *-->
-                <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-                <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *--> */}
-                {/* <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> */}
             </body>
         </html>
     </div>

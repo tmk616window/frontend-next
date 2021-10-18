@@ -3,16 +3,31 @@ import {getProLangs} from '../src/api/prolang/GetProLang'
 import {
     Box,
     Container,
-    Grid
+    Grid,
+    IconButton
   } from '@material-ui/core';
+  import Favorite from '@material-ui/icons/Favorite';
+
   import TaskProfile from './components/Task/TaskProfile';
   import TaskDetails from './components/Task/TaskDetails';
   import TaskProlangs from './components/Task/TaskProlangs'
   import TaskTools from './components/Task/TaskTools'
   import TaskComment from './components/Task/TaskComment'
+  import {createLike} from '../src/api/like/CreateLike'
+  import { makeStyles } from '@material-ui/core/styles'
 
+  const useStyles = makeStyles({
+    customButton: {
+      position: "fixed",
+      bottom: "50px",
+      left: "30px",
+      // padding: "6px 40px",
+        },
+  })
+  
 
   export default function Task() {
+    const classes = useStyles()
 
     useEffect( () => {
       getProLangs()
@@ -100,6 +115,7 @@ import {
             <br/>
             <br/>
             <br/>
+            < IconButton className={classes.customButton} onClick={() => {createLike(2,2)}}><Favorite fontSize="fontSize large"/></IconButton>
 
           </Container>
         </Box>
