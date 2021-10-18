@@ -115,7 +115,7 @@ import {
             <br/>
             <br/>
             <br/>
-            < IconButton className={classes.customButton} onClick={() => {createLike(2,2)}}><Favorite fontSize="fontSize large"/></IconButton>
+            < IconButton className={classes.customButton} onClick={() => {createLike(2,2)}}><Favorite/></IconButton>
 
           </Container>
         </Box>
