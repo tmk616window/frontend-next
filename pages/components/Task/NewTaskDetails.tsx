@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image'
+import {createTask} from '../../../src/api/task/CreateTask'
+import {createContent} from '../../../src/api/task/content/CreateContent'
 
 import {
   Box,
@@ -35,6 +37,9 @@ type content = {
 
  const NewTaskDetails = () => {
   const [contents, setContents] = useState<content[]>([{title:"", text:""}])
+  const [title, setTitle] = useState<string>("")
+  const [desc, setDesc] = useState<string>("")
+  const [purl, setPurl] = useState<string>("")
   const [image, setImage] = useState<string>("")
   const addContent = () => {
     setContents([...contents, {title:"", text:""}]);
@@ -47,10 +52,6 @@ type content = {
       setContents(_contents)
     }
   
-
-  // const removeContent = (index:number) => {
-  //   setContents(contents.splice(index, index));
-  // }
 
   const deleteContent = (id:number) => {
     setContents(contents.filter((_, i) => i !== id))
@@ -69,12 +70,25 @@ const handleChange = (event: any) => {
     });
   };
 
+
+
   const handleImageChange = (event: any) => {
     const imageFile = event.target.files[0];
     const imageUrl = URL.createObjectURL(imageFile);
     setImage(imageUrl)
  }
- 
+
+ const postContent = () => {
+  for (const content of contents) {
+    createContent(content['title'], content['text'])
+  }
+}
+
+
+ const postTask = () => {
+  createTask(title, image, purl, desc)
+  postContent()
+}
 
   return (
       <Card>
@@ -90,6 +104,8 @@ const handleChange = (event: any) => {
             label="タイトル"
             name="タイトル"
             required
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             variant="outlined"
         />
         </Grid>
@@ -126,7 +142,8 @@ const handleChange = (event: any) => {
                 label="作品URL"
                 name="作品URL"
                 required
-                // value={}
+                value={purl}
+                onChange={(e) => setPurl(e.target.value)}
                 variant="outlined"
               />
 
@@ -140,6 +157,8 @@ const handleChange = (event: any) => {
               <p>概要</p>
               <TextareaAutosize
                 minRows={7}
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
                 style={{ width: "100%" }}
               />
             </Grid>
@@ -155,8 +174,8 @@ const handleChange = (event: any) => {
                         <Button onClick={()=>deleteContent(index)}>削除</Button>
                         <TextField
                             fullWidth
-                            label="タイトル"
-                            name="タイトル"
+                            label="サブタイトル"
+                            name="サブタイトル"
                             required
                             onChange={(event) => {
                               　      changeHandle("title", event.target.value, index);
@@ -197,6 +216,14 @@ const handleChange = (event: any) => {
           >
             保存
           </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={() =>{postTask()}}
+          >
+            test
+          </Button>
+
         </Box>
       </Card>
   );
