@@ -31,6 +31,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false)
   const [currentUser, setCurrentUser] = useState<User | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
+
+  const skipAuthPaths = [
+    '/login',
+    '/register',
+    '/top'
+  ]
+
+  const isPermitted = isSignedIn || skipAuthPaths.includes(router.asPath)
+
+  console.log(pageProps, router)
   
 
   const handleGetCurrentUser = async () => {
@@ -41,13 +51,17 @@ function MyApp({ Component, pageProps }: AppProps) {
       const _uid = Cookies.get("_uid")
       
       const res = await getCurrentUser()
-      console.log(res?.data.currentUser.isLogin)
+      console.log(res)
+      console.log(res?.data.is_login)
 
-      if (res?.data.currentUser.isLogin === true) {
+      if (res?.data.is_login === true) {
+        Cookies.set("_access_token", res.headers["access-token"])
+        Cookies.set("_client", res.headers["client"])
+        Cookies.set("_uid", res.headers["uid"])
         setIsSignedIn(true)
-        setCurrentUser(res?.data.currentUser.user)
+        setCurrentUser(res?.data.data)
 
-        console.log(res?.data.currentUser)
+        console.log(res?.data.data)
       } else {
         console.log("No current user")
       }
@@ -62,7 +76,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     execTest()
     console.log()
     handleGetCurrentUser()
-  }, [setCurrentUser])
+  }, [])
 
   const Private = ({ children }: any) => {
     if (!loading) {
@@ -82,7 +96,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser}}>
           <Navbar/>
-            <Component {...pageProps} />
+          { isPermitted
+            ? <Component {...pageProps} />
+            : <div>unauthorized</div>
+          }
       </AuthContext.Provider>
     </>
   )
