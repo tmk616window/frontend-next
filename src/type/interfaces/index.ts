@@ -33,3 +33,12 @@ export interface SignUpParams {
     updated_at: Date
   }
   
+
+  export interface Task {
+    id: number
+    title: string
+    description: string
+    logoImage: string
+    purl: string
+  }
+

@@ -1,5 +1,7 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {getProLangs} from '../src/api/prolang/GetProLang'
+import {getTask} from '../src/api/task/GetTask'
+
 import {
     Box,
     Container,
@@ -7,7 +9,7 @@ import {
     IconButton
   } from '@material-ui/core';
   import Favorite from '@material-ui/icons/Favorite';
-
+  import { useRouter } from 'next/router';
   import TaskProfile from './components/Task/TaskProfile';
   import TaskDetails from './components/Task/TaskDetails';
   import TaskProlangs from './components/Task/TaskProlangs'
@@ -21,29 +23,44 @@ import {
       position: "fixed",
       bottom: "50px",
       left: "30px",
-      // padding: "6px 40px",
         },
   })
   
 
-  export default function Task() {
+  //サーバーサイドレンダリング
+  export async function getServerSideProps(context) {
+    const id = context.query.id;
+    const task = (await getTask(id)).data
+    // const proLangs = (await getProLangs(id)).data
+
+    return {
+      props: {
+        id: id,
+        task: task,
+        // proLangs: proLangs
+      }
+    }
+  }
+
+  const Task = (props:any) => {
     const classes = useStyles()
+    const task = props.task.task  
+    const proL = props.proLangs
 
-    useEffect( () => {
-      getProLangs()
-      console.log(getProLangs())
-
-    }, [])
-  
+      useEffect(() => {
+        console.log("ccewcew",proL)
+      },[]) 
+    
 
     return(
-      <>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-    
+      <>    
+        <h1>検索キーワード：{task.title}</h1>
+        <h1>検索キーワード：{task.title}</h1>
+        <h1>検索キーワード：{task.title}</h1>
+        <h1>検索キーワード：{task.title}</h1>
+        <h1>検索キーワード：{task.title}</h1>
+        <h1>検索キーワード：{task.title}</h1>
+
         <Box
           sx={{
             minHeight: '100%',
@@ -61,7 +78,7 @@ import {
                 md={9}
                 xs={12}
               >
-                <TaskDetails />
+                <TaskDetails task={task} />
               </Grid>
               <Grid
                 item
@@ -76,11 +93,6 @@ import {
                 <TaskProfile />
               </Grid>
             </Grid>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
             <Grid
                 spacing={3}
                 lg={10}
@@ -88,6 +100,15 @@ import {
                 xs={12}
               >
               <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              {/* <h3>{task}</h3> */}
+
             </Grid>
             <Grid
                 spacing={3}
@@ -107,14 +128,6 @@ import {
               >
             </Grid>
 
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
             < IconButton className={classes.customButton} onClick={() => {createLike(2,2)}}><Favorite/></IconButton>
 
           </Container>
@@ -123,4 +136,6 @@ import {
     )
   };
   
+
+  export default Task
   

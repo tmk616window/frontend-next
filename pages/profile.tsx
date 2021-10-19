@@ -10,12 +10,6 @@ export default function ProfilePage() {
 
   return (
   <>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-
     <Box
       sx={{
         minHeight: '100%',
@@ -45,7 +39,6 @@ export default function ProfilePage() {
 
           </Grid>
         </Grid>
-        <br/>
         <Grid
             spacing={3}
             lg={4}

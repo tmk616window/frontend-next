@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
+import {Task} from '../../../src/type/interfaces'
 
 import {
   Box,
@@ -13,42 +14,22 @@ import {
   TextField
 } from '@material-ui/core';
 
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
+interface TaskItem {
+  task: Task
+}
 
- const TaskDetails = (props: any) => {
-  const [values, setValues] = useState({
-    firstName: 'Katarina',
-    lastName: 'Smith',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
-  });
 
-  const handleChange = (event: any) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
-  };
+ const TaskDetails:React.FC<TaskItem> = ({task}) => {
+
+  useEffect(() => {
+    console.log(task)
+  }, [])
+  
 
   return (
       <Card>
         <CardHeader
-          title="題名"
+          title={task.title}
         />
         <Divider />
         <CardContent>
@@ -85,7 +66,7 @@ const states = [
               xs={12}
             >
               <h3>概要</h3>
-                <p>、dl３、ld、３、dl３、ld、３、dl、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３３、ld、３、dl３、ld、３、dl３、ld、３、dl３、ld、３</p>
+                <p>{task.description}</p>
             </Grid>
           </Grid>
           <Grid>

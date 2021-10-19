@@ -24,6 +24,9 @@ import { AuthContext } from "../_app"
     }    
     
     const useStyles = makeStyles((theme: Theme) => ({
+        nabvarBottom: {
+          
+        },
 
         iconButton: {
           marginRight: theme.spacing(2),
@@ -111,7 +114,7 @@ import { AuthContext } from "../_app"
 
   return (
     <>
-      <AppBar position="absolute">
+      <AppBar position="absolute" className={classes.nabvarBottom}>
         <Toolbar>
           <IconButton
             edge="start"

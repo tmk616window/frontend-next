@@ -11,11 +11,6 @@ import {
 
     return(
       <>
-      <br/>
-      <br/>
-      <br/>
-    <br/>
-    <br/>
         <Box
           sx={{
             minHeight: '100%',
@@ -46,14 +41,6 @@ import {
                 <TaskTools/>
               </Grid>
             </Grid>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
 
           </Container>
         </Box>
