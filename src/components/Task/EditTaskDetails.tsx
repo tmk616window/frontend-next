@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Image from 'next/image'
-import {createTask} from '../../../src/api/task/CreateTask'
-import {createContent} from '../../../src/api/task/content/CreateContent'
-import {Task} from '../../../src/type/interfaces'
-import {updateTask} from '../../../src/api/task/UpdateTask'
+import {createTask} from '../../api/task/CreateTask'
+import {createContent} from '../../api/task/content/CreateContent'
+import {Task} from '../../type/interfaces'
+import {updateTask} from '../../api/task/UpdateTask'
 
 import {
   Box,

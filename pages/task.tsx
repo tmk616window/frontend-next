@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import {getProLangs} from '../src/api/prolang/GetProLang'
 import {getTask} from '../src/api/task/GetTask'
 import EditTask from '../pages/task/edit'
-import EditTaskDetails from './components/Task/EditTaskDetails'
+import EditTaskDetails from '../src/components/Task/EditTaskDetails'
 import {Task} from '../src/type/interfaces'
 import {
     Box,
@@ -14,11 +14,11 @@ import {
   } from '@material-ui/core';
   import Favorite from '@material-ui/icons/Favorite';
   import { useRouter } from 'next/router';
-  import TaskProfile from './components/Task/TaskProfile';
-  import TaskDetails from './components/Task/TaskDetails';
-  import TaskProlangs from './components/Task/TaskProlangs'
-  import TaskTools from './components/Task/TaskTools'
-  import TaskComment from './components/Task/TaskComment'
+  import TaskProfile from '../src/components/Task/TaskProfile';
+  import TaskDetails from '../src/components/Task/TaskDetails';
+  import TaskProlangs from '../src/components/Task/TaskProlangs'
+  import TaskTools from '../src/components/Task/TaskTools'
+  import TaskComment from '../src/components/Task/TaskComment'
   import {createLike} from '../src/api/like/CreateLike'
   import { makeStyles } from '@material-ui/core/styles'
 

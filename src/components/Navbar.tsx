@@ -11,9 +11,9 @@ import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
 
-import { signOut } from "../../src/api/login/auth"
+import { signOut } from "../api/login/auth"
 import Cookies from "js-cookie"
-import { AuthContext } from "../_app"
+import { AuthContext } from "../../pages/_app"
 
 
  const Navbar = () => {
