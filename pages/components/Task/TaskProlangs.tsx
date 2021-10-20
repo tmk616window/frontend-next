@@ -1,4 +1,6 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import {getProLangs} from '../../../src/api/prolang/GetProLang'
+
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
 import {
@@ -16,8 +18,36 @@ import {
   import {createProLang} from '../../../src/api/prolang/CreateProLang'
   import DeleteIcon from '@material-ui/icons/Delete';
   
+  // export async function getStaticProps({id}) {
+  //   // const id = context.query.id;
+  //   const proLangs = (await getProLangs(id)).data
+  //   return {
+  //     props: {
+  //       proLangs: proLangs,
+  //     },
+  //   }
+  // }
 
- const TaskProlangs = () => {
+  export async function getServerSideProps(context) {
+    const id = context.query.id;
+    const proLangs = (await getProLangs(id)).data
+    return {
+      props: {
+        proLangs: proLangs,
+      }
+    }
+  }
+
+
+
+
+ const TaskProlangs = (props:any) => {
+  const proLang = props.proLangs
+  useEffect(() => {
+    console.log(proLang)
+  },[]) 
+  
+
 
       const [form, setForm] = useState<string>("")
       const [proLangs, setProLangs] = useState<string[]>([])

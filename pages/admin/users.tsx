@@ -6,13 +6,6 @@ import UserListToolbar from '../components/Admin/UserListToolbar';
 
 const UserList = () => (
   <>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
 
     {/* <Helmet>
       <title>Customers | Material Kit</title>

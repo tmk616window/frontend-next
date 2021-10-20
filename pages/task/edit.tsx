@@ -6,8 +6,17 @@ import {
   import NewTaskDetails from '../components/Task/NewTaskDetails';
   import TaskProlangs from '../components/Task/TaskProlangs'
   import TaskTools from '../components/Task/TaskTools'
+  import {Task} from '../../src/type/interfaces'
 
-  export default function Task() {
+  interface TaskItem {
+    task: Task
+    setEdit: any
+  }
+  
+  
+  
+
+  const EditTask:React.FC<TaskItem> = ({task, setEdit}) => {
 
     return(
       <>
@@ -36,9 +45,6 @@ import {
                 md={4}
                 xs={12}
               >
-                <TaskProlangs/>
-                <br/>
-                <TaskTools/>
               </Grid>
             </Grid>
 
@@ -48,4 +54,5 @@ import {
     )
   };
   
+export default EditTask
   

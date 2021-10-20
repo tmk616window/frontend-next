@@ -3,10 +3,11 @@ import {getTasks} from '../src/api/task/GetTasks'
 import Image from 'next/image'
 import Logo from '../img/logo.png'
 import {Task} from '../src/type/interfaces/task'
+import Link from 'next/link';
 
 export const TaskList = () => {
   
-  const[tasks, setTasks] = useState<Task[]>()
+  const[tasks, setTasks] = useState<Task[]>([])
 
   
   const handleGetTasks = async () => {
@@ -16,9 +17,6 @@ export const TaskList = () => {
 
       if (res?.status === 200) {
         const Tasks = res.data.tasks
-        console.log("dem",res.data.tasks)
-        console.log("tasks", Tasks)
-        setTasks(Tasks)
         // setTasks((newTasks) => Tasks)
     
       } else {
@@ -46,16 +44,10 @@ export const TaskList = () => {
   console.log("dddmdopekmdopew", tasks)
     return (
       <div style={taslList}>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
               <>{tasks}</>
         <ul className="list-group">
           {["List Item 1", "List Item 2", "List Item 3"].map((listitem ,index)=> (
+            <Link href="/">
             <li key={index} className="list-group-item list-group-item-primary list-item" >
               <div className="item-image">
                 <Image src={Logo} alt="..." width = "250" height="250" className="logo-image" />
@@ -82,6 +74,7 @@ export const TaskList = () => {
 
               </div>
             </li>
+            </Link>
           ))}
         </ul>
       </div>

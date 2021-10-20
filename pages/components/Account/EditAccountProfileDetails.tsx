@@ -39,7 +39,7 @@ const states = [
   }
 ];
 
- const AccountProfileDetails:React.FC<UserProfile> = ({user, setEdit}) => {
+ const EditAccountProfileDetails:React.FC<UserProfile> = ({user, setEdit}) => {
   const [values, setValues] = useState<any>({
     name: user.name,
     email: user.email,
@@ -48,12 +48,6 @@ const states = [
     age: user.age
   });
   
-
-  const patchUser = () => {    
-    updateUser(user.id, values.name, values.email, values.live, values.details, values.age)
-    setEdit(true)
-    // location.reload();
-  };
 
 
   const handleChange = (event: any) => {    
@@ -81,63 +75,28 @@ const states = [
               md={12}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="名前"
-                name="name"
-                onChange={handleChange}
-                required
-                value={values.name}
-                variant="outlined"
-              />
+              <p>{user.name}</p>
             </Grid>
             <Grid
               item
               md={12}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="メールアドレス"
-                name="email"
-                onChange={handleChange}
-                required
-                value={values.email}
-                variant="outlined"
-              />
+              <p>{user.email}</p>
             </Grid>
             <Grid
               item
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="年齢"
-                name="age"
-                onChange={handleChange}
-                type="number"
-                value={values.age}
-                variant="outlined"
-              />
+              <p>{user.age}歳</p>
             </Grid>
             <Grid
               item
               md={6}
               xs={12}
             >
-              <TextField
-                fullWidth
-                label="都道府県"
-                name="live"
-                onChange={handleChange}
-                required
-                // select
-                // SelectProps={{ native: true }}
-                value={values.live}
-                variant="outlined"
-              >
-              </TextField>
+              <p>{user.live}</p>
             </Grid>
             <Grid
             item
@@ -171,13 +130,7 @@ const states = [
             xs={12}
           >
             <p>詳細プロフィール</p>
-            <TextareaAutosize
-            name="details"
-              minRows={7}
-              value={values.details}
-              style={{ width: "100%" }}
-              onChange={handleChange}
-          />
+            <p>{user.details}</p>
           </Grid>
 
           </Grid>
@@ -195,9 +148,9 @@ const states = [
           <Button
             color="secondary"
             variant="contained"
-            onClick={() =>{patchUser()}}
+            onClick={() =>{setEdit(false)}}
           >
-            保存
+            編集
           </Button>
         </Box>
       </Card>
@@ -205,4 +158,4 @@ const states = [
   );
 };
 
-export default AccountProfileDetails
+export default EditAccountProfileDetails

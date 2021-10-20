@@ -1,13 +1,19 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {getProLangs} from '../src/api/prolang/GetProLang'
+import {getTask} from '../src/api/task/GetTask'
+import EditTask from '../pages/task/edit'
+import EditTaskDetails from './components/Task/EditTaskDetails'
+
 import {
     Box,
     Container,
     Grid,
-    IconButton
+    IconButton,
+    Button,
+    Divider
   } from '@material-ui/core';
   import Favorite from '@material-ui/icons/Favorite';
-
+  import { useRouter } from 'next/router';
   import TaskProfile from './components/Task/TaskProfile';
   import TaskDetails from './components/Task/TaskDetails';
   import TaskProlangs from './components/Task/TaskProlangs'
@@ -21,29 +27,51 @@ import {
       position: "fixed",
       bottom: "50px",
       left: "30px",
-      // padding: "6px 40px",
         },
   })
   
 
-  export default function Task() {
-    const classes = useStyles()
+  //サーバーサイドレンダリング
+  export async function getServerSideProps(context) {
+    const id = context.query.id;
+    const task = (await getTask(id)).data
+    const proLangs = (await getProLangs(id)).data
 
-    useEffect( () => {
-      getProLangs()
-      console.log(getProLangs())
+    return {
+      props: {
+        id: id,
+        task: task,
+        proLangs: proLangs
+      }
+    }
+  }
 
-    }, [])
   
 
-    return(
-      <>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+  const Task = (props:any) => {
+    const[edit, setEdit] = useState<boolean>(true)
+
+    const classes = useStyles()
+    const task = props.task.task  
+    const proL = props.proLangs
+    const id = props.id
+
+      useEffect(() => {
+        console.log("ccewcew",proL)
+      },[]) 
     
+
+
+
+    return(
+      <>    
+        <h1>検索キーワード：{task.title}</h1>
+        <h1>検索キーワード：{task.title}</h1>
+        <h1>検索キーワード：{task.title}</h1>
+        <h1>検索キーワード：{task.title}</h1>
+        <h1>検索キーワード：{task.title}</h1>
+        <h1>検索キーワード：{task.title}</h1>
+
         <Box
           sx={{
             minHeight: '100%',
@@ -61,8 +89,19 @@ import {
                 md={9}
                 xs={12}
               >
-                <TaskDetails />
+
+
+                
+                {edit
+                  ? <TaskDetails task={task} setEdit={setEdit} />
+
+                  
+                    : <EditTaskDetails  task={task} setEdit={setEdit} id={id}/>
+                }
+
+
               </Grid>
+
               <Grid
                 item
                 lg={3}
@@ -76,11 +115,6 @@ import {
                 <TaskProfile />
               </Grid>
             </Grid>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
             <Grid
                 spacing={3}
                 lg={10}
@@ -88,6 +122,14 @@ import {
                 xs={12}
               >
               <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+              <h3>コメント一覧</h3>
+
             </Grid>
             <Grid
                 spacing={3}
@@ -107,14 +149,6 @@ import {
               >
             </Grid>
 
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
             < IconButton className={classes.customButton} onClick={() => {createLike(2,2)}}><Favorite/></IconButton>
 
           </Container>
@@ -123,4 +157,6 @@ import {
     )
   };
   
+
+  export default Task
   
