@@ -50,7 +50,7 @@ const states = [
   
 
   const patchUser = () => {    
-    updateUser(user.id, values.name, values.email, values.live, values.details, values.age)
+    updateUser(user.id, values.Name, values.email, values.live, values.details, values.age)
     setEdit(true)
     // location.reload();
   };

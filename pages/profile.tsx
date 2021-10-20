@@ -53,7 +53,7 @@ const ProfilePage =(props:any) => {
             md={6}
             xs={12}
           >
-            <AccountProfile user={user}/>
+            <AccountProfile user={props.user}/>
           </Grid>
           <Grid
             item

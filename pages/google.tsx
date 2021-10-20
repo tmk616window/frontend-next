@@ -1,7 +1,7 @@
 import {getTask} from '../src/api/task/GetTask'
 import {useEffect} from 'react'
 //サーバーサイドレンダリング
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context:any) {
     const id = context.query.id;  
     const t = (await getTask(id)).data
     return {
@@ -12,13 +12,8 @@ export async function getServerSideProps(context) {
     }
   }
   
-  export default function Result(props) {
+  export default function Result(props:any) {
   
-    // useEffect(() => {
-    //     console.log(props.task.task.id)
-
-    // }, [])
-    //Googleブックの情報を取得  
     return (
       <div style={{marginLeft: "50px"}}>
           <br/>

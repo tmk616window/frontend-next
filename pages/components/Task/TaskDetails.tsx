@@ -23,7 +23,7 @@ interface TaskItem {
  const TaskDetails:React.FC<TaskItem> = ({task, setEdit}) => {
 
   useEffect(() => {
-    console.log(task)
+    console.log("アイウエオ", task.title)
   }, [])
   
 

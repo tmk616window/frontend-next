@@ -3,7 +3,7 @@ import {getProLangs} from '../src/api/prolang/GetProLang'
 import {getTask} from '../src/api/task/GetTask'
 import EditTask from '../pages/task/edit'
 import EditTaskDetails from './components/Task/EditTaskDetails'
-
+import {Task} from '../src/type/interfaces'
 import {
     Box,
     Container,
@@ -29,7 +29,7 @@ import {
       left: "30px",
         },
   })
-  
+
 
   //サーバーサイドレンダリング
   export async function getServerSideProps(context:any) {
@@ -48,7 +48,7 @@ import {
 
   
 
-  const Task = (props:any) => {
+  const Tasks = (props:any) => {
     const[edit, setEdit] = useState<boolean>(true)
 
     const classes = useStyles()
@@ -95,7 +95,6 @@ import {
                 {edit
                   ? <TaskDetails task={task} setEdit={setEdit} />
 
-                  
                     : <EditTaskDetails  task={task} setEdit={setEdit} id={id}/>
                 }
 
@@ -158,5 +157,5 @@ import {
   };
   
 
-  export default Task
+  export default Tasks
   
