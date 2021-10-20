@@ -1,12 +1,16 @@
 import {useEffect, useState} from 'react'
 import {getProLangs} from '../src/api/prolang/GetProLang'
 import {getTask} from '../src/api/task/GetTask'
+import EditTask from '../pages/task/edit'
+import EditTaskDetails from './components/Task/EditTaskDetails'
 
 import {
     Box,
     Container,
     Grid,
-    IconButton
+    IconButton,
+    Button,
+    Divider
   } from '@material-ui/core';
   import Favorite from '@material-ui/icons/Favorite';
   import { useRouter } from 'next/router';
@@ -42,15 +46,22 @@ import {
     }
   }
 
+  
+
   const Task = (props:any) => {
+    const[edit, setEdit] = useState<boolean>(true)
+
     const classes = useStyles()
     const task = props.task.task  
     const proL = props.proLangs
+    const id = props.id
 
       useEffect(() => {
         console.log("ccewcew",proL)
       },[]) 
     
+
+
 
     return(
       <>    
@@ -78,8 +89,19 @@ import {
                 md={9}
                 xs={12}
               >
-                <TaskDetails task={task} />
+
+
+                
+                {edit
+                  ? <TaskDetails task={task} setEdit={setEdit} />
+
+                  
+                    : <EditTaskDetails  task={task} setEdit={setEdit} id={id}/>
+                }
+
+
               </Grid>
+
               <Grid
                 item
                 lg={3}
@@ -107,7 +129,6 @@ import {
               <h3>コメント一覧</h3>
               <h3>コメント一覧</h3>
               <h3>コメント一覧</h3>
-              {/* <h3>{task}</h3> */}
 
             </Grid>
             <Grid

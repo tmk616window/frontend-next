@@ -16,10 +16,11 @@ import {
 
 interface TaskItem {
   task: Task
+  setEdit: any
 }
 
 
- const TaskDetails:React.FC<TaskItem> = ({task}) => {
+ const TaskDetails:React.FC<TaskItem> = ({task, setEdit}) => {
 
   useEffect(() => {
     console.log(task)
@@ -69,24 +70,27 @@ interface TaskItem {
                 <p>{task.description}</p>
             </Grid>
           </Grid>
+          z
+          <Divider />
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  p: 2
+                }}
+              >
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  onClick={()=>{setEdit(false)}}
+                >
+                  編集
+                </Button>
+              </Box>
+
           <Grid>
           </Grid>
         </CardContent>
-        <Divider />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
-          }}
-        >
-          <Button
-            color="secondary"
-            variant="contained"
-          >
-            編集
-          </Button>
-        </Box>
       </Card>
   );
 };
