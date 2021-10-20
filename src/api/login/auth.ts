@@ -21,6 +21,12 @@ export const signOut = (params:any) => {
 // 認証済みのユーザーを取得
 export const getCurrentUser = () => {
   if (!Cookies.get("_access_token") || !Cookies.get("_client") || !Cookies.get("_uid")) return
-  return axios.get<{currentUser: currentUser}>("http://localhost/api/v1/auth/sessions")
+  return axios.get<{currentUser: currentUser}>("http://localhost/api/v1/auth/sessions", {
+    headers: {
+      "access-token": Cookies.get("_access_token"),
+      "client": Cookies.get("_client"),
+      "uid": Cookies.get("_uid")
+    }
+  })
 }
 
