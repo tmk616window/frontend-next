@@ -28,7 +28,7 @@ import {
   //   }
   // }
 
-  export async function getServerSideProps(context) {
+  export async function getServerSideProps(context:any) {
     const id = context.query.id;
     const proLangs = (await getProLangs(id)).data
     return {

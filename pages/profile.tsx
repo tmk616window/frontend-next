@@ -12,7 +12,7 @@ import {useEffect, useState} from 'react'
 import {getProLangs} from '../src/api/prolang/GetProLang'
 
 //サーバーサイドレンダリング
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context:any) {
   const id = context.query.id;
   const user = (await getUser(id)).data
   const p = (await getProLangs(id)).data
