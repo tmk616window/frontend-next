@@ -32,7 +32,7 @@ import {
   
 
   //サーバーサイドレンダリング
-  export async function getServerSideProps(context) {
+  export async function getServerSideProps(context:any) {
     const id = context.query.id;
     const task = (await getTask(id)).data
     const proLangs = (await getProLangs(id)).data
