@@ -18,19 +18,6 @@ import {
   import {createProLang} from '../../../src/api/prolang/CreateProLang'
   import DeleteIcon from '@material-ui/icons/Delete';
   
-  export async function getServerSideProps(context:any) {
-    const id = context.query.id;
-    const proLangs = (await getProLangs(id)).data
-    return {
-      props: {
-        proLangs: proLangs,
-      }
-    }
-  }
-
-
-
-
  const TaskProlangs = (props:any) => {
   const proLang = props.proLangs
   useEffect(() => {
