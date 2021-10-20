@@ -1,7 +1,7 @@
 import '../styles/globals.css'
-import '../pages/components/Task/task.css'
+import '../src/components/Task/task.css'
 import type { AppProps } from 'next/app'
-import Navbar from './components/Navbar'
+import Navbar from '../src/components/Navbar'
 import React, { useState, useEffect, createContext } from "react"
 import { User } from "../src/type/interfaces"
 import {getCurrentUser} from '../src/api/login/auth'

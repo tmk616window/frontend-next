@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
-import {User} from '../../../src/type/interfaces'
-import {updateUser} from '../../../src/api/user/UpdateUser'
+import {User} from '../../type/interfaces'
+import {updateUser} from '../../api/user/UpdateUser'
 
 import {
   Box,

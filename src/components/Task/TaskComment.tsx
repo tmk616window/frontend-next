@@ -8,7 +8,7 @@ import {
   TextareaAutosize,
   Box
   } from '@material-ui/core';
-import {createComment} from '../../../src/api/task/comment/CreateComment'
+import {createComment} from '../../api/task/comment/CreateComment'
 
 const TaskComment = () => {
   

@@ -12,7 +12,7 @@ import {
     IconButton,
     Grid
   } from '@material-ui/core';
-  import {createTool} from '../../../src/api/tool/CreatTool'
+  import {createTool} from '../../api/tool/CreatTool'
   import DeleteIcon from '@material-ui/icons/Delete';
 
   
