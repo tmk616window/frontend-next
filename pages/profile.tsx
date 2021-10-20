@@ -5,9 +5,35 @@ import {
 } from '@material-ui/core';
 import AccountProfile from './components/Account/AccountProfile';
 import AccountProfileDetails from './components/Account/AccountProfileDetails';
+import EditAccountProfileDetails from './components/Account/EditAccountProfileDetails';
 
-export default function ProfilePage() {
+import {getUser} from '../src/api/user/GetUser'
+import {useEffect, useState} from 'react'
+import {getProLangs} from '../src/api/prolang/GetProLang'
 
+//サーバーサイドレンダリング
+export async function getServerSideProps(context) {
+  const id = context.query.id;
+  const user = (await getUser(id)).data
+  const p = (await getProLangs(id)).data
+  return {
+    props: {
+      user: user,
+      p: p,
+      id: id,                
+    }
+  }
+}
+
+
+const ProfilePage =(props:any) => {
+  const [edit, setEdit] = useState<boolean>(true)
+  const id = props.id
+  const user = props.user.user
+  const p = props.p
+  const[u, setU] = useState(user)
+ 
+  
   return (
   <>
     <Box
@@ -27,7 +53,7 @@ export default function ProfilePage() {
             md={6}
             xs={12}
           >
-            <AccountProfile />
+            <AccountProfile user={user}/>
           </Grid>
           <Grid
             item
@@ -35,7 +61,16 @@ export default function ProfilePage() {
             md={6}
             xs={12}
           >
-            <AccountProfileDetails />
+
+            {edit
+                  ? <EditAccountProfileDetails user={user} setEdit={setEdit} />
+
+                  
+                    : <AccountProfileDetails user={user} setEdit={setEdit}/>
+                }
+
+
+            
 
           </Grid>
         </Grid>
@@ -48,8 +83,12 @@ export default function ProfilePage() {
             <h2>投稿したポートフォリオ</h2>
         </Grid>
       </Container>
+
+
+
     </Box>
   </>
 );
 }
 
+export default ProfilePage

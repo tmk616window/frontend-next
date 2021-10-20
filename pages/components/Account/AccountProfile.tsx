@@ -1,4 +1,5 @@
-// import moment from 'moment';
+import {User} from '../../../src/type/interfaces'
+import {getPrefectures} from '../../../src/api/user/GetPrefectures'
 import {
   Avatar,
   Box,
@@ -10,17 +11,11 @@ import {
   Typography
 } from '@material-ui/core';
 
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  city: 'Los Angeles',
-  country: 'USA',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith',
-  timezone: 'GTM-7'
-};
+interface UserProfile {
+  user: User
+}
 
-
- const AccountProfile = () => (
+ const AccountProfile:React.FC<UserProfile> = ({user},props) => (
   <>
   <Card>
     <CardContent>
@@ -49,19 +44,17 @@ const user = {
           color="textSecondary"
           variant="body1"
         >
-          {`${user.city} ${user.country}`}
         </Typography>
         <Typography
           color="textSecondary"
           variant="body1"
         >
-          <p>mdepwpoew</p>
+          <p>{user.email}</p>
         </Typography>
         <Typography
           color="textSecondary"
           variant="body1"
         >
-          {/* {`${moment().format('hh:mm A')} ${user.timezone}`} */}
         </Typography>
       </Box>
     </CardContent>
@@ -72,7 +65,7 @@ const user = {
         fullWidth
         variant="text"
       >
-        Upload picture
+        画像編集
       </Button>
     </CardActions>
     

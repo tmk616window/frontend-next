@@ -12,7 +12,7 @@ export default function Index() {
       return;
     }
     router.push({
-        pathname:"/task",       //URL
+        pathname:"/profile",       //URL
         query: {id :keyword} //検索クエリ
       });
   }

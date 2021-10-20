@@ -35,13 +35,13 @@ import {
   export async function getServerSideProps(context) {
     const id = context.query.id;
     const task = (await getTask(id)).data
-    // const proLangs = (await getProLangs(id)).data
+    const proLangs = (await getProLangs(id)).data
 
     return {
       props: {
         id: id,
         task: task,
-        // proLangs: proLangs
+        proLangs: proLangs
       }
     }
   }

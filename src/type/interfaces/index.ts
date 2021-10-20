@@ -31,6 +31,9 @@ export interface SignUpParams {
     allowPasswordChange: boolean
     created_at: Date
     updated_at: Date
+    details: string
+    live:string
+    age: number
   }
   
 
