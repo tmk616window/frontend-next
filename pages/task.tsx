@@ -1,14 +1,21 @@
 import {useEffect, useState} from 'react'
 import {getProLangs} from '../src/api/prolang/GetProLang'
 import {getTask} from '../src/api/task/GetTask'
+import {getTools} from '../src/api/tool/GetTool'
+import {getComments} from '../src/api/task/comment/GetComment'
+import {getContents} from '../src/api/task/content/GetComment'
+import {getUsers} from '../src/api/user/GetUsers'
+import {Comment} from '../src/type/interfaces'
+import Link from 'next/link'
 import EditTask from '../pages/task/edit'
 import EditTaskDetails from './components/Task/EditTaskDetails'
-import {Task} from '../src/type/interfaces'
 import {
     Box,
     Container,
     Grid,
     IconButton,
+    CardContent,
+    Card,
     Button,
     Divider
   } from '@material-ui/core';
@@ -36,12 +43,20 @@ import {
     const id = context.query.id;
     const task = (await getTask(id)).data
     const proLangs = (await getProLangs(id)).data
+    const tools = (await getTools(id)).data
+    const comments = (await getComments(id)).data
+    const contents = (await getContents(id)).data
+    const users = (await getUsers()).data
 
     return {
       props: {
         id: id,
         task: task,
-        proLangs: proLangs
+        proLangs: proLangs,
+        tools: tools,
+        comments:comments,
+        contents: contents,
+        users: users
       }
     }
   }
@@ -53,16 +68,23 @@ import {
 
     const classes = useStyles()
     const task = props.task.task  
-    const proL = props.proLangs
+    const proLangs = props.proLangs.prolang
+    const tools = props.tools.tools
+    const comments = props.comments.comment
+    const contents= props.contents.content
+    const users = props.users.user
     const id = props.id
+    const uuid:any = {}
+    for(const user of users) {
+      uuid[user.id] = user.email
+    }
+
 
       useEffect(() => {
-        console.log("ccewcew",proL)
+        console.log("ccewcew",uuid)
+
       },[]) 
     
-
-
-
     return(
       <>    
         <h1>検索キーワード：{task.title}</h1>
@@ -88,30 +110,24 @@ import {
                 lg={9}
                 md={9}
                 xs={12}
-              >
-
-
-                
+              > 
                 {edit
                   ? <TaskDetails task={task} setEdit={setEdit} />
 
                     : <EditTaskDetails  task={task} setEdit={setEdit} id={id}/>
                 }
-
-
               </Grid>
-
               <Grid
                 item
                 lg={3}
                 md={3}
                 xs={12}
               >
-                <TaskProlangs />
+                <TaskProlangs proL={proLangs} />
                 <br/>
-                <TaskTools />
+                <TaskTools  tls={tools}/>
                 <br/>
-                <TaskProfile />
+                <TaskProfile/>
               </Grid>
             </Grid>
             <Grid
@@ -120,15 +136,19 @@ import {
                 md={10}
                 xs={12}
               >
+              <br/>
               <h3>コメント一覧</h3>
-              <h3>コメント一覧</h3>
-              <h3>コメント一覧</h3>
-              <h3>コメント一覧</h3>
-              <h3>コメント一覧</h3>
-              <h3>コメント一覧</h3>
-              <h3>コメント一覧</h3>
-              <h3>コメント一覧</h3>
-
+              {comments.map((comment:Comment, index:number) =>
+                <div key={index}>
+                  <Card>
+                    <CardContent>
+                  <p >{comment.text}</p>
+                  <Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{uuid[comment.user_id]}</Link>
+                    </CardContent>
+                  </Card>
+                  <br/>
+                </div>
+                )}
             </Grid>
             <Grid
                 spacing={3}
@@ -136,10 +156,8 @@ import {
                 md={10}
                 xs={12}
               >
-              <h4>ユーザーめい</h4>
               <TaskComment/>
             </Grid>
-
             <Grid
                 spacing={3}
                 lg={10}
@@ -147,9 +165,7 @@ import {
                 xs={12}
               >
             </Grid>
-
             < IconButton className={classes.customButton} onClick={() => {createLike(2,2)}}><Favorite/></IconButton>
-
           </Container>
         </Box>
       </>  

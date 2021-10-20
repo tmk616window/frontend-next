@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import {Tool} from '../../../src/type/interfaces'
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
 import {
@@ -15,10 +16,12 @@ import {
   import {createTool} from '../../../src/api/tool/CreatTool'
   import DeleteIcon from '@material-ui/icons/Delete';
 
-  
+  interface ToolsParams{
+    tls: Tool[]
+  }
 
   
- const TaskTools = () => {
+ const TaskTools:React.FC<ToolsParams> = ({tls}) => {
 
     const [toolForm, setToolForm] = useState<string>("")
     const [tools, setTools] = useState<string[]>([])
@@ -27,9 +30,13 @@ import {
       setTools(tools.filter((_, i) => i !== id))
     }
       
+    useEffect(() => {
+      console.log("dniwhnduiwhuidhwuidew", tls)
+    }, [])
     const addContent = () => {
       setTools([...tools, toolForm]);
       console.log(tools)
+      location.reload();
       createTool(toolForm)
       setToolForm("")
       };
@@ -39,9 +46,9 @@ import {
     <Card>
       <CardContent>
       <h4>使用ツール</h4>
-      {tools.map((proLang:string, index:number) => (
-         <p className="toolArticle" key={index}>{proLang}< IconButton onClick={() =>deleteContent(index)}><DeleteIcon fontSize="small"/></IconButton></p>
-     ))} 
+      {tls.map((tool:Tool, index:number) =>
+            <p key={index} className="toolArticle">{tool.name}< IconButton onClick={() =>deleteContent(index)}><DeleteIcon fontSize="small"/></IconButton></p>
+          )}
      </CardContent>
       <Divider />
       <Divider />

@@ -41,3 +41,28 @@ export interface SignUpParams {
     user_id: number
   }
 
+  export interface Tool {
+    id: number
+    name: string
+    task_id: number
+  }
+
+  export interface ProLang {
+    id: number
+    lange: string
+    task_id: number
+  }
+
+  export interface Comment{
+    text: string,
+    task_id: number,
+    user_id: number,
+  }
+
+  export interface Content{
+    title: string,
+    text: string,
+    task_id: number,
+  }
+
+

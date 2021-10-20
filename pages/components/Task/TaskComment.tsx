@@ -20,6 +20,7 @@ const TaskComment = () => {
     console.log(comment)
     createComment(form)
     setForm("")
+    location.reload();
     };
 
   
