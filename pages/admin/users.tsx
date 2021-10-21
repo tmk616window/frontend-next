@@ -1,7 +1,7 @@
 // import { Helmet } from 'react-helmet';
 import { Box, Container } from '@material-ui/core';
-import UserListResults from '../components/Admin/UserListResults';
-import UserListToolbar from '../components/Admin/UserListToolbar';
+import UserListResults from '../../src/components/Admin/UserListResults';
+import UserListToolbar from '../../src/components/Admin/UserListToolbar';
 // import users from '../../__mocks__/users';
 
 const UserList = () => (

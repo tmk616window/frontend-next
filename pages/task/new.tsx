@@ -3,9 +3,9 @@ import {
     Container,
     Grid
   } from '@material-ui/core';
-  import NewTaskDetails from '../components/Task/NewTaskDetails';
-  import TaskProlangs from '../components/Task/TaskProlangs'
-  import TaskTools from '../components/Task/TaskTools'
+  import NewTaskDetails from '../../src/components/Task/NewTaskDetails';
+  import TaskProlangs from '../../src/components/Task/TaskProlangs'
+  import TaskTools from '../../src/components/Task/TaskTools'
 
   export default function Task() {
 
@@ -36,9 +36,9 @@ import {
                 md={4}
                 xs={12}
               >
-                <TaskProlangs/>
+                {/* <TaskProlangs/> */}
                 <br/>
-                <TaskTools/>
+                {/* <TaskTools/> */}
               </Grid>
             </Grid>
 

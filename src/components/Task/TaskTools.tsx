@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {Tool} from '../../../src/type/interfaces'
+import {Tool} from '../../type/interfaces'
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
 import {
@@ -13,7 +13,7 @@ import {
     IconButton,
     Grid
   } from '@material-ui/core';
-  import {createTool} from '../../../src/api/tool/CreatTool'
+  import {createTool} from '../../api/tool/CreatTool'
   import DeleteIcon from '@material-ui/icons/Delete';
 
   interface ToolsParams{

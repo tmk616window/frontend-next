@@ -3,9 +3,9 @@ import {
   Container,
   Grid
 } from '@material-ui/core';
-import AccountProfile from './components/Account/AccountProfile';
-import AccountProfileDetails from './components/Account/AccountProfileDetails';
-import EditAccountProfileDetails from './components/Account/EditAccountProfileDetails';
+import AccountProfile from '../src/components/Account/AccountProfile';
+import AccountProfileDetails from '../src/components/Account/AccountProfileDetails';
+import EditAccountProfileDetails from '../src/components/Account/EditAccountProfileDetails';
 
 import {getUser} from '../src/api/user/GetUser'
 import {useEffect, useState} from 'react'

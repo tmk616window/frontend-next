@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
-import {getProLangs} from '../../../src/api/prolang/GetProLang'
-import {ProLang} from '../../../src/type/interfaces'
+import {getProLangs} from '../../api/prolang/GetProLang'
+import {ProLang} from '../../type/interfaces'
 
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
@@ -16,7 +16,7 @@ import {
     IconButton,
     Grid
   } from '@material-ui/core';
-  import {createProLang} from '../../../src/api/prolang/CreateProLang'
+  import {createProLang} from '../../api/prolang/CreateProLang'
   import DeleteIcon from '@material-ui/icons/Delete';
   
   interface ProLangParam{

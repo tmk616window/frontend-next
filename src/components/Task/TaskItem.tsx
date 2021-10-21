@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {TaskList} from '../../tasks'
+import {TaskList} from '../../../pages/tasks'
 
 interface TaskItemProps {
     taskItem: string

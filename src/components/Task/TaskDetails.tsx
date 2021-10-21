@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
-import {Task} from '../../../src/type/interfaces'
+import {Task} from '../../type/interfaces'
 
 import {
   Box,

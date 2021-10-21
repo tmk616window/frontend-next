@@ -1,5 +1,5 @@
-import {User} from '../../../src/type/interfaces'
-import {getPrefectures} from '../../../src/api/user/GetPrefectures'
+import {User} from '../../type/interfaces'
+import {getPrefectures} from '../../api/user/GetPrefectures'
 import {
   Avatar,
   Box,

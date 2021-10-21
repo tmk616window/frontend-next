@@ -8,7 +8,7 @@ import {getUsers} from '../src/api/user/GetUsers'
 import {Comment} from '../src/type/interfaces'
 import Link from 'next/link'
 import EditTask from '../pages/task/edit'
-import EditTaskDetails from './components/Task/EditTaskDetails'
+import EditTaskDetails from '../src/components/Task/EditTaskDetails'
 import {
     Box,
     Container,
@@ -21,11 +21,11 @@ import {
   } from '@material-ui/core';
   import Favorite from '@material-ui/icons/Favorite';
   import { useRouter } from 'next/router';
-  import TaskProfile from './components/Task/TaskProfile';
-  import TaskDetails from './components/Task/TaskDetails';
-  import TaskProlangs from './components/Task/TaskProlangs'
-  import TaskTools from './components/Task/TaskTools'
-  import TaskComment from './components/Task/TaskComment'
+  import TaskProfile from '../src/components/Task/TaskProfile';
+  import TaskDetails from '../src/components/Task/TaskDetails';
+  import TaskProlangs from '../src/components/Task/TaskProlangs'
+  import TaskTools from '../src/components/Task/TaskTools'
+  import TaskComment from '../src/components/Task/TaskComment'
   import {createLike} from '../src/api/like/CreateLike'
   import { makeStyles } from '@material-ui/core/styles'
 
@@ -137,26 +137,7 @@ import {
                 xs={12}
               >
               <br/>
-              <h3>コメント一覧</h3>
-              {comments.map((comment:Comment, index:number) =>
-                <div key={index}>
-                  <Card>
-                    <CardContent>
-                  <p >{comment.text}</p>
-                  <Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{uuid[comment.user_id]}</Link>
-                    </CardContent>
-                  </Card>
-                  <br/>
-                </div>
-                )}
-            </Grid>
-            <Grid
-                spacing={3}
-                lg={10}
-                md={10}
-                xs={12}
-              >
-              <TaskComment/>
+              <TaskComment comments={comments} uuid={uuid}/>
             </Grid>
             <Grid
                 spacing={3}

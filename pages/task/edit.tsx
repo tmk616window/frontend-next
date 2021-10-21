@@ -3,9 +3,9 @@ import {
     Container,
     Grid
   } from '@material-ui/core';
-  import NewTaskDetails from '../components/Task/NewTaskDetails';
-  import TaskProlangs from '../components/Task/TaskProlangs'
-  import TaskTools from '../components/Task/TaskTools'
+  import NewTaskDetails from '../../src/components/Task/NewTaskDetails';
+  import TaskProlangs from '../../src/components/Task/TaskProlangs'
+  import TaskTools from '../../src/components/Task/TaskTools'
   import {Task} from '../../src/type/interfaces'
 
   interface TaskItem {
