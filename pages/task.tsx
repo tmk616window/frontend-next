@@ -5,6 +5,7 @@ import {getTools} from '../src/api/tool/GetTool'
 import {getComments} from '../src/api/task/comment/GetComment'
 import {getContents} from '../src/api/task/content/GetComment'
 import {getUsers} from '../src/api/user/GetUsers'
+import {getUser} from '../src/api/user/GetUser'
 import {Comment} from '../src/type/interfaces'
 import Link from 'next/link'
 import EditTask from '../pages/task/edit'
@@ -47,6 +48,8 @@ import {
     const comments = (await getComments(id)).data
     const contents = (await getContents(id)).data
     const users = (await getUsers()).data
+    // const user = (await getUser(id)).data
+    
 
     return {
       props: {
@@ -56,7 +59,8 @@ import {
         tools: tools,
         comments:comments,
         contents: contents,
-        users: users
+        users: users,
+        // user:user
       }
     }
   }
@@ -74,6 +78,7 @@ import {
     const contents= props.contents.content
     const users = props.users.user
     const id = props.id
+    // const user = props.user
     const uuid:any = {}
     for(const user of users) {
       uuid[user.id] = user.email
@@ -81,7 +86,7 @@ import {
 
 
       useEffect(() => {
-        console.log("ccewcew",uuid)
+        console.log("ccewcew",)
 
       },[]) 
     

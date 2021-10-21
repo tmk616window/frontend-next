@@ -58,8 +58,8 @@ interface TaskItem {
               md={12}
               xs={12}
             >
-              <h3>作品URL</h3>
-                <p>testtesttesttesttesttesttesttesttest</p>
+              <h3>ポートフォリオURL</h3>
+                <p>{task.purl}</p>
             </Grid>
             <Grid
               item
