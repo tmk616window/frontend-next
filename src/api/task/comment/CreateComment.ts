@@ -1,10 +1,10 @@
 import {api} from '../../common/client'
 
-export const createComment = (text: string) =>  {
+export const createComment = (text:string, taskId:number, userId:number) =>  {
     return api.post('/comments' , 
     {
         text: text,
-        task_id: 21,
-        user_id: 1
+        task_id: taskId,
+        user_id: userId
     }
     )}

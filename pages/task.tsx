@@ -137,7 +137,7 @@ import {
                 xs={12}
               >
               <br/>
-              <TaskComment comments={comments} uuid={uuid}/>
+              <TaskComment id={task.id} comments={comments} uuid={uuid}/>
             </Grid>
             <Grid
                 spacing={3}

@@ -16,9 +16,10 @@ import {Comment} from '../../type/interfaces'
 interface CommentParam{
   comments: Comment[]
   uuid: any
+  id: number
 }
 
-const TaskComment:React.FC<CommentParam> = ({comments, uuid}) => {
+const TaskComment:React.FC<CommentParam> = ({comments, uuid, id}) => {
   
   const[comment, setComment] = useState<string[]>([])
   const [form, setForm] = useState<string>("")
@@ -26,7 +27,7 @@ const TaskComment:React.FC<CommentParam> = ({comments, uuid}) => {
   const addContent = () => {
     setComment([...comment, form]);
     console.log(comment)
-    createComment(form)
+    createComment(form, id, 1)
     setForm("")
     location.reload();
     };
