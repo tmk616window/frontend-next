@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
-import {Task} from '../../type/interfaces'
+import {Task, Content} from '../../type/interfaces'
+
 
 import {
   Box,
@@ -17,13 +18,14 @@ import {
 interface TaskItem {
   task: Task
   setEdit: any
+  contents: Content[]
 }
 
 
- const TaskDetails:React.FC<TaskItem> = ({task, setEdit}) => {
+ const TaskDetails:React.FC<TaskItem> = ({task, setEdit, contents}) => {
 
   useEffect(() => {
-    console.log("アイウエオ", task.title)
+    console.log("アイウエオ", contents)
   }, [])
   
 
@@ -70,7 +72,23 @@ interface TaskItem {
                 <p>{task.description}</p>
             </Grid>
           </Grid>
-          z
+          <Grid
+              item
+              md={12}
+              xs={12}
+            >
+            {contents.map((content:Content, index:number) =>
+                  <div key={index}>
+                    <Card>
+                    <CardContent>
+                    <h3>{content.title}</h3>
+                    <p >{content.text}</p>
+                      </CardContent>
+                    </Card>
+                    <br/>
+                  </div>
+                  )}
+          </Grid>
           <Divider />
               <Box
                 sx={{

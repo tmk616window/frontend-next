@@ -117,7 +117,8 @@ import {
                 xs={12}
               > 
                 {edit
-                  ? <TaskDetails task={task} setEdit={setEdit} />
+                  ? <TaskDetails task={task} setEdit={setEdit} contents={contents}/>
+                  
 
                     : <EditTaskDetails  task={task} setEdit={setEdit} id={id}/>
                 }
