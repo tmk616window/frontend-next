@@ -21,10 +21,11 @@ import {
   
   interface ProLangParam{
     proL: ProLang[]
+    id: number
   }
 
 
- const TaskProlangs:React.FC<ProLangParam> = ({proL}) => {  
+ const TaskProlangs:React.FC<ProLangParam> = ({proL, id}) => {  
       const [form, setForm] = useState<string>("")
       const [proLangs, setProLangs] = useState<string[]>([])
     
@@ -36,7 +37,7 @@ import {
       const addContent = () => {
         setProLangs([...proLangs, form]);
         console.log(proLangs)
-        createProLang(form)
+        createProLang(form, id)
         location.reload();
         setForm("")
         };

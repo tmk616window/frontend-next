@@ -90,7 +90,6 @@ const handleChange = (event: any) => {
  const postTask = async () => {
   const taskPesp = (await createTask(title, image, purl, desc)).data.task
   postContent()
-  console.log(taskPesp.id)
 
   router.push({
     pathname:"/task",       

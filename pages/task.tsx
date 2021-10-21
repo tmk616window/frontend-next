@@ -123,9 +123,9 @@ import {
                 md={3}
                 xs={12}
               >
-                <TaskProlangs proL={proLangs} />
+                <TaskProlangs proL={proLangs} id={id} />
                 <br/>
-                <TaskTools  tls={tools}/>
+                <TaskTools  tls={tools} id={id}/>
                 <br/>
                 <TaskProfile/>
               </Grid>

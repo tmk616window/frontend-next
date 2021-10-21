@@ -18,10 +18,11 @@ import {
 
   interface ToolsParams{
     tls: Tool[]
+    id: number
   }
 
   
- const TaskTools:React.FC<ToolsParams> = ({tls}) => {
+ const TaskTools:React.FC<ToolsParams> = ({tls, id}) => {
 
     const [toolForm, setToolForm] = useState<string>("")
     const [tools, setTools] = useState<string[]>([])
@@ -37,7 +38,7 @@ import {
       setTools([...tools, toolForm]);
       console.log(tools)
       location.reload();
-      createTool(toolForm)
+      createTool(toolForm, id)
       setToolForm("")
       };
 

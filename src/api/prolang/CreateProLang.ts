@@ -1,10 +1,10 @@
 import {api} from '../common/client'
 import axios from 'axios'
 
-export const createProLang = (lange: string) =>  {
+export const createProLang = (lange:string, id:number) =>  {
     return api.post('/prolongs' , 
     {
         lange: lange,
-        task_id: 21
+        task_id: id
     }
     )}
