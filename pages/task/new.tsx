@@ -7,6 +7,7 @@ import {
   import TaskProlangs from '../../src/components/Task/TaskProlangs'
   import TaskTools from '../../src/components/Task/TaskTools'
 
+
   export default function Task() {
 
     return(
@@ -24,16 +25,23 @@ import {
             >
               <Grid
                 item
-                lg={8}
-                md={8}
+                lg={1}
+                md={1}
+                xs={12}
+              >
+              </Grid>
+              <Grid
+                item
+                lg={10}
+                md={10}
                 xs={12}
               >
                 <NewTaskDetails />
               </Grid>
               <Grid
                 item
-                lg={4}
-                md={4}
+                lg={1}
+                md={1}
                 xs={12}
               >
                 {/* <TaskProlangs/> */}

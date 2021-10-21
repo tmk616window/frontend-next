@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image'
 import {createTask} from '../../api/task/CreateTask'
 import {createContent} from '../../api/task/content/CreateContent'
+import { useRouter } from 'next/router';
 
 import {
   Box,
@@ -36,6 +37,7 @@ type content = {
 }
 
  const NewTaskDetails = () => {
+  const router = useRouter();
   const [contents, setContents] = useState<content[]>([{title:"", text:""}])
   const [title, setTitle] = useState<string>("")
   const [desc, setDesc] = useState<string>("")
@@ -85,9 +87,16 @@ const handleChange = (event: any) => {
 }
 
 
- const postTask = () => {
-  createTask(title, image, purl, desc)
+ const postTask = async () => {
+  const taskPesp = (await createTask(title, image, purl, desc)).data.task
   postContent()
+  console.log(taskPesp.id)
+
+  router.push({
+    pathname:"/task",       
+    query: {id : taskPesp.id} 
+  });
+
 }
 
   return (
