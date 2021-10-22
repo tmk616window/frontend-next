@@ -120,7 +120,7 @@ import {
                   ? <TaskDetails task={task} setEdit={setEdit} contents={contents}/>
                   
 
-                    : <EditTaskDetails  task={task} setEdit={setEdit} id={id}/>
+                    : <EditTaskDetails  task={task} setEdit={setEdit} id={id} propsContents={contents}/>
                 }
               </Grid>
               <Grid

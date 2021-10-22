@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image'
 import {createTask} from '../../api/task/CreateTask'
 import {createContent} from '../../api/task/content/CreateContent'
-import {Task} from '../../type/interfaces'
+import {Task, Content} from '../../type/interfaces'
 import {updateTask} from '../../api/task/UpdateTask'
+import {updateContent} from '../../api/task/content/UpdateContent'
 
 import {
   Box,
@@ -18,27 +19,24 @@ import {
 } from '@material-ui/core';
 
 
-type content = {
-    title :string,
-    text: string
-}
-
 interface TaskItem {
   task: Task
   setEdit: any
   id :number
+  propsContents: Content[]
 }
 
 
 
- const EditTaskDetails:React.FC<TaskItem> = ({task, setEdit, id}) => {
-  const [contents, setContents] = useState<content[]>([{title:"", text:""}])
+ const EditTaskDetails:React.FC<TaskItem> = ({task, setEdit, propsContents, id}) => {
+  const [contents, setContents] = useState<any[]>(propsContents)
   const [title, setTitle] = useState<string>(task.title)
   const [desc, setDesc] = useState<string>(task.description)
-  const [purl, setPurl] = useState<string>("")
-  const [image, setImage] = useState<string>("")
+  const [purl, setPurl] = useState<string>(task.purl)
+  const [image, setImage] = useState<string>(task.logoImage)
   const addContent = () => {
-    setContents([...contents, {title:"", text:""}]);
+        setContents([...contents, {title:"", text:""}]);
+
     console.log(contents)
     };
 
@@ -76,15 +74,27 @@ const handleChange = (event: any) => {
 
  const postContent = () => {
   for (const content of contents) {
-    createContent(content['title'], content['text'])
+    createContent(content['title'], content['text'], task.id)
   }
 }
+
+
+const patchContent = () => {
+  console.log(contents)
+  for (const content of contents) {
+    if(content.id) {
+      updateContent(content['title'], content['text'], task.id, content.id)
+    } else {
+      createContent(content['title'], content['text'], task.id)
+    }
+  }
+}
+
 
 const patchTask = () => {
   setEdit(true)
   updateTask(title, image, purl, desc, id, task.user_id)
 }
-
 
   return (
       <Card>
@@ -160,7 +170,7 @@ const patchTask = () => {
             </Grid>
     
                 <Button onClick={addContent}>追加</Button>
-                {contents.map((c:{title:string, text:string}, index:number) => (
+                {contents.map((content:Content, index:number) => (
                     <Grid
                         key={index}
                         item
@@ -176,7 +186,7 @@ const patchTask = () => {
                             onChange={(event) => {
                               　      changeHandle("title", event.target.value, index);
                               　    }}
-                            value={c.title}
+                            value={content.title}
                             variant="outlined"
                             />
                         <br/>
@@ -188,7 +198,7 @@ const patchTask = () => {
                         onChange={(event) => {
                           　      changeHandle("text", event.target.value, index);
                           　    }}
-                          value={c.text}
+                          value={content.text}
                           minRows={7}
                           style={{ width: "100%" }}
                         />
@@ -209,7 +219,7 @@ const patchTask = () => {
           <Button
             color="secondary"
             variant="contained"
-            onClick={() =>{patchTask()}}
+            onClick={() =>{patchContent()}}
           >
             保存
           </Button>

@@ -80,16 +80,16 @@ const handleChange = (event: any) => {
     setImage(imageUrl)
  }
 
- const postContent = () => {
+ const postContent = (id: number) => {
   for (const content of contents) {
-    createContent(content['title'], content['text'])
+    createContent(content['title'], content['text'], id)
   }
 }
 
 
  const postTask = async () => {
   const taskPesp = (await createTask(title, image, purl, desc)).data.task
-  postContent()
+  postContent(taskPesp.id)
 
   router.push({
     pathname:"/task",       

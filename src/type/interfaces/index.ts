@@ -54,12 +54,14 @@ export interface SignUpParams {
   }
 
   export interface Comment{
+    id: number,
     text: string,
     task_id: number,
     user_id: number,
   }
 
   export interface Content{
+    id: string
     title: string,
     text: string,
     task_id: number,
