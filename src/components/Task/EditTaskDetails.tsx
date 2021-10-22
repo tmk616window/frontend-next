@@ -5,6 +5,8 @@ import {createContent} from '../../api/task/content/CreateContent'
 import {Task, Content} from '../../type/interfaces'
 import {updateTask} from '../../api/task/UpdateTask'
 import {updateContent} from '../../api/task/content/UpdateContent'
+import { useRouter } from 'next/router';
+import {destroyContent} from '../../api/task/content/DestroyContent'
 
 import {
   Box,
@@ -29,6 +31,7 @@ interface TaskItem {
 
 
  const EditTaskDetails:React.FC<TaskItem> = ({task, setEdit, propsContents, id}) => {
+  const router = useRouter();
   const [contents, setContents] = useState<any[]>(propsContents)
   const [title, setTitle] = useState<string>(task.title)
   const [desc, setDesc] = useState<string>(task.description)
@@ -48,6 +51,9 @@ interface TaskItem {
   
 
   const deleteContent = (id:number) => {
+    if(contents[id].id != null) {
+      destroyContent(contents[id].id)
+    } 
     setContents(contents.filter((_, i) => i !== id))
   }
 
@@ -79,6 +85,7 @@ const handleChange = (event: any) => {
 }
 
 
+
 const patchContent = () => {
   console.log(contents)
   for (const content of contents) {
@@ -94,6 +101,13 @@ const patchContent = () => {
 const patchTask = () => {
   setEdit(true)
   updateTask(title, image, purl, desc, id, task.user_id)
+  patchContent()
+
+  router.push({
+    pathname:"/task",       
+    query: {id : task.id} 
+  });
+  
 }
 
   return (
@@ -219,7 +233,7 @@ const patchTask = () => {
           <Button
             color="secondary"
             variant="contained"
-            onClick={() =>{patchContent()}}
+            onClick={() =>{patchTask()}}
           >
             保存
           </Button>

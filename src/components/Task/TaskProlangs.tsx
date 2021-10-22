@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import {getProLangs} from '../../api/prolang/GetProLang'
 import {ProLang} from '../../type/interfaces'
+import {destroyProLang} from '../../api/prolang/DestroyProLang'
 
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
@@ -29,9 +30,12 @@ import {
       const [form, setForm] = useState<string>("")
       const [proLangs, setProLangs] = useState<string[]>([])
     
-      const deleteContent = (id:number) => {
-        const dTask = proL.filter((_, i) => i !== id)
-        console.log(dTask)
+      const destroyContent = (id:number) => {
+        if(proL[id].id) {
+          destroyProLang(proL[id].id)
+        }
+        location.reload();
+        // const dTask = proL.filter((_, i) => i !== id)
       }
         
       const addContent = () => {
@@ -50,7 +54,7 @@ import {
       <CardContent>
       <h4>プログラミング言語</h4>
         {proL.map((p:ProLang, index:number) =>
-            <p key={index} className="article">{p.lange}< IconButton onClick={() =>deleteContent(index)}><DeleteIcon fontSize="small"/></IconButton></p>
+            <p key={index} className="article">{p.lange}< IconButton onClick={() =>destroyContent(index)}><DeleteIcon fontSize="small"/></IconButton></p>
           )}
       </CardContent>
       <Divider />
