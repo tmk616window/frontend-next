@@ -8,10 +8,13 @@ import {
   Box,
   Card,
   CardContent,
-  Grid
+  Grid,
+  IconButton
   } from '@material-ui/core';
 import {createComment} from '../../api/task/comment/CreateComment'
 import {Comment} from '../../type/interfaces'
+import DeleteIcon from '@material-ui/icons/Delete';
+import {destroyComment} from '../../api/task/comment/DestroyComment'
 
 interface CommentParam{
   comments: Comment[]
@@ -32,7 +35,10 @@ const TaskComment:React.FC<CommentParam> = ({comments, uuid, id}) => {
     location.reload();
     };
 
-  
+  const deleteComment = (index:number) => {
+    destroyComment(comments[index].id)
+    location.reload();
+  }
   
     return (
         <>
@@ -57,9 +63,10 @@ const TaskComment:React.FC<CommentParam> = ({comments, uuid, id}) => {
                     p: 2
                   }}
                   >
+                    
                     ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{uuid[comment.user_id]}</Link>
                   </Box>
-
+                  < IconButton onClick={() =>deleteComment(index)}><DeleteIcon fontSize="small"/></IconButton>
                     </CardContent>
                   </Card>
                   <br/>
