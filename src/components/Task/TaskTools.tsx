@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react'
 import {Tool} from '../../type/interfaces'
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
+import {destroyTool} from '../../api/tool/DestroyTool'
+
 import {
     Avatar,
     Box,
@@ -28,7 +30,11 @@ import {
     const [tools, setTools] = useState<string[]>([])
 
     const deleteContent = (id:number) => {
-      setTools(tools.filter((_, i) => i !== id))
+      if(tls[id].id) {
+        destroyTool(tls[id].id)
+      }
+      location.reload();
+      // setTools(tools.filter((_, i) => i !== id))
     }
       
     useEffect(() => {
