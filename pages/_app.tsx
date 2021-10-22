@@ -79,12 +79,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 
   return (
-    <>
+    <div className={"app"}>
       <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser}}>
-          <Navbar/>
+      <Navbar/>
             <Component {...pageProps} />
       </AuthContext.Provider>
-    </>
+    </div>
   )
 }
 export default MyApp

@@ -92,13 +92,6 @@ import {
     
     return(
       <>    
-        <h1>検索キーワード：{task.title}</h1>
-        <h1>検索キーワード：{task.title}</h1>
-        <h1>検索キーワード：{task.title}</h1>
-        <h1>検索キーワード：{task.title}</h1>
-        <h1>検索キーワード：{task.title}</h1>
-        <h1>検索キーワード：{task.title}</h1>
-
         <Box
           sx={{
             minHeight: '100%',

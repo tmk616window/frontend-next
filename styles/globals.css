@@ -12354,3 +12354,7 @@ max-height: 120px; */
 .cardContent {
   padding: 10px 10px 70px 10px;
 }
+
+.app {
+  padding-top: 64px;
+}
