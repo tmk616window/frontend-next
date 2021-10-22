@@ -32,7 +32,7 @@ interface TaskItem {
 
  const EditTaskDetails:React.FC<TaskItem> = ({task, setEdit, propsContents, id}) => {
   const router = useRouter();
-  const [contents, setContents] = useState<any[]>(propsContents)
+  const [contents, setContents] = useState<Content[]>(propsContents)
   const [title, setTitle] = useState<string>(task.title)
   const [desc, setDesc] = useState<string>(task.description)
   const [purl, setPurl] = useState<string>(task.purl)

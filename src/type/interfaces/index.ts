@@ -61,10 +61,10 @@ export interface SignUpParams {
   }
 
   export interface Content{
-    id: string
+    id?: number
     title: string,
     text: string,
-    task_id: number,
+    task_id?: number,
   }
 
 
