@@ -7,9 +7,8 @@ import {getProLangs} from '../src/api/prolang/GetProLang'
 
   //サーバーサイドレンダリング
   export async function getServerSideProps() {
-    const rTasks = (await execTest()).data
-    console.log(rTasks)
-
+    const rTasks = (await execTest()).data.tasks
+      
     return {
       props: {
         rTasks: rTasks,
@@ -19,8 +18,7 @@ import {getProLangs} from '../src/api/prolang/GetProLang'
 
 
 const Home: NextPage =  (props:any) => {
-  const rTasks = props.rTasks.task
-  console.log(rTasks)
+  const rTasks = props.task
   
   return (
     <>
