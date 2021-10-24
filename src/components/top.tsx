@@ -16,11 +16,11 @@ interface RankingParam{
 
 const Top:React.FC<RankingParam> = ({rTasks}) => {
     
-    useEffect(() => {
-        console.log("ranking",rTasks)
-      },[]) 
+    // useEffect(() => {
+    //     console.log("ranking",rTasks)
+    //   },[]) q
       
-
+    //   const a = getProLangs
   return (
     <div className="App">
         <html lang="en">
@@ -71,9 +71,8 @@ const Top:React.FC<RankingParam> = ({rTasks}) => {
                         </div>
                         <div className="container">
                             <div className="row">
-                                {/* {rTasks.map((task:Task, index:number) => 
+                                {rTasks.map((task:Task, index:number) => 
                                     <div className="col-md-4" key={index}>
-                                        <p></p>
                                         <p>{index + 1}位</p>
                                         <div className="card card-1">
                                         <Image alt="alt" src={Post} width="100%" height="200%" />
@@ -87,7 +86,7 @@ const Top:React.FC<RankingParam> = ({rTasks}) => {
                                         <h4>ユーザー名</h4>
                                         </div>
                                     </div>
-                                        )} */}
+                                        )}
                             </div>
                         </div>
                     </div>

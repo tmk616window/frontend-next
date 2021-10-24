@@ -1,14 +1,9 @@
 import {useEffect, useState} from 'react'
-import {getProLangs} from '../src/api/prolang/GetProLang'
 import {getTask} from '../src/api/task/GetTask'
-import {getTools} from '../src/api/tool/GetTool'
-import {getComments} from '../src/api/task/comment/GetComment'
-import {getContents} from '../src/api/task/content/GetComment'
 import {getUsers} from '../src/api/user/GetUsers'
-import {getUser} from '../src/api/user/GetUser'
-import {Comment} from '../src/type/interfaces'
 import Link from 'next/link'
 import EditTask from '../pages/task/edit'
+import {Task} from '../src/type/interfaces'
 import EditTaskDetails from '../src/components/Task/EditTaskDetails'
 import {
     Box,
@@ -43,24 +38,14 @@ import {
   export async function getServerSideProps(context:any) {
     const id = context.query.id;
     const task = (await getTask(id)).data
-    const proLangs = (await getProLangs(id)).data
-    const tools = (await getTools(id)).data
-    const comments = (await getComments(id)).data
-    const contents = (await getContents(id)).data
     const users = (await getUsers()).data
-    // const user = (await getUser(id)).data
-    
+
 
     return {
       props: {
         id: id,
         task: task,
-        proLangs: proLangs,
-        tools: tools,
-        comments:comments,
-        contents: contents,
-        users: users,
-        // user:user
+        users: users
       }
     }
   }
@@ -68,26 +53,27 @@ import {
   
 
   const Tasks = (props:any) => {
-    const[edit, setEdit] = useState<boolean>(true)
 
+    const[edit, setEdit] = useState<boolean>(true)
     const classes = useStyles()
     const task = props.task.task  
-    const proLangs = props.proLangs.prolang
-    const tools = props.tools.tools
-    const comments = props.comments.comment
-    const contents= props.contents.content
     const users = props.users.user
     const id = props.id
-    // const user = props.user
     const uuid:any = {}
     for(const user of users) {
       uuid[user.id] = user.email
     }
 
+    // const[pasks, setTasks] = useState<any>(task)
+    // const handleGetPosts = async () => {
+    //   const {data} = await getTask(id)
+    //   console.log("ccewcew",data.tasks)
+    //   setTasks(data.tasks)
+    // }
+
+
 
       useEffect(() => {
-        console.log("ccewcew",)
-
       },[]) 
     
     return(
@@ -110,10 +96,10 @@ import {
                 xs={12}
               > 
                 {edit
-                  ? <TaskDetails task={task} setEdit={setEdit} contents={contents}/>
+                  ? <TaskDetails task={task.task} setEdit={setEdit} contents={task.contents}/>
                   
 
-                    : <EditTaskDetails  task={task} setEdit={setEdit} id={id} propsContents={contents}/>
+                    : <EditTaskDetails  task={task} setEdit={setEdit} id={task.task.id} propsContents={task.contents}/>
                 }
               </Grid>
               <Grid
@@ -122,9 +108,9 @@ import {
                 md={3}
                 xs={12}
               >
-                <TaskProlangs proL={proLangs} id={id} />
+                <TaskProlangs proL={task.prolangs} id={task.task.id} />
                 <br/>
-                <TaskTools  tls={tools} id={id}/>
+                <TaskTools  tls={task.tools} id={task.task.id}/>
                 <br/>
                 <TaskProfile/>
               </Grid>
@@ -136,7 +122,7 @@ import {
                 xs={12}
               >
               <br/>
-              <TaskComment id={task.id} comments={comments} uuid={uuid}/>
+              <TaskComment id={task.task.id} comments={task.comments} uuid={uuid}/>
             </Grid>
             <Grid
                 spacing={3}

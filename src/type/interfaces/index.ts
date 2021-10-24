@@ -25,7 +25,9 @@ export interface SignUpParams {
     uid: string
     email: string
     name: string
-    image?: string
+    image?: {
+      url: string
+    }
     details: string
     live:string
     age: number

@@ -30,6 +30,11 @@ import {
       const [form, setForm] = useState<string>("")
       const [proLangs, setProLangs] = useState<string[]>([])
     
+      useEffect(() => {
+        console.log("proL",proL)
+      },[]) 
+
+
       const destroyContent = (id:number) => {
         if(proL[id].id) {
           destroyProLang(proL[id].id)

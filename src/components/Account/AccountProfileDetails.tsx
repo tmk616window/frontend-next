@@ -39,18 +39,22 @@ const states = [
   }
 ];
 
+
  const AccountProfileDetails:React.FC<UserProfile> = ({user, setEdit}) => {
+  const [fileUrl, setFileUrl] = useState<string>("");
+
   const [values, setValues] = useState<any>({
     name: user.name,
     email: user.email,
     live: user.live,
     details: user.details,
-    age: user.age
+    age: user.age,
+    image: ""
   });
+    
   
-
   const patchUser = () => {    
-    updateUser(user.id, values.Name, values.email, values.live, values.details, values.age)
+    updateUser(user.id, values.Name, values.email, values.live, values.details, values.age, values.image)
     setEdit(true)
     // location.reload();
   };
@@ -72,6 +76,23 @@ const states = [
         />
         <Divider />
         <CardContent>
+
+        <Grid
+              item
+              md={12}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="写真"
+                name="image"
+                onChange={handleChange}
+                type="file"
+                value={values.image}
+                variant="outlined"
+              />
+            </Grid>
+
           <Grid
             container
             spacing={3}

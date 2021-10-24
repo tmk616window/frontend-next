@@ -40,6 +40,11 @@ const TaskComment:React.FC<CommentParam> = ({comments, uuid, id}) => {
     location.reload();
   }
   
+  useEffect(() => {
+    console.log("comments",comments)
+  },[]) 
+
+
     return (
         <>
             <Grid
@@ -49,8 +54,7 @@ const TaskComment:React.FC<CommentParam> = ({comments, uuid, id}) => {
                 xs={12}
               >
               <br/>
-              <h3>コメント一覧</h3>
-              
+              <h3>コメント一覧</h3>     
               {comments.map((comment:Comment, index:number) =>
                 <div key={index}>
                   <Card>
