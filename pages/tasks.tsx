@@ -6,21 +6,21 @@ import {Task, ProLang} from '../src/type/interfaces'
 import Link from 'next/link';
 import {displayImage} from '../src/api/common/DisplayImage'
 //サーバーサイドレンダリング
-// export async function getServerSideProps() {
-//   const tasks = (await getTasks()).data
-//   console.log(tasks)
-//   return {
-//     props: {
-//       tasks: tasks,
-//     }
-//   }
-// }
+export async function getServerSideProps() {
+  const tasks = (await getTasks()).data
+  console.log(tasks)
+  return {
+    props: {
+      tasks: tasks,
+    }
+  }
+}
 
 
 export const TaskList = (props:any) => {
   // const[tasks, setTasks] = useState<Task[]>([])
 
-  // const tasks = props.tasks.tasks
+  const tasks = props.tasks.tasks
 
 
   useEffect(() => {
@@ -61,9 +61,9 @@ export const TaskList = (props:any) => {
                 <p>使用技術</p>
                 <div className="langArticle">
 
-                {/* {task.prolongs.map((proLang:ProLang ,index:number)=> (  
+                {task.prolongs.map((proLang:ProLang ,index:number)=> (  
                   <span className="article" key={index}>{proLang.lange}</span>
-                ))} */}
+                ))}
 
                 </div>
 
