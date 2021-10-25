@@ -46,11 +46,12 @@ import {
 
     const[edit, setEdit] = useState<boolean>(true)
     const classes = useStyles()
-    const task = props.task.task  
+    const task = props.task.task.task
+    const cTask = props.task.task
     const comments = props.comments.comments
 
       useEffect(() => {
-        console.log("user", comments)
+        console.log("user", task)
       },[]) 
     
     return(
@@ -73,10 +74,10 @@ import {
                 xs={12}
               > 
                 {edit
-                  ? <TaskDetails task={task.task} setEdit={setEdit} contents={task.contents}/>
+                  ? <TaskDetails task={task} setEdit={setEdit} contents={cTask.contents}/>
                   
 
-                    : <EditTaskDetails  task={task} setEdit={setEdit} id={task.task.id} propsContents={task.contents}/>
+                    : <EditTaskDetails  task={task} setEdit={setEdit} id={task.id} propsContents={cTask.contents}/>
                 }
               </Grid>
               <Grid
@@ -85,11 +86,11 @@ import {
                 md={3}
                 xs={12}
               >
-                <TaskProlangs proL={task.prolangs} id={task.task.id} />
+                <TaskProlangs proL={cTask.prolangs} id={task.id} />
                 <br/>
-                <TaskTools  tls={task.tools} id={task.task.id}/>
+                <TaskTools  tls={cTask.tools} id={task.id}/>
                 <br/>
-                <TaskProfile user={task.user}/>
+                <TaskProfile user={cTask.user}/>
               </Grid>
             </Grid>
             <Grid
@@ -99,7 +100,7 @@ import {
                 xs={12}
               >
               <br/>
-              <TaskComment id={task.task.id} comments={comments}/>
+              <TaskComment id={task.id} comments={comments}/>
             </Grid>
             <Grid
                 spacing={3}

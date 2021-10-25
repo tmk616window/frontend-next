@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image'
 import {createTask} from '../../api/task/CreateTask'
 import {createContent} from '../../api/task/content/CreateContent'
@@ -36,12 +36,17 @@ interface TaskItem {
   const [title, setTitle] = useState<string>(task.title)
   const [desc, setDesc] = useState<string>(task.description)
   const [purl, setPurl] = useState<string>(task.purl)
-  const [image, setImage] = useState<string>(task.logoImage)
+  const [image, setImage] = useState<File>()
   const addContent = () => {
         setContents([...contents, {title:"", text:""}]);
-
     console.log(contents)
     };
+
+    useEffect(() => {
+      console.log("task", task.title)
+    },[]) 
+
+
 
     const changeHandle = (key: string, value: string, index:number) => {
       const _contents = [...contents]
@@ -57,34 +62,11 @@ interface TaskItem {
     setContents(contents.filter((_, i) => i !== id))
   }
 
-  const [values, setValues] = useState({
-    email: 'demo@devias.io',
-    country: 'USA'
-  });
 
-
-const handleChange = (event: any) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
-  };
-
-
-
-  const handleImageChange = (event: any) => {
-    const imageFile = event.target.files[0];
-    const imageUrl = URL.createObjectURL(imageFile);
-    setImage(imageUrl)
- }
-
- const postContent = () => {
-  for (const content of contents) {
-    createContent(content['title'], content['text'], task.id)
-  }
-}
-
-
+  const uploadImage = useCallback((e) => {
+    const file = e.target.files[0]
+    setImage(file)
+  }, [])
 
 const patchContent = () => {
   console.log(contents)
@@ -98,20 +80,34 @@ const patchContent = () => {
 }
 
 
+  // FormData形式でデータを作成
+  const createFormData = (): FormData => {
+    const formData = new FormData()
+    formData.append("title", title)
+    formData.append("purl", purl)
+    formData.append("description", desc)
+    if (image) formData.append("logoImage", image)
+
+    return formData
+  }
+
+
 const patchTask = () => {
+  const data = createFormData()
   setEdit(true)
-  updateTask(title, image, purl, desc, id, task.user_id)
+  updateTask(id, data)
   patchContent()
 
   router.push({
     pathname:"/task",       
-    query: {id : task.id} 
+    query: {id : id} 
   });
   
 }
 
   return (
       <Card>
+        <form  noValidate onSubmit={patchTask}>
         <Divider />
         <CardContent>
         <Grid
@@ -144,11 +140,15 @@ const patchTask = () => {
               <Button
                   component="label"
                 >
-                ロゴ画像を貼ってください
-                  <input type="file" accept="image/*" onChange={handleImageChange}/>
+                <input
+              accept="image/*"
+              id="icon-button-file" 
+              type="file"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                uploadImage(e)
+              }}
+            />
               </Button>
-              {/* <Image alt="admin" src={image} height="450" width="100%"/> */}
-              {/* <Image src={image} height="800"/> */}
             </Grid>
 
             <Grid
@@ -233,12 +233,12 @@ const patchTask = () => {
           <Button
             color="secondary"
             variant="contained"
-            onClick={() =>{patchTask()}}
+            type="submit"
           >
             保存
           </Button>
-
         </Box>
+        </form>
       </Card>
   );
 };

@@ -38,7 +38,9 @@ export interface SignUpParams {
     id: number
     title: string
     description: string
-    logoImage: string
+    logoImage?: {
+      url: string
+    }
     purl: string
     user_id: number
   }

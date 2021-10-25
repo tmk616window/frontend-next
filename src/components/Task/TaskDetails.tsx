@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
 import {Task, Content} from '../../type/interfaces'
-
+import {displayImage} from '../../api/common/DisplayImage'
 
 import {
   Box,
@@ -46,7 +46,7 @@ interface TaskItem {
               md={12}
               xs={12}
             >
-              <Image alt="logo" src={Logo} height="800"/>
+              <img alt="logo" src={displayImage(task.logoImage?.url)} height="70%" width="100%"/>
             </Grid>
             <Grid
               item

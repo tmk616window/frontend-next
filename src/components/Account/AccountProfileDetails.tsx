@@ -21,25 +21,6 @@ interface UserProfile {
   setEdit: any
 }
 
-
-
-
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
-
-
  const AccountProfileDetails:React.FC<UserProfile> = ({user, setEdit}) => {
   const [image, setImage] = useState<File>()
   const [values, setValues] = useState<any>({
@@ -50,14 +31,6 @@ const states = [
     age: user.age
   });
    
-  
-  // const patchUser = () => {    
-    // updateUser(user.id, values.Name, values.email, values.live, values.details, values.age, values.image)
-  //   setEdit(true)
-  //   // location.reload();
-  // };
-
-
   const handleChange = (event: any) => {    
     setValues({
       ...values,
@@ -82,7 +55,6 @@ const states = [
     const file = e.target.files[0]
     setImage(file)
   }, [])
-
 
 
   const patchUser  = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -189,8 +161,6 @@ const states = [
                 name="live"
                 onChange={handleChange}
                 required
-                // select
-                // SelectProps={{ native: true }}
                 value={values.live}
                 variant="outlined"
               >
