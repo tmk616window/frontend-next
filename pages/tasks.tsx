@@ -2,45 +2,36 @@ import React, { useEffect, useState } from "react";
 import {getTasks} from '../src/api/task/GetTasks'
 import Image from 'next/image'
 import Logo from '../img/logo.png'
-import {Task} from '../src/type/interfaces/task'
+import {Task, ProLang} from '../src/type/interfaces'
 import Link from 'next/link';
-
+import {displayImage} from '../src/api/common/DisplayImage'
 //サーバーサイドレンダリング
-export async function getServerSideProps(context:any) {
-  const p = (await getTasks()).data
+export async function getServerSideProps() {
+  const tasks = (await getTasks()).data
+  console.log(tasks)
   return {
     props: {
-      p: p,
+      tasks: tasks,
     }
   }
 }
 
 
-export const TaskList = () => {
-  
-  const[tasks, setTasks] = useState<Task[]>([])
+export const TaskList = (props:any) => {
+  // const[tasks, setTasks] = useState<Task[]>([])
 
-  
-  const handleGetTasks = async () => {
-    try {
-      const res = await getTasks()
-      console.log(res.data.tasks)
+  const tasks = props.tasks.tasks
 
-      if (res?.status === 200) {
-        const Tasks = res.data.tasks
-        // setTasks((newTasks) => Tasks)
-    
-      } else {
-        
-      }
-    } catch (err) {
-      console.log(err)
-    }
-
-  }
 
   useEffect(() => {
-    handleGetTasks()
+
+    // {tasks.prolongs.map((proLang:ProLang ,index:number)=> (  
+    //   console.log("xwxwxw",proLang.lange)
+    //   // <span className="article" key={index}>{proLang.lange}</span>
+    // ))}
+
+
+    // console.log("tasks.prolongs",tasks.prolongs)
   },[])
 
   
@@ -52,35 +43,28 @@ export const TaskList = () => {
   let taslList = {
     // backgroundColor: "#99FFFF	",
   }
-  console.log("dddmdopekmdopew", tasks)
+  // console.log("dddmdopekmdopew", tasks)
     return (
       <div style={taslList}>
-              <>{tasks}</>
+              {/* <>{tasks}</> */}
         <ul className="list-group">
-          {["List Item 1", "List Item 2", "List Item 3"].map((listitem ,index)=> (
-            <Link href="/">
+          {tasks.map((task:Task ,index:number)=> (
+            <Link href={{ pathname: '/task', query: { id: task.id } }}>
             <li key={index} className="list-group-item list-group-item-primary list-item" >
               <div className="item-image">
-                <Image src={Logo} alt="..." width = "250" height="250" className="logo-image" />
+                <img src={displayImage(task.logoImage?.url)} alt="..." width = "250" height="250" className="logo-image" />
               </div>
               <div className="item-content">
-                <h1>{listitem}</h1>
+                <h1>{task.title}</h1>
                 <p>ポートフォリオ概要</p>
-                <p className="description">dkopkdomxklんmkおxsんwこcんwkpmんqkpmwkpqmdpwqmpwんmqpdmんwqkpmpおwqもpwqもpもpqwdmんどpqpekwopddejwopjdeopjopdew</p>
+                <p className="description">{task.description}</p>
                 <p>使用技術</p>
                 <div className="langArticle">
-                  
-                <span className="article">vue</span>
-                <span className="article">vue</span>
-                <span className="article">vue</span>
-                <span className="article">vue</span>
-                <span className="article">vue</span>
-                <span className="article">vue</span>
-                <span className="article">vue</span>
-                <span className="article">vue</span>
-                <span className="article">vue</span>
-                <span className="article">vue</span>
-                <span className="article">vue</span>
+
+                {task.prolongs.map((proLang:ProLang ,index:number)=> (  
+                  <span className="article" key={index}>{proLang.lange}</span>
+                ))}
+
                 </div>
 
               </div>

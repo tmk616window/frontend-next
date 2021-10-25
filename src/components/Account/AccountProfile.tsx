@@ -41,7 +41,6 @@ interface UserProfile {
         
         <Avatar 
         src={displayImage(user.image?.url)}
-        //  sx={{ width: 24, height: 24 }}
         />
         <br/>
 

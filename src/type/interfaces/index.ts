@@ -43,6 +43,7 @@ export interface SignUpParams {
     }
     purl: string
     user_id: number
+    prolongs: ProLang[]
   }
 
   export interface Tool {

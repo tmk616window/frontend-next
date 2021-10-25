@@ -1,6 +1,4 @@
 import { useState, useCallback} from 'react';
-import Logo from '../../../img/logo.png'
-import Image from 'next/image'
 import {User} from '../../type/interfaces'
 import {updateUser} from '../../api/user/UpdateUser'
 

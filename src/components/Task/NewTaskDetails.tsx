@@ -191,7 +191,7 @@ const handleChange = (event: any) => {
               md={12}
               xs={12}
             >
-              <p>概要</p>
+              <p>ポートフォリオ概要</p>
               <TextareaAutosize
                 minRows={7}
                 value={desc}

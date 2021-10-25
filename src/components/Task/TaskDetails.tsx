@@ -68,7 +68,7 @@ interface TaskItem {
               md={12}
               xs={12}
             >
-              <h3>概要</h3>
+              <h3>ポートフォリオ概要</h3>
                 <p>{task.description}</p>
             </Grid>
           </Grid>

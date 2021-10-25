@@ -16,7 +16,10 @@ interface UserParams{
 }
 
   
- const TaskProfile = ({user}: UserParams) => (
+ const TaskProfile = ({user}: UserParams) => {
+
+
+   return (
     <>
     <Card>
       <CardContent>
@@ -27,10 +30,12 @@ interface UserParams{
             flexDirection: 'column'
           }}
         >
-        <Avatar 
-          src={displayImage(user.image?.url)}
-        />
 
+        <Avatar src={displayImage(user.image?.url)}/>
+
+
+
+        
           <Typography
             color="textPrimary"
             gutterBottom
@@ -55,6 +60,6 @@ interface UserParams{
     </Card>
     </>
   );
-  
+}
   export default TaskProfile
   
