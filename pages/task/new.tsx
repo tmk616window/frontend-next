@@ -44,9 +44,7 @@ import {
                 md={1}
                 xs={12}
               >
-                {/* <TaskProlangs/> */}
                 <br/>
-                {/* <TaskTools/> */}
               </Grid>
             </Grid>
 

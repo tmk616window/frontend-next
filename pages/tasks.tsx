@@ -5,6 +5,17 @@ import Logo from '../img/logo.png'
 import {Task} from '../src/type/interfaces/task'
 import Link from 'next/link';
 
+//サーバーサイドレンダリング
+export async function getServerSideProps(context:any) {
+  const p = (await getTasks()).data
+  return {
+    props: {
+      p: p,
+    }
+  }
+}
+
+
 export const TaskList = () => {
   
   const[tasks, setTasks] = useState<Task[]>([])

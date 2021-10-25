@@ -75,7 +75,7 @@ const states = [
               md={12}
               xs={12}
             >
-              <p>{user.name}</p>
+              {/* <p>{user.name}</p> */}
             </Grid>
             <Grid
               item

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Image from 'next/image'
 import {createTask} from '../../api/task/CreateTask'
 import {createContent} from '../../api/task/content/CreateContent'
@@ -87,10 +87,32 @@ const handleChange = (event: any) => {
 }
 
 
- const postTask = async () => {
-  const taskPesp = (await createTask(title, image, purl, desc)).data.task
-  postContent(taskPesp.id)
 
+  // FormData形式でデータを作成
+  const createFormData = (): FormData => {
+    const formData = new FormData()
+    formData.append("title", title)
+    if (image) formData.append("logoImage", image)
+    formData.append("purl", purl)
+    formData.append("description", desc)
+    formData.append("user_id", "3")
+
+
+    return formData
+  }
+
+  const uploadImage = useCallback((e) => {
+    const file = e.target.files[0]
+    setImage(file)
+  }, [])
+
+
+ const postTask = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+
+  const data = createFormData()
+  const taskPesp = (await createTask(data)).data.task
+  postContent(taskPesp.id)
   router.push({
     pathname:"/task",       
     query: {id : taskPesp.id} 
@@ -100,6 +122,7 @@ const handleChange = (event: any) => {
 
   return (
       <Card>
+        <form  noValidate onSubmit={postTask}>
         <Divider />
         <CardContent>
         <Grid
@@ -133,7 +156,13 @@ const handleChange = (event: any) => {
                   component="label"
                 >
                 ロゴ画像を貼ってください
-                  <input type="file" accept="image/*" onChange={handleImageChange}/>
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      uploadImage(e)
+                    }}
+                  />
               </Button>
               {/* <Image alt="admin" src={image} height="450" width="100%"/> */}
               {/* <Image src={image} height="800"/> */}
@@ -221,18 +250,12 @@ const handleChange = (event: any) => {
           <Button
             color="secondary"
             variant="contained"
+            type="submit"
           >
             保存
           </Button>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={() =>{postTask()}}
-          >
-            test
-          </Button>
-
         </Box>
+        </form>
       </Card>
   );
 };
