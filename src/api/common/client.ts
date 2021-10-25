@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie'
 
-
 const env = 0
 
 export const api: AxiosInstance = axios.create({

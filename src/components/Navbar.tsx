@@ -97,6 +97,13 @@ import { AuthContext } from "../../pages/_app"
           } else {
             return (
               <>
+                <Link href="/tasks" >
+                  一覧
+                </Link>
+                <Link href="/task/new" >
+                  投稿
+                </Link>
+
                 <Link href="/login" >
                   ログイン
                 </Link>

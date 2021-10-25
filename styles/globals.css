@@ -12346,10 +12346,10 @@ max-height: 120px; */
 .taskButton {
   padding: 20px 20px 20px 20px;
   display: block;
-  width: 150px;
+  width: 250px;
   margin: 0 auto;
-  color: white;
-  background-color: #ffc800;
+  /* color: white; */
+  background-color: white;
 }
 
 .cardContent {
