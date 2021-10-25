@@ -63,17 +63,12 @@ const ProfilePage =(props:any) => {
             md={6}
             xs={12}
           >
-
             {edit
                   ? <EditAccountProfileDetails user={user} setEdit={setEdit} />
 
                   
                     : <AccountProfileDetails user={user} setEdit={setEdit}/>
                 }
-
-
-            
-
           </Grid>
         </Grid>
         <Grid
@@ -85,9 +80,6 @@ const ProfilePage =(props:any) => {
             <h2>投稿したポートフォリオ</h2>
         </Grid>
       </Container>
-
-
-
     </Box>
   </>
 );

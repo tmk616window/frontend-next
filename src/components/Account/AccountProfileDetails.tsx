@@ -111,7 +111,6 @@ const states = [
         <Divider />
         <CardContent>
 
-        {/* <input type="file" accept="image/*" onChange={processImage}/> */}
         <Grid
               item
               md={12}
@@ -128,15 +127,6 @@ const states = [
             />
 
 
-              {/* <TextField
-                fullWidth
-                label="写真"
-                name="image"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => uploadImage(e)}
-                type="file"
-                // value={values.image}
-                variant="outlined"
-              /> */}
             </Grid>
 
           <Grid

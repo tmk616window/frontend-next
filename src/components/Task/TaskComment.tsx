@@ -18,11 +18,10 @@ import {destroyComment} from '../../api/task/comment/DestroyComment'
 
 interface CommentParam{
   comments: Comment[]
-  uuid: any
   id: number
 }
 
-const TaskComment:React.FC<CommentParam> = ({comments, uuid, id}) => {
+const TaskComment:React.FC<CommentParam> = ({comments,id}) => {
   
   const[comment, setComment] = useState<string[]>([])
   const [form, setForm] = useState<string>("")
@@ -68,7 +67,7 @@ const TaskComment:React.FC<CommentParam> = ({comments, uuid, id}) => {
                   }}
                   >
                     
-                    ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{uuid[comment.user_id]}</Link>
+                    ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{comment.user.email}</Link>
                   </Box>
                   < IconButton onClick={() =>deleteComment(index)}><DeleteIcon fontSize="small"/></IconButton>
                     </CardContent>

@@ -1,5 +1,4 @@
-import Logo from '../../../img/logo.png'
-import Image from 'next/image'
+import Link from 'next/link'
 import {
     Avatar,
     Box,
@@ -10,17 +9,14 @@ import {
     Divider,
     Typography
   } from '@material-ui/core';
+import {User} from '../../type/interfaces'
+import {displayImage} from '../../api/common/DisplayImage'
+interface UserParams{
+  user: User
+}
+
   
-  const user = {
-    avatar: '/static/images/avatars/avatar_6.png',
-    city: 'Los Angeles',
-    country: 'USA',
-    jobTitle: 'Senior Developer',
-    name: 'Katarina Smith',
-    timezone: 'GTM-7'
-  };
-  
- const TaskProfile = () => (
+ const TaskProfile = ({user}: UserParams) => (
     <>
     <Card>
       <CardContent>
@@ -31,31 +27,27 @@ import {
             flexDirection: 'column'
           }}
         >
-          <Image alt="img" src={Logo} height="800"/>
+        <Avatar 
+          src={displayImage(user.image?.url)}
+        />
+
           <Typography
             color="textPrimary"
             gutterBottom
             variant="h5"
           >
-            {user.name}
+            <Link href={{ pathname: '/profile', query: { id: user.id } }}>{user.name}</Link>
           </Typography>
           <Typography
             color="textSecondary"
             variant="body1"
           >
-            {`${user.city} ${user.country}`}
+            <p>{user.email}</p>
           </Typography>
           <Typography
             color="textSecondary"
             variant="body1"
           >
-            <p>mdepwpoew</p>
-          </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body1"
-          >
-            {/* {`${moment().format('hh:mm A')} ${user.timezone}`} */}
           </Typography>
         </Box>
       </CardContent>

@@ -1,22 +1,14 @@
 import {useEffect, useState} from 'react'
 import {getTask} from '../src/api/task/GetTask'
-import {getUsers} from '../src/api/user/GetUsers'
-import Link from 'next/link'
-import EditTask from '../pages/task/edit'
-import {Task} from '../src/type/interfaces'
+import {getComments} from '../src/api/task/comment/GetComment'
 import EditTaskDetails from '../src/components/Task/EditTaskDetails'
 import {
     Box,
     Container,
     Grid,
     IconButton,
-    CardContent,
-    Card,
-    Button,
-    Divider
   } from '@material-ui/core';
   import Favorite from '@material-ui/icons/Favorite';
-  import { useRouter } from 'next/router';
   import TaskProfile from '../src/components/Task/TaskProfile';
   import TaskDetails from '../src/components/Task/TaskDetails';
   import TaskProlangs from '../src/components/Task/TaskProlangs'
@@ -38,42 +30,27 @@ import {
   export async function getServerSideProps(context:any) {
     const id = context.query.id;
     const task = (await getTask(id)).data
-    const users = (await getUsers()).data
+    const comments = (await getComments(id)).data
 
-
+  
     return {
       props: {
         id: id,
         task: task,
-        users: users
+        comments: comments
       }
     }
   }
-
-  
 
   const Tasks = (props:any) => {
 
     const[edit, setEdit] = useState<boolean>(true)
     const classes = useStyles()
     const task = props.task.task  
-    const users = props.users.user
-    const id = props.id
-    const uuid:any = {}
-    for(const user of users) {
-      uuid[user.id] = user.email
-    }
-
-    // const[pasks, setTasks] = useState<any>(task)
-    // const handleGetPosts = async () => {
-    //   const {data} = await getTask(id)
-    //   console.log("ccewcew",data.tasks)
-    //   setTasks(data.tasks)
-    // }
-
-
+    const comments = props.comments.comments
 
       useEffect(() => {
+        console.log("user", comments)
       },[]) 
     
     return(
@@ -112,7 +89,7 @@ import {
                 <br/>
                 <TaskTools  tls={task.tools} id={task.task.id}/>
                 <br/>
-                <TaskProfile/>
+                <TaskProfile user={task.user}/>
               </Grid>
             </Grid>
             <Grid
@@ -122,7 +99,7 @@ import {
                 xs={12}
               >
               <br/>
-              <TaskComment id={task.task.id} comments={task.comments} uuid={uuid}/>
+              <TaskComment id={task.task.id} comments={comments}/>
             </Grid>
             <Grid
                 spacing={3}
@@ -137,7 +114,5 @@ import {
       </>  
     )
   };
-  
-
   export default Tasks
   

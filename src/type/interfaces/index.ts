@@ -58,6 +58,7 @@ export interface SignUpParams {
   export interface Comment{
     id: number,
     text: string,
+    user: User,
     task_id: number,
     user_id: number,
   }
