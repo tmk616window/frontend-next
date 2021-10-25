@@ -70,7 +70,7 @@ const Top:React.FC<RankingParam> = ({rTasks}) => {
                         </div>
                         <div className="container">
                             <div className="row">
-                                {rTasks.map((task:Task, index:number) => 
+                                {/* {rTasks.map((task:Task, index:number) => 
                                     <div className="col-md-4" key={index}>
                                         <p>{index + 1}位</p>
                                         <div className="card card-1">
@@ -85,7 +85,7 @@ const Top:React.FC<RankingParam> = ({rTasks}) => {
                                         <h4>ユーザー名</h4>
                                         </div>
                                     </div>
-                                        )}
+                                        )} */}
                             </div>
                         </div>
                     </div>
