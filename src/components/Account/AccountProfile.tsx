@@ -1,5 +1,6 @@
 import {User} from '../../type/interfaces'
 import {getPrefectures} from '../../api/user/GetPrefectures'
+import {useEffect} from 'react'
 import {
   Avatar,
   Box,
@@ -8,14 +9,25 @@ import {
   CardActions,
   CardContent,
   Divider,
-  Typography
+  Typography,
+  CardMedia,
+  
 } from '@material-ui/core';
-
+import Image from 'next/image'
+import {displayImage} from '../../api/common/DisplayImage'
+import {} from '@material-ui/core/';
 interface UserProfile {
   user: User
 }
 
- const AccountProfile:React.FC<UserProfile> = ({user},props) => (
+ const AccountProfile:React.FC<UserProfile> = ({user}) => {
+
+  useEffect(() => {
+    console.log("user", user.image?.url)
+  }, [])
+
+
+  return (
   <>
   <Card>
     <CardContent>
@@ -26,13 +38,13 @@ interface UserProfile {
           flexDirection: 'column'
         }}
       >
-        <Avatar
-          // src={user.avatar}
-          // sx={{
-          //   height: 100,
-          //   width: 100
-          // }}
+        
+        <Avatar 
+        src={displayImage(user.image?.url)}
+        //  sx={{ width: 24, height: 24 }}
         />
+        <br/>
+
         <Typography
           color="textPrimary"
           gutterBottom
@@ -71,7 +83,8 @@ interface UserProfile {
     
   </Card>
   </>
-);
+  )
+};
 
 
 export default AccountProfile

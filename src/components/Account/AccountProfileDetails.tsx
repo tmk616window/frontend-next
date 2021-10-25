@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback} from 'react';
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
 import {User} from '../../type/interfaces'
@@ -41,23 +41,21 @@ const states = [
 
 
  const AccountProfileDetails:React.FC<UserProfile> = ({user, setEdit}) => {
-  const [fileUrl, setFileUrl] = useState<string>("");
-
+  const [image, setImage] = useState<File>()
   const [values, setValues] = useState<any>({
     name: user.name,
     email: user.email,
     live: user.live,
     details: user.details,
-    age: user.age,
-    image: ""
+    age: user.age
   });
-    
+   
   
-  const patchUser = () => {    
-    updateUser(user.id, values.Name, values.email, values.live, values.details, values.age, values.image)
-    setEdit(true)
-    // location.reload();
-  };
+  // const patchUser = () => {    
+    // updateUser(user.id, values.Name, values.email, values.live, values.details, values.age, values.image)
+  //   setEdit(true)
+  //   // location.reload();
+  // };
 
 
   const handleChange = (event: any) => {    
@@ -67,30 +65,78 @@ const states = [
     });
   };
 
+  // FormData形式でデータを作成
+  const createFormData = (): FormData => {
+    const formData = new FormData()
+    formData.append("name", values.name)
+    formData.append("email", values.email)
+    formData.append("live", values.live)
+    formData.append("details", values.details)
+    formData.append("age", values.age)
+    if (image) formData.append("image", image)
+
+    return formData
+  }
+
+  const uploadImage = useCallback((e) => {
+    const file = e.target.files[0]
+    setImage(file)
+  }, [])
+
+
+
+  const patchUser  = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const data = createFormData()
+
+    await updateUser(user.id, data)
+    .then(() => {
+      console.log("成功")
+      // setContent("")
+      // setPreview("")
+      // setImage(undefined)
+      // handleGetPosts()
+    })
+  }
+
 
   return (
     <div className="profile-details">
       <Card>
+        <form  noValidate onSubmit={patchUser}>
         <CardHeader
           title="プロフィール"
         />
         <Divider />
         <CardContent>
 
+        {/* <input type="file" accept="image/*" onChange={processImage}/> */}
         <Grid
               item
               md={12}
               xs={12}
             >
-              <TextField
+
+            <input
+              accept="image/*"
+              id="icon-button-file" 
+              type="file"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                uploadImage(e)
+              }}
+            />
+
+
+              {/* <TextField
                 fullWidth
                 label="写真"
                 name="image"
-                onChange={handleChange}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => uploadImage(e)}
                 type="file"
-                value={values.image}
+                // value={values.image}
                 variant="outlined"
-              />
+              /> */}
             </Grid>
 
           <Grid
@@ -168,20 +214,6 @@ const states = [
           >
             <p>使用プログラミング言語</p>
             <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
 
           </Grid>
 
@@ -216,11 +248,12 @@ const states = [
           <Button
             color="secondary"
             variant="contained"
-            onClick={() =>{patchUser()}}
+            type="submit"
           >
             保存
           </Button>
         </Box>
+        </form>
       </Card>
       </div>
   );

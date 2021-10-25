@@ -6,7 +6,6 @@ import {
 import AccountProfile from '../src/components/Account/AccountProfile';
 import AccountProfileDetails from '../src/components/Account/AccountProfileDetails';
 import EditAccountProfileDetails from '../src/components/Account/EditAccountProfileDetails';
-
 import {getUser} from '../src/api/user/GetUser'
 import {useEffect, useState} from 'react'
 import {getProLangs} from '../src/api/prolang/GetProLang'
@@ -27,6 +26,9 @@ export async function getServerSideProps(context:any) {
 
 
 const ProfilePage =(props:any) => {
+
+
+
   const [edit, setEdit] = useState<boolean>(true)
   const id = props.id
   const user = props.user.user
@@ -53,7 +55,7 @@ const ProfilePage =(props:any) => {
             md={6}
             xs={12}
           >
-            <AccountProfile user={props.user}/>
+            <AccountProfile user={user}/>
           </Grid>
           <Grid
             item

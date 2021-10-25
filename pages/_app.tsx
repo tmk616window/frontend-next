@@ -6,7 +6,6 @@ import React, { useState, useEffect, createContext } from "react"
 import { User } from "../src/type/interfaces"
 import {getCurrentUser} from '../src/api/login/auth'
 import {useRouter} from 'next/router'
-import Top from './top'
 import Register from './register'
 import Login from './login'
 import {execTest} from '../src/api/test'
