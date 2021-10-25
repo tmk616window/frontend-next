@@ -43,7 +43,7 @@ interface UserProfile {
     formData.append("email", values.email)
     formData.append("live", values.live)
     formData.append("details", values.details)
-    formData.append("age", values.age)
+    // formData.append("age", values.age)
     if (image) formData.append("image", image)
 
     return formData

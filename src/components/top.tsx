@@ -8,7 +8,6 @@ import {useEffect} from 'react'
 import {Task} from '../type/interfaces'
 import {getProLangs} from '../../src/api/prolang/GetProLang'
 
-
 interface RankingParam{
     rTasks: Task[]
   }
@@ -92,7 +91,7 @@ const Top:React.FC<RankingParam> = ({rTasks}) => {
                     </div>
                 </section>
                 <section className="page-section bg-light" id="team">
-                <a className="taskButton btn">他のポートフォリオを見る</a>
+                <a className="taskButton btn"><Link href="/tasks" >他のポートフォリオを見る</Link></a>
 
                 </section>
                 <footer className="footer py-4">
