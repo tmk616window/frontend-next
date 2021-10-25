@@ -8,12 +8,12 @@ import {useEffect} from 'react'
 import {Task} from '../type/interfaces'
 import {getProLangs} from '../../src/api/prolang/GetProLang'
 
-interface RankingParam{
-    rTasks: Task[]
-  }
+// interface RankingParam{
+//     rTasks: Task[]
+//   }
   
 
-const Top:React.FC<RankingParam> = ({rTasks}) => {
+const Top = () => {
     
     // useEffect(() => {
     //     console.log("ranking",rTasks)
