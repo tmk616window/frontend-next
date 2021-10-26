@@ -40,7 +40,7 @@ interface UserProfile {
       >
         
         <Avatar 
-        src={displayImage(`http://${user.image?.url}`)}
+        src={displayImage(`http://54.199.221.123/${user.image?.url}`)}
         />
         <br/>
 

@@ -47,7 +47,7 @@ interface TaskItem {
               xs={12}
             >
               {/* <img alt="logo" src={task.logoImage?.url} height="70%" width="100%"/> */}
-              <img alt="logo" src={displayImage(`http://${task.logoImage?.url}`)} height="70%" width="100%"/>
+              <img alt="logo" src={displayImage(`http://54.199.221.123/${task.logoImage?.url}`)} height="70%" width="100%"/>
             </Grid>
             <Grid
               item
