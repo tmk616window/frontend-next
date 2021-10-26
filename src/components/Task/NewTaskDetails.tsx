@@ -95,7 +95,7 @@ const handleChange = (event: any) => {
     if (image) formData.append("logoImage", image)
     formData.append("purl", purl)
     formData.append("description", desc)
-    formData.append("user_id", "3")
+    formData.append("user_id", "1")
 
 
     return formData

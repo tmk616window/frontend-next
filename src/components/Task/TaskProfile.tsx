@@ -31,7 +31,7 @@ interface UserParams{
           }}
         >
 
-        <Avatar src={displayImage(user.image?.url)}/>
+        <Avatar src={displayImage(`http://${user.image?.url}`)}/>
 
 
 

@@ -25,7 +25,7 @@ interface TaskItem {
  const TaskDetails:React.FC<TaskItem> = ({task, setEdit, contents}) => {
 
   useEffect(() => {
-    console.log("アイウエオ", contents)
+    console.log("task.logoImage?.url", task.logoImage)
   }, [])
   
 
@@ -46,7 +46,8 @@ interface TaskItem {
               md={12}
               xs={12}
             >
-              <img alt="logo" src={displayImage(task.logoImage?.url)} height="70%" width="100%"/>
+              {/* <img alt="logo" src={task.logoImage?.url} height="70%" width="100%"/> */}
+              <img alt="logo" src={displayImage(`http://${task.logoImage?.url}`)} height="70%" width="100%"/>
             </Grid>
             <Grid
               item
