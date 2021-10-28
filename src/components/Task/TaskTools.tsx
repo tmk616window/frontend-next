@@ -1,8 +1,9 @@
 import {useState, useEffect} from 'react'
-import {Tool} from '../../type/interfaces'
+import {Tool, User} from '../../type/interfaces'
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
 import {destroyTool} from '../../api/tool/DestroyTool'
+import Cookies from 'js-cookie'
 
 import {
     Avatar,
@@ -21,13 +22,16 @@ import {
   interface ToolsParams{
     tls: Tool[]
     id: number
+    user: User
   }
 
   
- const TaskTools:React.FC<ToolsParams> = ({tls, id}) => {
+ const TaskTools:React.FC<ToolsParams> = ({tls, id, user}) => {
 
     const [toolForm, setToolForm] = useState<string>("")
     const [tools, setTools] = useState<string[]>([])
+    const _uid = Cookies.get("_uid")
+
 
     const deleteContent = (id:number) => {
       if(tls[id].id) {
@@ -48,22 +52,41 @@ import {
       setToolForm("")
       };
 
+      const atools = () => {
+        if (user.email === _uid) {
+          return (
+            <>
+              {tls.map((tool:Tool, index:number) =>
+                    <p key={index} className="toolArticle">{tool.name}< IconButton onClick={() =>deleteContent(index)}><DeleteIcon fontSize="small"/></IconButton></p>
+                  )}
+              <Divider />
+              <CardActions>
+                  <input value={toolForm} onChange={(e) => setToolForm(e.target.value)}/>
+                  <Button onClick={() =>addContent()}>追加</Button>
+              </CardActions>
+          </>
+          );
+        } else {
+          return (
+            <>
+              {tls.map((tool:Tool, index:number) =>
+                    <p key={index} className="toolArticle">{tool.name}</p>
+                  )}
+          </>
+          );
+        }
+      };              
+
+
+
+
   return (
     <>
     <Card>
       <CardContent>
       <h4>使用ツール</h4>
-      {tls.map((tool:Tool, index:number) =>
-            <p key={index} className="toolArticle">{tool.name}< IconButton onClick={() =>deleteContent(index)}><DeleteIcon fontSize="small"/></IconButton></p>
-          )}
-     </CardContent>
-      <Divider />
-      <Divider />
-      <CardActions>
-          <input value={toolForm} onChange={(e) => setToolForm(e.target.value)}/>
-          <Button onClick={() =>addContent()}>追加</Button>
-      </CardActions>
-      
+      {atools()}
+     </CardContent>      
     </Card>
     </>
   )

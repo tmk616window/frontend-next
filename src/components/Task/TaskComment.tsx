@@ -12,19 +12,22 @@ import {
   IconButton
   } from '@material-ui/core';
 import {createComment} from '../../api/task/comment/CreateComment'
-import {Comment} from '../../type/interfaces'
+import {Comment, User} from '../../type/interfaces'
 import DeleteIcon from '@material-ui/icons/Delete';
 import {destroyComment} from '../../api/task/comment/DestroyComment'
+import Cookies from 'js-cookie'
 
 interface CommentParam{
   comments: Comment[]
   id: number
+  user: User
 }
 
-const TaskComment:React.FC<CommentParam> = ({comments,id}) => {
+const TaskComment:React.FC<CommentParam> = ({comments, id, user}) => {
   
   const[comment, setComment] = useState<string[]>([])
   const [form, setForm] = useState<string>("")
+  const _uid = Cookies.get("_uid")
 
   const addContent = () => {
     setComment([...comment, form]);
@@ -40,9 +43,51 @@ const TaskComment:React.FC<CommentParam> = ({comments,id}) => {
   }
   
   useEffect(() => {
-    console.log("comments",comments)
+    console.log("commentsuser", user)
   },[]) 
 
+
+  const commentForm = () => {
+    // if (user.email !== _uid) {
+      if (_uid) {
+      return (
+        <>
+          <h3>コメント</h3>
+          <TextareaAutosize
+            name="コンテンツ"
+              minRows={7}
+              value={form}
+              style={{ width: "100%" }}
+              onChange={(e) => setForm(e.target.value)}
+            />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            p: 2
+          }}
+        >
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={addContent}
+          >
+            投稿
+          </Button>
+        </Box>
+      </>
+      );
+    } 
+  };              
+
+  const deleteButton = (index:number) => {
+    // if (user.email === _uid) {
+      if (_uid) {
+      return (
+          < IconButton onClick={() =>deleteComment(index)}><DeleteIcon fontSize="small"/></IconButton>
+      );
+    }
+  }
 
     return (
         <>
@@ -65,41 +110,17 @@ const TaskComment:React.FC<CommentParam> = ({comments,id}) => {
                     justifyContent: 'flex-end',
                     p: 2
                   }}
-                  >
-                    
+                  >    
                     ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{comment.user.email}</Link>
                   </Box>
-                  < IconButton onClick={() =>deleteComment(index)}><DeleteIcon fontSize="small"/></IconButton>
+                  {deleteButton(index)}
                     </CardContent>
                   </Card>
                   <br/>
                 </div>
                 )}
             </Grid>
-            <h3>コメント</h3>
-          <TextareaAutosize
-            name="コンテンツ"
-              minRows={7}
-              value={form}
-              style={{ width: "100%" }}
-              onChange={(e) => setForm(e.target.value)}
-          />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
-          }}
-        >
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={addContent}
-          >
-            投稿
-          </Button>
-        </Box>
-
+            {commentForm()}
         </>
     );
   }

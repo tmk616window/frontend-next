@@ -68,7 +68,8 @@ import { AuthContext } from "../../pages/_app"
             Cookies.remove("_access_token")
             Cookies.remove("_client")
             Cookies.remove("_uid")
-    
+            Cookies.remove("id")
+
             setIsSignedIn(false)
             // histroy.push("/signin")
     
@@ -82,19 +83,15 @@ import { AuthContext } from "../../pages/_app"
       }
     
       const AuthButtons = () => {
+
+        const _access_token = Cookies.get("_access_token")
+        const _client = Cookies.get("_client")
+        const _uid = Cookies.get("_uid")
+        const id = Cookies.get("id")
+
+
         if (!loading) {
-          if (isSignedIn) {
-            
-            return (
-              <Button
-                color="inherit"
-                className={classes.linkBtn}
-                onClick={handleSignOut}
-              >
-                ログアウト
-              </Button>
-            )
-          } else {
+          if ( _access_token && _client && _uid) {
             return (
               <>
                 <Link href="/tasks" >
@@ -103,6 +100,21 @@ import { AuthContext } from "../../pages/_app"
                 <Link href="/task/new" >
                   投稿
                 </Link>
+                <Link href={{ pathname: '/profile', query: { id: id } }} >
+                  プロフィール
+                </Link>
+                <Button
+                  color="inherit"
+                  className={classes.linkBtn}
+                  onClick={handleSignOut}
+                >
+                  ログアウト
+                </Button>
+              </>
+            )
+          } else {
+            return (
+              <>
                 <Link href="/login" >
                   ログイン
                 </Link>

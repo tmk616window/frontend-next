@@ -15,6 +15,7 @@ export async function getServerSideProps(context:any) {
   const id = context.query.id;
   const user = (await getUser(id)).data
   const p = (await getProLangs(id)).data
+
   return {
     props: {
       user: user,

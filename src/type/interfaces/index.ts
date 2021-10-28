@@ -11,6 +11,7 @@ export interface SignUpParams {
     email: string
     password: string
     user: User
+    data: any
   }
   
   export interface currentUser {
@@ -44,6 +45,8 @@ export interface SignUpParams {
     purl: string
     user_id: number
     prolongs: ProLang[]
+    user: User
+    tools: Tool[]
   }
 
   export interface Tool {
@@ -73,4 +76,6 @@ export interface SignUpParams {
     task_id?: number,
   }
 
-
+export interface SignIn {
+    id: any
+}

@@ -42,6 +42,7 @@ const Login: React.FC = () => {
         Cookies.set("_access_token", res.headers["access-token"])
         Cookies.set("_client", res.headers["client"])
         Cookies.set("_uid", res.headers["uid"])
+        Cookies.set("id", res.data.data.id)
 
         setIsSignedIn(true)
         setCurrentUser(res.data)

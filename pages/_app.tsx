@@ -31,6 +31,58 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [currentUser, setCurrentUser] = useState<User | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
   
+  const skipAuthPaths = [
+    '/login',
+    '/register',
+    '/top'
+  ]
+
+  const isPermitted = isSignedIn || skipAuthPaths.includes(router.asPath)
+
+  // const handleGetCurrentUser = async () => {
+    
+  //   try {
+  //     // const _access_token = Cookies.get("_access_token")
+  //     // const _client = Cookies.get("_client")
+  //     // const _uid = Cookies.get("_uid")
+  //     const _access_token = localStorage.getItem("_access_token")
+  //     const _client = localStorage.getItem("_client")
+  //     const _uid = localStorage.getItem("_uid")
+      
+
+  //     console.log(_access_token,_client, _uid)
+  //     const res = await getCurrentUser(_access_token, _client, _uid)
+  //     console.log(res?.data.currentUser.isLogin)
+
+  //     if (res?.data.currentUser.isLogin === true) {
+  //       setIsSignedIn(true)
+  //       setCurrentUser(res?.data.currentUser.user)
+
+  //       console.log(res?.data.currentUser)
+  //     } else {
+  //       console.log("No current user")
+  //     }
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  //   setLoading(false)
+
+  // }
+
+  // useEffect(() => {
+  //   execTest()
+  //   console.log()
+  //   handleGetCurrentUser()
+  // }, [setCurrentUser])
+
+
+
+
+
+
+
+
+
 
   const handleGetCurrentUser = async () => {
     
@@ -38,16 +90,17 @@ function MyApp({ Component, pageProps }: AppProps) {
       const _access_token = Cookies.get("_access_token")
       const _client = Cookies.get("_client")
       const _uid = Cookies.get("_uid")
+      // const _access_token = localStorage.getItem("_access_token")
+      // const _client = localStorage.getItem("_client")
+      // const _uid = localStorage.getItem("_uid")
       
-      const res = await getCurrentUser()
-      console.log(res?.data.currentUser.isLogin)
 
-      if (res?.data.currentUser.isLogin === true) {
+
+      if (_access_token && _client && _uid) {
         setIsSignedIn(true)
-        setCurrentUser(res?.data.currentUser.user)
-
-        console.log(res?.data.currentUser)
+        console.log("current user")
       } else {
+        setIsSignedIn(false)
         console.log("No current user")
       }
     } catch (err) {
@@ -58,10 +111,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   useEffect(() => {
-    execTest()
-    console.log()
     handleGetCurrentUser()
-  }, [setCurrentUser])
+    console.log("isSignedIn", isSignedIn)
+  }, [])
+
+
+
 
   const Private = ({ children }: any) => {
     if (!loading) {
@@ -81,7 +136,33 @@ function MyApp({ Component, pageProps }: AppProps) {
     <div className={"app"}>
       <AuthContext.Provider value={{ loading, setLoading, isSignedIn, setIsSignedIn, currentUser, setCurrentUser}}>
       <Navbar/>
+
+      {/* { isPermitted
+            ? <Component {...pageProps} />
+            : <div>unauthorized<br/><br/><br/><br/><br/><br/><br/><br/><div>dwxswcdwcwqdw</div></div>
+        } */}
+
+{/* { isSignedIn && (
+                    <Component {...pageProps} />
+                )}
+{ isSignedIn == false  && (
+                    <div>unauthorized<br/><br/><br/><br/><br/><br/><br/><br/><div>dwxswcdwcwqdw</div></div>
+                )} */}
+
+
             <Component {...pageProps} />
+
+
+            <br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+      { isSignedIn
+            ? <div>a{isSignedIn}</div>
+            : <div>b{isSignedIn}</div>
+        }
+
+
+            
       </AuthContext.Provider>
     </div>
   )

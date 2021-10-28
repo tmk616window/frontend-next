@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
 import {User} from '../../type/interfaces'
 import {updateUser} from '../../api/user/UpdateUser'
-
+import Cookies from 'js-cookie'
 import {
   Box,
   Button,
@@ -40,6 +40,14 @@ const states = [
 ];
 
  const EditAccountProfileDetails:React.FC<UserProfile> = ({user, setEdit}) => {
+
+  // const _access_token = Cookies.get("_access_token")
+  // const _client = Cookies.get("_client")
+  const _uid = Cookies.get("_uid")
+  useEffect(() => {
+    console.log(user.email, _uid)
+  }, [])
+
   const [values, setValues] = useState<any>({
     name: user.name,
     email: user.email,
@@ -48,6 +56,28 @@ const states = [
     age: user.age
   });
   
+  const patchButton = () => {
+    if(user.email === _uid) {
+      return (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            p: 2
+          }}
+        >
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={() =>{setEdit(false)}}
+          >
+            編集
+          </Button>
+        </Box>  
+      )
+    }
+  };
+
 
 
   const handleChange = (event: any) => {    
@@ -138,21 +168,7 @@ const states = [
           </Grid>
         </CardContent>
         <Divider />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
-          }}
-        >
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={() =>{setEdit(false)}}
-          >
-            編集
-          </Button>
-        </Box>
+        {patchButton()}
       </Card>
       </div>
   );

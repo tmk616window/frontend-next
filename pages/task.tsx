@@ -16,7 +16,7 @@ import {
   import TaskComment from '../src/components/Task/TaskComment'
   import {createLike} from '../src/api/like/CreateLike'
   import { makeStyles } from '@material-ui/core/styles'
-
+  import Cookies from 'js-cookie'
   const useStyles = makeStyles({
     customButton: {
       position: "fixed",
@@ -43,15 +43,19 @@ import {
   }
 
   const Tasks = (props:any) => {
+    const _access_token = Cookies.get("_access_token")
+    const _client = Cookies.get("_client")
+    const _uid = Cookies.get("_uid")
 
     const[edit, setEdit] = useState<boolean>(true)
     const classes = useStyles()
     const task = props.task.task.task
+    const user = props.task.task
     const cTask = props.task.task
     const comments = props.comments.comments
 
       useEffect(() => {
-        console.log("user", task)
+        console.log("user", user)
       },[]) 
     
     return(
@@ -74,7 +78,7 @@ import {
                 xs={12}
               > 
                 {edit
-                  ? <TaskDetails task={task} setEdit={setEdit} contents={cTask.contents}/>
+                  ? <TaskDetails task={task} setEdit={setEdit} contents={cTask.contents} user={user}/>
                   
 
                     : <EditTaskDetails  task={task} setEdit={setEdit} id={task.id} propsContents={cTask.contents}/>
@@ -86,9 +90,9 @@ import {
                 md={3}
                 xs={12}
               >
-                <TaskProlangs proL={cTask.prolangs} id={task.id} />
+                <TaskProlangs proL={cTask.prolangs} id={task.id} user={user}/>
                 <br/>
-                <TaskTools  tls={cTask.tools} id={task.id}/>
+                <TaskTools  tls={cTask.tools} id={task.id} user={user}/>
                 <br/>
                 <TaskProfile user={cTask.user}/>
               </Grid>
@@ -100,7 +104,7 @@ import {
                 xs={12}
               >
               <br/>
-              <TaskComment id={task.id} comments={comments}/>
+              <TaskComment id={task.id} comments={comments} user={user}/>
             </Grid>
             <Grid
                 spacing={3}
