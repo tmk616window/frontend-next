@@ -42,14 +42,13 @@ const TaskComment:React.FC<CommentParam> = ({comments, id, user}) => {
     location.reload();
   }
   
-  useEffect(() => {
-    console.log("commentsuser", user)
-  },[]) 
+  // useEffect(() => {
+  //   console.log("commentsuser", user)
+  // },[]) 
 
 
   const commentForm = () => {
-    // if (user.email !== _uid) {
-      if (_uid) {
+    if (user.email !== _uid) {
       return (
         <>
           <h3>コメント</h3>

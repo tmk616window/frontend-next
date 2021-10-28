@@ -42,7 +42,6 @@ import {
     }
       
     useEffect(() => {
-      console.log("dniwhnduiwhuidhwuidew", tls)
     }, [])
     const addContent = () => {
       setTools([...tools, toolForm]);

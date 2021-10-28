@@ -30,12 +30,28 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false)
   const [currentUser, setCurrentUser] = useState<User | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
-  
+  const _access_token = Cookies.get("_access_token")
+  const _client = Cookies.get("_client")
+  const _uid = Cookies.get("_uid")
+
+
+
   const skipAuthPaths = [
     '/login',
     '/register',
     '/top'
   ]
+
+  const AuthPaths = [
+    '/login',
+    '/register',
+    '/top'
+  ]
+
+  const authPath = async () => {
+
+  }
+
 
   const isPermitted = isSignedIn || skipAuthPaths.includes(router.asPath)
 

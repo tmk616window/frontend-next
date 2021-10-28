@@ -26,11 +26,12 @@ interface TaskItem {
   setEdit: any
   id :number
   propsContents: Content[]
+  setTask: any
 }
 
 
 
- const EditTaskDetails:React.FC<TaskItem> = ({task, setEdit, propsContents, id}) => {
+ const EditTaskDetails:React.FC<TaskItem> = ({task, setEdit, propsContents, id, setTask}) => {
   const router = useRouter();
   const [contents, setContents] = useState<Content[]>(propsContents)
   const [title, setTitle] = useState<string>(task.title)
@@ -77,6 +78,7 @@ const patchContent = () => {
       createContent(content['title'], content['text'], task.id)
     }
   }
+  
 }
 
 
@@ -92,12 +94,14 @@ const patchContent = () => {
   }
 
 
-const patchTask = () => {
-  const data = createFormData()
+const patchTask = async () => {
+  const uData = createFormData()
   setEdit(true)
-  updateTask(id, data)
+  const { data }  = await updateTask(id, uData)
+  console.log("updateTask(id, data)updateTask(id, data)", data.task)
   patchContent()
-
+  
+  setTask(data.task)
   router.push({
     pathname:"/task",       
     query: {id : id} 

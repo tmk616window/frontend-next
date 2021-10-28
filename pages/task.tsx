@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import {getTask} from '../src/api/task/GetTask'
 import {getComments} from '../src/api/task/comment/GetComment'
+import {Task} from '../src/type/interfaces'
 import EditTaskDetails from '../src/components/Task/EditTaskDetails'
 import {
     Box,
@@ -45,17 +46,21 @@ import {
   const Tasks = (props:any) => {
     const _access_token = Cookies.get("_access_token")
     const _client = Cookies.get("_client")
-    const _uid = Cookies.get("_uid")
-
+    const _uid = Cookies.get("_uid")  
+    
     const[edit, setEdit] = useState<boolean>(true)
     const classes = useStyles()
-    const task = props.task.task.task
-    const user = props.task.task
+    const pTask = props.task.task.task
+    const user = props.task.task.user
     const cTask = props.task.task
     const comments = props.comments.comments
+    const[task, setTask] = useState<any>(pTask)
+    const[prolangs, setProlangs] = useState<any>(cTask.prolongs)
+
+
 
       useEffect(() => {
-        console.log("user", user)
+        console.log("user", cTask.prolongs)
       },[]) 
     
     return(
@@ -81,7 +86,7 @@ import {
                   ? <TaskDetails task={task} setEdit={setEdit} contents={cTask.contents} user={user}/>
                   
 
-                    : <EditTaskDetails  task={task} setEdit={setEdit} id={task.id} propsContents={cTask.contents}/>
+                    : <EditTaskDetails  task={task} setEdit={setEdit} id={pTask.id} propsContents={cTask.contents} setTask={setTask}/>
                 }
               </Grid>
               <Grid
@@ -90,9 +95,9 @@ import {
                 md={3}
                 xs={12}
               >
-                <TaskProlangs proL={cTask.prolangs} id={task.id} user={user}/>
+                <TaskProlangs proL={prolangs} id={pTask.id} user={user} setProlangs={setProlangs}/>
                 <br/>
-                <TaskTools  tls={cTask.tools} id={task.id} user={user}/>
+                <TaskTools  tls={cTask.tools} id={pTask.id} user={user}/>
                 <br/>
                 <TaskProfile user={cTask.user}/>
               </Grid>
@@ -104,7 +109,7 @@ import {
                 xs={12}
               >
               <br/>
-              <TaskComment id={task.id} comments={comments} user={user}/>
+              <TaskComment id={pTask.id} comments={comments} user={user}/>
             </Grid>
             <Grid
                 spacing={3}

@@ -31,7 +31,7 @@ interface TaskItem {
 
 
   useEffect(() => {
-    console.log("task.logoImage?.url", _uid)
+    console.log("task.logoImage?.url", _uid, user.email)
   }, [])
   
   const patchButton = () => {

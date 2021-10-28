@@ -2,7 +2,7 @@ import {api} from '../../common/client'
 import {Content} from '../../../type/interfaces'
 
 
-export const createContent = (title: string, text:string, taskId:number) =>  {
+export const createContent = (title: string, text:string, taskId:any) =>  {
     return api.post<{content: Content}>('/contents' , 
     {
         title: title,
