@@ -4,7 +4,7 @@ import Logo from '../../../img/logo.png'
 import Image from 'next/image'
 import {destroyTool} from '../../api/tool/DestroyTool'
 import Cookies from 'js-cookie'
-
+import {getTask} from '../../api/task/GetTask'
 import {
     Avatar,
     Box,
@@ -23,32 +23,42 @@ import {
     tls: Tool[]
     id: number
     user: User
+    setPtools: any
   }
 
   
- const TaskTools:React.FC<ToolsParams> = ({tls, id, user}) => {
+ const TaskTools:React.FC<ToolsParams> = ({tls, id, user, setPtools}) => {
 
     const [toolForm, setToolForm] = useState<string>("")
     const [tools, setTools] = useState<string[]>([])
     const _uid = Cookies.get("_uid")
 
 
-    const deleteContent = (id:number) => {
-      if(tls[id].id) {
-        destroyTool(tls[id].id)
-      }
+    const deleteContent = async (id:number) => {
+      
+
+      const {data} = await destroyTool(tls[id].id)
+      console.log("destroyProLangdestroyProLangdestroyProLang", data.tool.task_id)
+      // location.reload();
+      const tProlangs = (await getTask(data.tool.task_id)).data
+      console.log("aaaaaaaaaaaa",tProlangs.task.tools)
+      setPtools(tProlangs.task.tools)
       location.reload();
-      // setTools(tools.filter((_, i) => i !== id))
+
+      // location.reload();
     }
       
     useEffect(() => {
     }, [])
-    const addContent = () => {
+    const addContent = async () => {
       setTools([...tools, toolForm]);
       console.log(tools)
-      location.reload();
       createTool(toolForm, id)
+      const tTools = (await getTask(id)).data
+      console.log("aaaaaaaaaaaa",tTools.task.tools)
+      setPtools(tTools.task.tools)
       setToolForm("")
+      location.reload();
       };
 
       const atools = () => {

@@ -1,5 +1,5 @@
 import {api} from '../common/client'
-import axios from 'axios'
+import {Tool} from '../../type/interfaces'
 
 export const destroyTool = (id: number) =>  {
-    return api.delete('/tools/' + id )}
+    return api.delete<{tool: Tool}>('/tools/' + id )}

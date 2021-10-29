@@ -45,16 +45,15 @@ import {
         const tProlangs = (await getTask(data.prolong.task_id)).data
         console.log("aaaaaaaaaaaa",tProlangs.task.prolongs)
         setProlangs(tProlangs.task.prolongs)
+        location.reload();
       }
         
       const addContent = async () => {
         setProLangs([...proLangs, form]);
-        
         createProLang(form, id)
-
         const tProlangs = (await getTask(id)).data
-        console.log("aaaaaaaaaaaa",tProlangs.task.prolongs)
         setProlangs(tProlangs.task.prolongs)
+        location.reload();
         setForm("")
         };
 

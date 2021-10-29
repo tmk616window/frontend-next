@@ -56,6 +56,7 @@ import {
     const comments = props.comments.comments
     const[task, setTask] = useState<any>(pTask)
     const[prolangs, setProlangs] = useState<any>(cTask.prolongs)
+    const[ptools, setPtools] = useState<any>(cTask.tools)
 
 
 
@@ -97,7 +98,7 @@ import {
               >
                 <TaskProlangs proL={prolangs} id={pTask.id} user={user} setProlangs={setProlangs}/>
                 <br/>
-                <TaskTools  tls={cTask.tools} id={pTask.id} user={user}/>
+                <TaskTools  tls={ptools} id={pTask.id} user={user} setPtools={setPtools}/>
                 <br/>
                 <TaskProfile user={cTask.user}/>
               </Grid>
