@@ -1,13 +1,11 @@
 import {useEffect, useState} from 'react'
 import {getTask} from '../src/api/task/GetTask'
 import {getComments} from '../src/api/task/comment/GetComment'
-import {Task} from '../src/type/interfaces'
 import EditTaskDetails from '../src/components/Task/EditTaskDetails'
 import {
     Box,
     Container,
     Grid,
-    IconButton,
   } from '@material-ui/core';
   import TaskProfile from '../src/components/Task/TaskProfile';
   import TaskDetails from '../src/components/Task/TaskDetails';
@@ -15,17 +13,7 @@ import {
   import TaskTools from '../src/components/Task/TaskTools'
   import TaskComment from '../src/components/Task/TaskComment'
   import TaskLikes from '../src/components/Task/TaskLikes'
-
-  import { makeStyles } from '@material-ui/core/styles'
   import Cookies from 'js-cookie'
-  const useStyles = makeStyles({
-    customButton: {
-      position: "fixed",
-      bottom: "70%",
-      left: "20px",
-        },
-  })
-
 
   //サーバーサイドレンダリング
   export async function getServerSideProps(context:any) {
@@ -54,7 +42,6 @@ import {
     const[prolangs, setProlangs] = useState<any>(cTask.prolongs)
     const[ptools, setPtools] = useState<any>(cTask.tools)
     const[likes, setLikes] = useState<any>(pLikes)
-    const classes = useStyles()
 
     useEffect(() => {
   
@@ -101,7 +88,6 @@ import {
               </Grid>
             </Grid>
             <TaskLikes likes={likes} setLikes={setLikes} currentId={currentId} taskId={pTask.id}/>
-
             <Grid
                 spacing={3}
                 lg={10}

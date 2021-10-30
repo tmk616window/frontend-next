@@ -79,7 +79,6 @@ interface UserProfile {
         画像編集
       </Button>
     </CardActions>
-    
   </Card>
   </>
   )

@@ -1,14 +1,19 @@
 import {
   Box,
   Container,
-  Grid
+  Grid,
+  Card,
+  CardContent,
+  Divider
 } from '@material-ui/core';
 import AccountProfile from '../src/components/Account/AccountProfile';
 import AccountProfileDetails from '../src/components/Account/AccountProfileDetails';
 import EditAccountProfileDetails from '../src/components/Account/EditAccountProfileDetails';
 import {getUser} from '../src/api/user/GetUser'
 import {useEffect, useState} from 'react'
+import Link from 'next/link'
 import {getProLangs} from '../src/api/prolang/GetProLang'
+import {Task} from '../src/type/interfaces'
 
 //サーバーサイドレンダリング
 export async function getServerSideProps(context:any) {
@@ -28,14 +33,18 @@ export async function getServerSideProps(context:any) {
 
 const ProfilePage =(props:any) => {
   
-
-
   const [edit, setEdit] = useState<boolean>(true)
-  const id = props.id
-  const u = props.user.user
-  const p = props.p
+  const u = props.user.user.user
+  const t = props.user.user.task
   const[user, setUser] = useState(u)
- 
+
+
+  useEffect(() => {
+  
+    console.log("props.userprops.user", t)
+  },[])
+
+
   
   return (
   <>
@@ -57,6 +66,20 @@ const ProfilePage =(props:any) => {
             xs={12}
           >
             <AccountProfile user={user}/>
+            <br/>
+            <Card>
+              <CardContent>
+              <h2>投稿したポートフォリオ</h2>
+              <Divider />
+              <br/>
+                {t.map((task:Task, index:number) =>
+                <div key={index}>
+                    <Link href={{ pathname: '/profile', query: { id: task.id } }} >{task.title}</Link>
+                    <br/>
+                </div>
+                )}
+              </CardContent>    
+            </Card>
           </Grid>
           <Grid
             item
@@ -78,7 +101,6 @@ const ProfilePage =(props:any) => {
             md={6}
             xs={12}
           >
-            <h2>投稿したポートフォリオ</h2>
         </Grid>
       </Container>
     </Box>
