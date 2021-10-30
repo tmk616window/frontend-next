@@ -47,6 +47,7 @@ export interface SignUpParams {
     prolongs: ProLang[]
     user: User
     tools: Tool[]
+    likes: Like[]
   }
 
   export interface Tool {
@@ -78,4 +79,10 @@ export interface SignUpParams {
 
 export interface SignIn {
     id: any
+}
+
+export interface Like {
+  id: number
+  task_id: number
+  user_id: number
 }

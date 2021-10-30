@@ -42,7 +42,7 @@ interface UserParams{
             gutterBottom
             variant="h5"
           >
-            {/* <Link href={{ pathname: '/profile', query: { id: user.id } }}>{user.email}</Link> */}
+            <Link href={{ pathname: '/profile', query: { id: user.id } }}>{user.email}</Link>
           </Typography>
           <Typography
             color="textSecondary"

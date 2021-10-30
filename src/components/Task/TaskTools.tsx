@@ -35,27 +35,18 @@ import {
 
 
     const deleteContent = async (id:number) => {
-      
-
       const {data} = await destroyTool(tls[id].id)
-      console.log("destroyProLangdestroyProLangdestroyProLang", data.tool.task_id)
-      // location.reload();
       const tProlangs = (await getTask(data.tool.task_id)).data
-      console.log("aaaaaaaaaaaa",tProlangs.task.tools)
       setPtools(tProlangs.task.tools)
       location.reload();
-
-      // location.reload();
     }
       
     useEffect(() => {
     }, [])
     const addContent = async () => {
       setTools([...tools, toolForm]);
-      console.log(tools)
       createTool(toolForm, id)
       const tTools = (await getTask(id)).data
-      console.log("aaaaaaaaaaaa",tTools.task.tools)
       setPtools(tTools.task.tools)
       setToolForm("")
       location.reload();

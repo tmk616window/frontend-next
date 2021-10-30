@@ -9,20 +9,20 @@ import {
     Grid,
     IconButton,
   } from '@material-ui/core';
-  import Favorite from '@material-ui/icons/Favorite';
   import TaskProfile from '../src/components/Task/TaskProfile';
   import TaskDetails from '../src/components/Task/TaskDetails';
   import TaskProlangs from '../src/components/Task/TaskProlangs'
   import TaskTools from '../src/components/Task/TaskTools'
   import TaskComment from '../src/components/Task/TaskComment'
-  import {createLike} from '../src/api/like/CreateLike'
+  import TaskLikes from '../src/components/Task/TaskLikes'
+
   import { makeStyles } from '@material-ui/core/styles'
   import Cookies from 'js-cookie'
   const useStyles = makeStyles({
     customButton: {
       position: "fixed",
-      bottom: "50px",
-      left: "30px",
+      bottom: "70%",
+      left: "20px",
         },
   })
 
@@ -33,7 +33,6 @@ import {
     const task = (await getTask(id)).data
     const comments = (await getComments(id)).data
 
-  
     return {
       props: {
         id: id,
@@ -44,25 +43,23 @@ import {
   }
 
   const Tasks = (props:any) => {
-    const _access_token = Cookies.get("_access_token")
-    const _client = Cookies.get("_client")
-    const _uid = Cookies.get("_uid")  
-    
-    const[edit, setEdit] = useState<boolean>(true)
-    const classes = useStyles()
+    const currentId = Number(Cookies.get("id"))
     const pTask = props.task.task.task
     const user = props.task.task.user
     const cTask = props.task.task
     const comments = props.comments.comments
+    const pLikes = props.task.task.likes
+    const[edit, setEdit] = useState<boolean>(true)
     const[task, setTask] = useState<any>(pTask)
     const[prolangs, setProlangs] = useState<any>(cTask.prolongs)
     const[ptools, setPtools] = useState<any>(cTask.tools)
+    const[likes, setLikes] = useState<any>(pLikes)
+    const classes = useStyles()
 
-
-
-      useEffect(() => {
-        console.log("user", cTask.prolongs)
-      },[]) 
+    useEffect(() => {
+  
+      console.log("user", props.task.task.likes)
+    },[]) 
     
     return(
       <>    
@@ -79,10 +76,10 @@ import {
             >
               <Grid
                 item
-                lg={9}
-                md={9}
-                xs={12}
-              > 
+                lg={8}
+                md={8}
+                xs={11}
+              >
                 {edit
                   ? <TaskDetails task={task} setEdit={setEdit} contents={cTask.contents} user={user}/>
                   
@@ -92,9 +89,9 @@ import {
               </Grid>
               <Grid
                 item
-                lg={3}
-                md={3}
-                xs={12}
+                lg={4}
+                md={4}
+                xs={11}
               >
                 <TaskProlangs proL={prolangs} id={pTask.id} user={user} setProlangs={setProlangs}/>
                 <br/>
@@ -103,6 +100,8 @@ import {
                 <TaskProfile user={cTask.user}/>
               </Grid>
             </Grid>
+            <TaskLikes likes={likes} setLikes={setLikes} currentId={currentId} taskId={pTask.id}/>
+
             <Grid
                 spacing={3}
                 lg={10}
@@ -119,7 +118,6 @@ import {
                 xs={12}
               >
             </Grid>
-            < IconButton className={classes.customButton} onClick={() => {createLike(2,2)}}><Favorite/></IconButton>
           </Container>
         </Box>
       </>  

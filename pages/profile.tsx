@@ -27,14 +27,14 @@ export async function getServerSideProps(context:any) {
 
 
 const ProfilePage =(props:any) => {
-
+  
 
 
   const [edit, setEdit] = useState<boolean>(true)
   const id = props.id
-  const user = props.user.user
+  const u = props.user.user
   const p = props.p
-  const[u, setU] = useState(user)
+  const[user, setUser] = useState(u)
  
   
   return (
@@ -68,7 +68,7 @@ const ProfilePage =(props:any) => {
                   ? <EditAccountProfileDetails user={user} setEdit={setEdit} />
 
                   
-                    : <AccountProfileDetails user={user} setEdit={setEdit}/>
+                    : <AccountProfileDetails user={user} setEdit={setEdit} setUser={setUser}/>
                 }
           </Grid>
         </Grid>

@@ -41,8 +41,6 @@ const states = [
 
  const EditAccountProfileDetails:React.FC<UserProfile> = ({user, setEdit}) => {
 
-  // const _access_token = Cookies.get("_access_token")
-  // const _client = Cookies.get("_client")
   const _uid = Cookies.get("_uid")
   useEffect(() => {
     console.log(user.email, _uid)
@@ -112,21 +110,21 @@ const states = [
               md={12}
               xs={12}
             >
-              <p>{user.email}</p>
+              <p>メールアドレス：{user.email}</p>
             </Grid>
             <Grid
               item
               md={6}
               xs={12}
             >
-              <p>{user.age}歳</p>
+              <p>年齢：{user.age}歳</p>
             </Grid>
             <Grid
               item
               md={6}
               xs={12}
             >
-              <p>{user.live}</p>
+              <p>居住都道府県：{user.live}</p>
             </Grid>
             <Grid
             item
@@ -134,25 +132,7 @@ const states = [
             md={12}
             xs={12}
           >
-            <p>使用プログラミング言語</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-
           </Grid>
-
             <Grid
             item
             lg={12}

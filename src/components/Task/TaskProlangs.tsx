@@ -33,17 +33,9 @@ import {
       const [proLangs, setProLangs] = useState<string[]>([])
       const _uid = Cookies.get("_uid")
 
-
-      useEffect(() => {
-      },[]) 
-
-
       const destroyContent = async (id:number) => {
         const {data} = await destroyProLang(proL[id].id)
-        console.log("destroyProLangdestroyProLangdestroyProLang",data.prolong.task_id)
-        // location.reload();
         const tProlangs = (await getTask(data.prolong.task_id)).data
-        console.log("aaaaaaaaaaaa",tProlangs.task.prolongs)
         setProlangs(tProlangs.task.prolongs)
         location.reload();
       }
