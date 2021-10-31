@@ -74,7 +74,7 @@ const ProfilePage =(props:any) => {
               <br/>
                 {t.map((task:Task, index:number) =>
                 <div key={index}>
-                    <Link href={{ pathname: '/profile', query: { id: task.id } }} >{task.title}</Link>
+                    <Link href={{ pathname: '/task', query: { id: task.id } }} >{task.title}</Link>
                     <br/>
                 </div>
                 )}

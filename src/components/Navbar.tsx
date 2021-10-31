@@ -1,20 +1,15 @@
 import React, { useContext } from "react"
-// import { useHistory, Link } from "react-router-dom"
-
 import { makeStyles, Theme } from "@material-ui/core/styles"
-
 import Link from 'next/link'
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 import Button from "@material-ui/core/Button"
 import IconButton from "@material-ui/core/IconButton"
-import MenuIcon from "@material-ui/icons/Menu"
-
 import { signOut } from "../api/login/auth"
 import Cookies from "js-cookie"
 import { AuthContext } from "../../pages/_app"
-
+import TemporaryDrawer from './Drawer'
 
  const Navbar = () => {
 
@@ -49,7 +44,6 @@ import { AuthContext } from "../../pages/_app"
 
     const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
         try {
-
           const _access_token = Cookies.get("_access_token")
           const _client = Cookies.get("_client")
           const _uid = Cookies.get("_uid")
@@ -59,7 +53,6 @@ import { AuthContext } from "../../pages/_app"
             "client": _client,
             "uid": _uid    
           }
-          // console.log(params)
           const res = await signOut(params)
           console.log(res)
     
@@ -80,55 +73,8 @@ import { AuthContext } from "../../pages/_app"
         } catch (err) {
           console.log(err)
         }
-      }
-    
-      const AuthButtons = () => {
-
-        const _access_token = Cookies.get("_access_token")
-        const _client = Cookies.get("_client")
-        const _uid = Cookies.get("_uid")
-        const id = Cookies.get("id")
-
-
-        if (!loading) {
-          if ( _access_token && _client && _uid) {
-            return (
-              <>
-                <Link href="/tasks" >
-                  一覧
-                </Link>
-                <Link href="/task/new" >
-                  投稿
-                </Link>
-                <Link href={{ pathname: '/profile', query: { id: id } }} >
-                  プロフィール
-                </Link>
-                <Button
-                  color="inherit"
-                  className={classes.linkBtn}
-                  onClick={handleSignOut}
-                >
-                  ログアウト
-                </Button>
-              </>
-            )
-          } else {
-            return (
-              <>
-                <Link href="/login" >
-                  ログイン
-                </Link>
-                <Link href="/register" >
-                  新規作成
-                </Link>
-              </>
-            )
-          }
-        } else {
-          return <></>
-        }
-      }
-    
+    }
+        
 
   return (
     <>
@@ -139,7 +85,6 @@ import { AuthContext } from "../../pages/_app"
             className={classes.iconButton}
             color="inherit"
           >
-            <MenuIcon />
           </IconButton>
           <Typography
             // component={Link}
@@ -149,7 +94,7 @@ import { AuthContext } from "../../pages/_app"
           >
             エンジョブ
           </Typography>
-          <AuthButtons />
+          <TemporaryDrawer handleSignOut={handleSignOut}/>
         </Toolbar>
       </AppBar>
     </>

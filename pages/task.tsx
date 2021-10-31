@@ -44,7 +44,6 @@ import {
     const[likes, setLikes] = useState<any>(pLikes)
 
     useEffect(() => {
-  
       console.log("user", props.task.task.likes)
     },[]) 
     
