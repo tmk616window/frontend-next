@@ -114,7 +114,7 @@ const signOutList = (anchor: Anchor) => {
     <div>
       {(['right'] as const).map((anchor) => (
         <React.Fragment key={anchor}>
-          <IconButton onClick={toggleDrawer(anchor, true)}><MenuIcon /></IconButton>
+          <IconButton onClick={toggleDrawer(anchor, true)}><MenuIcon color="inherit"/></IconButton>
           <Drawer
             anchor={anchor}
             open={state[anchor]}

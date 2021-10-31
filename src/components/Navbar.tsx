@@ -10,8 +10,15 @@ import { signOut } from "../api/login/auth"
 import Cookies from "js-cookie"
 import { AuthContext } from "../../pages/_app"
 import TemporaryDrawer from './Drawer'
+import SwipeableTemporaryDrawer from './Drawer1'
+import { useRouter } from 'next/router'
+
+
+
 
  const Navbar = () => {
+  const router = useRouter()
+
 
     let logo ={
         height: "200px",
@@ -64,8 +71,7 @@ import TemporaryDrawer from './Drawer'
             Cookies.remove("id")
 
             setIsSignedIn(false)
-            // histroy.push("/signin")
-    
+            router.push("/")
             console.log("Succeeded in sign out")
           } else {
             console.log("Failed in sign out")
@@ -94,7 +100,7 @@ import TemporaryDrawer from './Drawer'
           >
             エンジョブ
           </Typography>
-          <TemporaryDrawer handleSignOut={handleSignOut}/>
+          <SwipeableTemporaryDrawer handleSignOut={handleSignOut}/>
         </Toolbar>
       </AppBar>
     </>
