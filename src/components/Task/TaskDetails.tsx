@@ -85,7 +85,7 @@ interface TaskItem {
               xs={12}
             >
               <h3>ポートフォリオURL</h3>
-                <p>{task.purl}</p>
+                <a href={task.purl}>{task.purl}</a>
             </Grid>
             <Grid
               item
@@ -101,15 +101,15 @@ interface TaskItem {
               md={12}
               xs={12}
             >
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             {contents.map((content:Content, index:number) =>
-                  <div key={index}>
-                    <Card>
-                    <CardContent>
+                  <div className="content" key={index}>
                     <h3>{content.title}</h3>
+                    <Divider />
                     <p >{content.text}</p>
-                      </CardContent>
-                    </Card>
-                    <br/>
                   </div>
                   )}
           </Grid>

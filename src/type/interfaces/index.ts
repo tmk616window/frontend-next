@@ -48,6 +48,7 @@ export interface SignUpParams {
     user: User
     tools: Tool[]
     likes: Like[]
+    contents: Content[]
   }
 
   export interface Tool {

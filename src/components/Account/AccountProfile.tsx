@@ -76,7 +76,7 @@ interface UserProfile {
         fullWidth
         variant="text"
       >
-        画像編集
+        スカウトメールを送る
       </Button>
     </CardActions>
   </Card>

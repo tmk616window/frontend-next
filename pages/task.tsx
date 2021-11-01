@@ -42,6 +42,7 @@ import {
     const[prolangs, setProlangs] = useState<any>(cTask.prolongs)
     const[ptools, setPtools] = useState<any>(cTask.tools)
     const[likes, setLikes] = useState<any>(pLikes)
+    const[content, setContent] = useState<any>(cTask.contents)
 
     useEffect(() => {
       console.log("user", props.task.task.likes)
@@ -70,7 +71,7 @@ import {
                   ? <TaskDetails task={task} setEdit={setEdit} contents={cTask.contents} user={user}/>
                   
 
-                    : <EditTaskDetails  task={task} setEdit={setEdit} id={pTask.id} propsContents={cTask.contents} setTask={setTask}/>
+                    : <EditTaskDetails  task={task} setEdit={setEdit} id={pTask.id} propsContents={content} setContent={setContent} setTask={setTask}/>
                 }
               </Grid>
               <Grid

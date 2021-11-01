@@ -7,7 +7,7 @@ import {updateTask} from '../../api/task/UpdateTask'
 import {updateContent} from '../../api/task/content/UpdateContent'
 import { useRouter } from 'next/router';
 import {destroyContent} from '../../api/task/content/DestroyContent'
-
+import {getTask} from '../../api/task/GetTask'
 import {
   Box,
   Button,
@@ -27,11 +27,12 @@ interface TaskItem {
   id :number
   propsContents: Content[]
   setTask: any
+  setContent: any
 }
 
 
 
- const EditTaskDetails:React.FC<TaskItem> = ({task, setEdit, propsContents, id, setTask}) => {
+ const EditTaskDetails:React.FC<TaskItem> = ({task, setEdit, propsContents, id, setTask, setContent}) => {
   const router = useRouter();
   const [contents, setContents] = useState<Content[]>(propsContents)
   const [title, setTitle] = useState<string>(task.title)
@@ -100,12 +101,15 @@ const patchTask = async () => {
   const { data }  = await updateTask(id, uData)
   console.log("updateTask(id, data)updateTask(id, data)", data.task)
   patchContent()
-  
+  console.log(data.task)
   setTask(data.task)
-  router.push({
-    pathname:"/task",       
-    query: {id : id} 
-  });
+  const content = (await getTask(id)).data
+  setContent(content.task.contents)
+  console.log("data.taskdata.taskdata.taskdata.task", content.task.contents)
+  // router.push({
+  //   pathname:"/task",       
+  //   query: {id : id} 
+  // });
   
 }
 

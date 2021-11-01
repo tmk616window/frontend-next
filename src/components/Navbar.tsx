@@ -17,9 +17,11 @@ import { useRouter } from 'next/router'
 
 
  const Navbar = () => {
+  const _access_token = Cookies.get("_access_token")
+  const _client = Cookies.get("_client")
+  const _uid = Cookies.get("_uid")
+
   const router = useRouter()
-
-
     let logo ={
         height: "200px",
         width: "200px"
@@ -85,13 +87,7 @@ import { useRouter } from 'next/router'
   return (
     <>
       <AppBar position="absolute" className={classes.nabvarBottom}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.iconButton}
-            color="inherit"
-          >
-          </IconButton>
+        <Toolbar>   
           <Typography
             // component={Link}
             // to="/"
@@ -100,6 +96,7 @@ import { useRouter } from 'next/router'
           >
             エンジョブ
           </Typography>
+          
           <SwipeableTemporaryDrawer handleSignOut={handleSignOut}/>
         </Toolbar>
       </AppBar>

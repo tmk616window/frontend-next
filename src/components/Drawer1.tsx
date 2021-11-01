@@ -7,6 +7,7 @@ import {
   ListItemText,
   SwipeableDrawer
 } from '@material-ui/core';
+import MenuIcon from "@material-ui/icons/Menu"
 import Link from 'next/link'
 import Cookies from 'js-cookie'
 
@@ -52,6 +53,10 @@ const signOutMenu = [
 
 
 const SwipeableTemporaryDrawer = ({handleSignOut}: any) => {
+  const _access_token = Cookies.get("_access_token")
+  const _client = Cookies.get("_client")
+  const _uid = Cookies.get("_uid")
+  const id = Cookies.get("id")
 
 
 
@@ -75,10 +80,6 @@ const SwipeableTemporaryDrawer = ({handleSignOut}: any) => {
     };
 
   const list = (anchor: Anchor) => {
-    const _access_token = Cookies.get("_access_token")
-    const _client = Cookies.get("_client")
-    const _uid = Cookies.get("_uid")
-    const id = Cookies.get("id")
     
 
 
@@ -120,9 +121,6 @@ const SwipeableTemporaryDrawer = ({handleSignOut}: any) => {
               ))}
             </List>      
              )
-
-
-
           }
         })()
       }
@@ -138,7 +136,7 @@ const SwipeableTemporaryDrawer = ({handleSignOut}: any) => {
     <div>
       {(['right'] as const).map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Button onClick={toggleDrawer(anchor, true)}><MenuIcon color="inherit"/></Button>
           <SwipeableDrawer
             anchor={anchor}
             open={state[anchor]}
@@ -147,6 +145,7 @@ const SwipeableTemporaryDrawer = ({handleSignOut}: any) => {
           >
             {list(anchor)}
           </SwipeableDrawer>
+          
         </React.Fragment>
       ))}
     </div>
