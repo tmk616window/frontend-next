@@ -15,13 +15,13 @@ export const signIn = (params: SignInParams)  => {
 
 // サインアウト（ログアウト）
 export const signOut = (params:any) => {
-  return axios.delete<{success: boolean}>("http://localhost/api/v1/auth/sign_out", {headers: params})  
+  return axios.delete<{success: boolean}>("https://enjob.work/api/v1/auth/sign_out", {headers: params})  
 }
 
 // 認証済みのユーザーを取得
 export const getCurrentUser = (token:any, client:any, uid:any) => {
   if (!token || !client || !uid) return
-  return axios.get<{currentUser: currentUser}>("http://localhost/api/v1/auth/sessions", {
+  return axios.get<{currentUser: currentUser}>("https://enjob.work/api/v1/auth/sessions", {
     headers: {
       "access-token": token,
       "client": client,

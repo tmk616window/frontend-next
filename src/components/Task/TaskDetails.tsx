@@ -70,7 +70,7 @@ interface TaskItem {
               xs={12}
             >
               {/* <img alt="logo" src={task.logoImage?.url} height="70%" width="100%"/> */}
-              <img alt="logo" src={displayImage(`/localhost/${task.logoImage?.url}`)} height="70%" width="100%"/>
+              <img alt="logo" src={displayImage(`https://enjob.work/${task.logoImage?.url}`)} height="70%" width="100%"/>
             </Grid>
             <Grid
               item

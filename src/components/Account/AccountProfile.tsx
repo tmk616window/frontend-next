@@ -40,7 +40,7 @@ interface UserProfile {
       >
         
         <Avatar 
-        src={displayImage(`http://localhost/${user.image?.url}`)}
+        src={displayImage(`https://enjob.work/${user.image?.url}`)}
         />
         <br/>
 
