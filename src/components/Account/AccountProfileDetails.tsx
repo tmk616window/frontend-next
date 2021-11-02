@@ -17,9 +17,10 @@ import {
 interface UserProfile {
   user: User
   setEdit: any
+  setUser: any
 }
 
- const AccountProfileDetails:React.FC<UserProfile> = ({user, setEdit}) => {
+ const AccountProfileDetails:React.FC<UserProfile> = ({user, setEdit, setUser}) => {
   const [image, setImage] = useState<File>()
   const [values, setValues] = useState<any>({
     name: user.name,
@@ -61,12 +62,10 @@ interface UserProfile {
     const data = createFormData()
 
     await updateUser(user.id, data)
-    .then(() => {
+    .then((res) => {
       console.log("成功")
-      // setContent("")
-      // setPreview("")
-      // setImage(undefined)
-      // handleGetPosts()
+      setUser(res.data.user)
+      setEdit(true)
     })
   }
 
@@ -80,13 +79,12 @@ interface UserProfile {
         />
         <Divider />
         <CardContent>
-
         <Grid
               item
               md={12}
               xs={12}
             >
-
+            
             <input
               accept="image/*"
               id="icon-button-file" 
@@ -95,10 +93,7 @@ interface UserProfile {
                 uploadImage(e)
               }}
             />
-
-
             </Grid>
-
           <Grid
             container
             spacing={3}
@@ -170,8 +165,6 @@ interface UserProfile {
             md={12}
             xs={12}
           >
-            <p>使用プログラミング言語</p>
-            <p className="article">vue.js</p>
 
           </Grid>
 

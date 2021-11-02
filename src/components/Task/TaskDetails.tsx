@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
-import {Task, Content} from '../../type/interfaces'
+import {Task, Content, User} from '../../type/interfaces'
 import {displayImage} from '../../api/common/DisplayImage'
-
+import Cookies from 'js-cookie'
 import {
   Box,
   Button,
@@ -19,15 +19,38 @@ interface TaskItem {
   task: Task
   setEdit: any
   contents: Content[]
+  user :User
 }
 
 
- const TaskDetails:React.FC<TaskItem> = ({task, setEdit, contents}) => {
+ const TaskDetails:React.FC<TaskItem> = ({task, setEdit, contents, user}) => {
+
+  const _access_token = Cookies.get("_access_token")
+  const _client = Cookies.get("_client")
+  const _uid = Cookies.get("_uid")
+
 
   useEffect(() => {
-    console.log("task.logoImage?.url", task.logoImage)
+    console.log("task.logoImage?.url", _uid, user.email)
   }, [])
   
+  const patchButton = () => {
+    if (user.email === _uid) {
+      return (
+        <>
+        <Button
+          color="secondary"
+          variant="contained"
+          onClick={()=>{setEdit(false)}}
+        >
+          編集
+        </Button>
+      </>
+      );
+    } 
+  };
+
+
 
   return (
       <Card>
@@ -47,7 +70,7 @@ interface TaskItem {
               xs={12}
             >
               {/* <img alt="logo" src={task.logoImage?.url} height="70%" width="100%"/> */}
-              <img alt="logo" src={displayImage(`http://54.199.221.123/${task.logoImage?.url}`)} height="70%" width="100%"/>
+              <img alt="logo" src={displayImage(`https://enjob.work/${task.logoImage?.url}`)} height="70%" width="100%"/>
             </Grid>
             <Grid
               item
@@ -62,7 +85,7 @@ interface TaskItem {
               xs={12}
             >
               <h3>ポートフォリオURL</h3>
-                <p>{task.purl}</p>
+                <a href={task.purl}>{task.purl}</a>
             </Grid>
             <Grid
               item
@@ -78,15 +101,15 @@ interface TaskItem {
               md={12}
               xs={12}
             >
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             {contents.map((content:Content, index:number) =>
-                  <div key={index}>
-                    <Card>
-                    <CardContent>
+                  <div className="content" key={index}>
                     <h3>{content.title}</h3>
+                    <Divider />
                     <p >{content.text}</p>
-                      </CardContent>
-                    </Card>
-                    <br/>
                   </div>
                   )}
           </Grid>
@@ -98,13 +121,7 @@ interface TaskItem {
                   p: 2
                 }}
               >
-                <Button
-                  color="secondary"
-                  variant="contained"
-                  onClick={()=>{setEdit(false)}}
-                >
-                  編集
-                </Button>
+                {patchButton()}
               </Box>
 
           <Grid>

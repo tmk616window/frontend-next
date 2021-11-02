@@ -3,7 +3,7 @@ import Image from 'next/image'
 import {createTask} from '../../api/task/CreateTask'
 import {createContent} from '../../api/task/content/CreateContent'
 import { useRouter } from 'next/router';
-
+import Cookies from "js-cookie";
 import {
   Box,
   Button,
@@ -43,6 +43,8 @@ type content = {
   const [desc, setDesc] = useState<string>("")
   const [purl, setPurl] = useState<string>("")
   const [image, setImage] = useState<string>("")
+  const currentId = Cookies.get("id")
+  const [cid, setCId] = useState<any>(currentId)
   const addContent = () => {
     setContents([...contents, {title:"", text:""}]);
     console.log(contents)
@@ -95,7 +97,7 @@ const handleChange = (event: any) => {
     if (image) formData.append("logoImage", image)
     formData.append("purl", purl)
     formData.append("description", desc)
-    formData.append("user_id", "1")
+    formData.append("user_id", cid)
 
 
     return formData

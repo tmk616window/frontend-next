@@ -1,12 +1,12 @@
 import {api} from '../common/client'
 
-export const createLike =  (userId:number, taskId: number) => {
+export const createLike =  (taskId: number, userId:any) => {
     return api.post("/likes" , 
     {
         // task_id: taskId,
         // user_id: userId,
-        task_id: 2,
-        user_id: 3,
+        task_id: taskId,
+        user_id: userId,
 
     }
     )}

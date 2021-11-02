@@ -7,6 +7,7 @@ import {SignInParams} from '../src/type/interfaces'
 import { signIn } from "../src/api/login/auth";
 import { AuthContext } from "./_app"
 import React, { useState, useContext } from "react"
+import { useRouter } from 'next/router'
 
 
 import {
@@ -27,6 +28,7 @@ let style = {
 
 
 const Login: React.FC = () => {
+  const router = useRouter()
 
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext)
 
@@ -42,12 +44,12 @@ const Login: React.FC = () => {
         Cookies.set("_access_token", res.headers["access-token"])
         Cookies.set("_client", res.headers["client"])
         Cookies.set("_uid", res.headers["uid"])
+        Cookies.set("id", res.data.data.id)
 
         setIsSignedIn(true)
         setCurrentUser(res.data)
 
-        // history.push("/")
-
+        router.push({ pathname: '/profile', query: { id: res.data.data.id } })
         console.log("Signed in successfully!")
       } else {
         // setAlertMessageOpen(true)

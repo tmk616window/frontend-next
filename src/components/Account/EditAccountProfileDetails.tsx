@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
 import {User} from '../../type/interfaces'
 import {updateUser} from '../../api/user/UpdateUser'
-
+import Cookies from 'js-cookie'
 import {
   Box,
   Button,
@@ -40,6 +40,12 @@ const states = [
 ];
 
  const EditAccountProfileDetails:React.FC<UserProfile> = ({user, setEdit}) => {
+
+  const _uid = Cookies.get("_uid")
+  useEffect(() => {
+    console.log(user.email, _uid)
+  }, [])
+
   const [values, setValues] = useState<any>({
     name: user.name,
     email: user.email,
@@ -48,6 +54,28 @@ const states = [
     age: user.age
   });
   
+  const patchButton = () => {
+    if(user.email === _uid) {
+      return (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            p: 2
+          }}
+        >
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={() =>{setEdit(false)}}
+          >
+            編集
+          </Button>
+        </Box>  
+      )
+    }
+  };
+
 
 
   const handleChange = (event: any) => {    
@@ -82,21 +110,21 @@ const states = [
               md={12}
               xs={12}
             >
-              <p>{user.email}</p>
+              <p>メールアドレス：{user.email}</p>
             </Grid>
             <Grid
               item
               md={6}
               xs={12}
             >
-              <p>{user.age}歳</p>
+              <p>年齢：{user.age}歳</p>
             </Grid>
             <Grid
               item
               md={6}
               xs={12}
             >
-              <p>{user.live}</p>
+              <p>居住都道府県：{user.live}</p>
             </Grid>
             <Grid
             item
@@ -104,25 +132,7 @@ const states = [
             md={12}
             xs={12}
           >
-            <p>使用プログラミング言語</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-            <p className="article">vue.js</p>
-
           </Grid>
-
             <Grid
             item
             lg={12}
@@ -138,21 +148,7 @@ const states = [
           </Grid>
         </CardContent>
         <Divider />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: 2
-          }}
-        >
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={() =>{setEdit(false)}}
-          >
-            編集
-          </Button>
-        </Box>
+        {patchButton()}
       </Card>
       </div>
   );

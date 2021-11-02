@@ -6,25 +6,14 @@ import {
     Box,
     Container,
     Grid,
-    IconButton,
   } from '@material-ui/core';
-  import Favorite from '@material-ui/icons/Favorite';
   import TaskProfile from '../src/components/Task/TaskProfile';
   import TaskDetails from '../src/components/Task/TaskDetails';
   import TaskProlangs from '../src/components/Task/TaskProlangs'
   import TaskTools from '../src/components/Task/TaskTools'
   import TaskComment from '../src/components/Task/TaskComment'
-  import {createLike} from '../src/api/like/CreateLike'
-  import { makeStyles } from '@material-ui/core/styles'
-
-  const useStyles = makeStyles({
-    customButton: {
-      position: "fixed",
-      bottom: "50px",
-      left: "30px",
-        },
-  })
-
+  import TaskLikes from '../src/components/Task/TaskLikes'
+  import Cookies from 'js-cookie'
 
   //サーバーサイドレンダリング
   export async function getServerSideProps(context:any) {
@@ -32,7 +21,6 @@ import {
     const task = (await getTask(id)).data
     const comments = (await getComments(id)).data
 
-  
     return {
       props: {
         id: id,
@@ -43,16 +31,22 @@ import {
   }
 
   const Tasks = (props:any) => {
-
-    const[edit, setEdit] = useState<boolean>(true)
-    const classes = useStyles()
-    const task = props.task.task.task
+    const currentId = Number(Cookies.get("id"))
+    const pTask = props.task.task.task
+    const user = props.task.task.user
     const cTask = props.task.task
     const comments = props.comments.comments
+    const pLikes = props.task.task.likes
+    const[edit, setEdit] = useState<boolean>(true)
+    const[task, setTask] = useState<any>(pTask)
+    const[prolangs, setProlangs] = useState<any>(cTask.prolongs)
+    const[ptools, setPtools] = useState<any>(cTask.tools)
+    const[likes, setLikes] = useState<any>(pLikes)
+    const[content, setContent] = useState<any>(cTask.contents)
 
-      useEffect(() => {
-        console.log("user", task)
-      },[]) 
+    useEffect(() => {
+      console.log("user", props.task.task.likes)
+    },[]) 
     
     return(
       <>    
@@ -69,30 +63,31 @@ import {
             >
               <Grid
                 item
-                lg={9}
-                md={9}
-                xs={12}
-              > 
+                lg={8}
+                md={8}
+                xs={11}
+              >
                 {edit
-                  ? <TaskDetails task={task} setEdit={setEdit} contents={cTask.contents}/>
+                  ? <TaskDetails task={task} setEdit={setEdit} contents={cTask.contents} user={user}/>
                   
 
-                    : <EditTaskDetails  task={task} setEdit={setEdit} id={task.id} propsContents={cTask.contents}/>
+                    : <EditTaskDetails  task={task} setEdit={setEdit} id={pTask.id} propsContents={content} setContent={setContent} setTask={setTask}/>
                 }
               </Grid>
               <Grid
                 item
-                lg={3}
-                md={3}
-                xs={12}
+                lg={4}
+                md={4}
+                xs={11}
               >
-                <TaskProlangs proL={cTask.prolangs} id={task.id} />
+                <TaskProlangs proL={prolangs} id={pTask.id} user={user} setProlangs={setProlangs}/>
                 <br/>
-                <TaskTools  tls={cTask.tools} id={task.id}/>
+                <TaskTools  tls={ptools} id={pTask.id} user={user} setPtools={setPtools}/>
                 <br/>
                 <TaskProfile user={cTask.user}/>
               </Grid>
             </Grid>
+            <TaskLikes likes={likes} setLikes={setLikes} currentId={currentId} taskId={pTask.id}/>
             <Grid
                 spacing={3}
                 lg={10}
@@ -100,7 +95,7 @@ import {
                 xs={12}
               >
               <br/>
-              <TaskComment id={task.id} comments={comments}/>
+              <TaskComment id={pTask.id} comments={comments} user={user}/>
             </Grid>
             <Grid
                 spacing={3}
@@ -109,7 +104,6 @@ import {
                 xs={12}
               >
             </Grid>
-            < IconButton className={classes.customButton} onClick={() => {createLike(2,2)}}><Favorite/></IconButton>
           </Container>
         </Box>
       </>  

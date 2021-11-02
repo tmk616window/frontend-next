@@ -40,7 +40,7 @@ interface UserProfile {
       >
         
         <Avatar 
-        src={displayImage(`http://54.199.221.123/${user.image?.url}`)}
+        src={displayImage(`https://enjob.work/${user.image?.url}`)}
         />
         <br/>
 
@@ -76,10 +76,9 @@ interface UserProfile {
         fullWidth
         variant="text"
       >
-        画像編集
+        スカウトメールを送る
       </Button>
     </CardActions>
-    
   </Card>
   </>
   )
