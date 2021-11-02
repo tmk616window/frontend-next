@@ -60,7 +60,6 @@ export const TaskList = (props:any) => {
                 <p className="description">{task.description}</p>
                 <p>使用技術</p>
                 <div className="langArticle">
-
                 {task.prolongs.map((proLang:ProLang ,index:number)=> (  
                   <span className="article" key={index}>{proLang.lange}</span>
                 ))}
