@@ -52,6 +52,7 @@ import { useRouter } from 'next/router'
 
 
     const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
+
         try {
           const _access_token = Cookies.get("_access_token")
           const _client = Cookies.get("_client")

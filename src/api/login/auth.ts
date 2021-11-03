@@ -5,12 +5,17 @@ import { SignUpParams, SignInParams, currentUser,User, SignIn } from "../../type
 
 // サインアップ（新規アカウント作成）
 export const signUp = (params: SignUpParams) => {
-  return client.post("auth", params)
+  return client.post<{data: SignIn}>("auth", params)
 }
 
 // サインイン（ログイン）
 export const signIn = (params: SignInParams)  => {
   return client.post<{data: SignIn}>("auth/sign_in", params)
+}
+
+// サインイン（ログイン）
+export const gustSignIn = ()  => {
+  return client.post<{data: SignIn}>("auth/sign_in", {email:"test123@example.com", password:"testtest"})
 }
 
 // サインアウト（ログアウト）

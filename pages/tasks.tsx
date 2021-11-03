@@ -22,31 +22,8 @@ export const TaskList = (props:any) => {
 
   const tasks = props.tasks.tasks
 
-
-  useEffect(() => {
-
-    // {tasks.prolongs.map((proLang:ProLang ,index:number)=> (  
-    //   console.log("xwxwxw",proLang.lange)
-    //   // <span className="article" key={index}>{proLang.lange}</span>
-    // ))}
-
-
-    // console.log("tasks.prolongs",tasks.prolongs)
-  },[])
-
-  
-
-  let listItem = {
-    margin: "10px 20px 20px 20px",
-  }
-
-  let taslList = {
-    // backgroundColor: "#99FFFF	",
-  }
-  // console.log("dddmdopekmdopew", tasks)
     return (
-      <div style={taslList}>
-              {/* <>{tasks}</> */}
+      <div >
         <ul className="list-group">
           {tasks.map((task:Task ,index:number)=> (
             <Link href={{ pathname: '/task', query: { id: task.id } }}>
@@ -63,9 +40,7 @@ export const TaskList = (props:any) => {
                 {task.prolongs.map((proLang:ProLang ,index:number)=> (  
                   <span className="article" key={index}>{proLang.lange}</span>
                 ))}
-
                 </div>
-
               </div>
             </li>
             </Link>

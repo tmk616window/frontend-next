@@ -124,16 +124,6 @@ export default function Login() {
                     ログイン
                   </Button>
                 </Box>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  アカウントをお持ちですか?
-                  {' '}
-                  <Link >
-                    ログイン
-                  </Link>
-                </Typography>
               </form>
             )}
           </Formik>

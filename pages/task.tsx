@@ -69,8 +69,6 @@ import {
               >
                 {edit
                   ? <TaskDetails task={task} setEdit={setEdit} contents={cTask.contents} user={user}/>
-                  
-
                     : <EditTaskDetails  task={task} setEdit={setEdit} id={pTask.id} propsContents={content} setContent={setContent} setTask={setTask}/>
                 }
               </Grid>

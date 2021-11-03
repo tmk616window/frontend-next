@@ -3,10 +3,9 @@ import Image from 'next/image'
 import { Formik } from 'formik';
 import LogIn from '../img/login.png'
 import Cookies from "js-cookie"
-import {SignInParams} from '../src/type/interfaces'
-import { signIn } from "../src/api/login/auth";
+import { signIn, gustSignIn } from "../src/api/login/auth";
 import { AuthContext } from "./_app"
-import React, { useState, useContext } from "react"
+import React, { useContext } from "react"
 import { useRouter } from 'next/router'
 
 
@@ -26,19 +25,15 @@ let style = {
 };
 
 
-
 const Login: React.FC = () => {
   const router = useRouter()
-
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext)
-
   const handleSubmit = async (params:any) => {
     console.log(params)
 
     try {
       const res = await signIn(params)
       console.log(res)
-
       if (res.status === 200) {
         // ログインに成功した場合はCookieに各値を格納
         Cookies.set("_access_token", res.headers["access-token"])
@@ -56,11 +51,21 @@ const Login: React.FC = () => {
       }
     } catch (err) {
       console.log(err)
+      alert("パスワードとメールアドレスが一致していない可能性があります")
       // setAlertMessageOpen(true)
     }
 
+  }
 
-}
+  const handleGustSubmit = async () => {
+    const res = await gustSignIn()
+    Cookies.set("_access_token", res.headers["access-token"])
+    Cookies.set("_client", res.headers["client"])
+    Cookies.set("_uid", res.headers["uid"])
+    Cookies.set("id", res.data.data.id)
+    router.push({ pathname: '/profile', query: { id: res.data.data.id } })
+  }
+
 
 
   return (
@@ -162,19 +167,23 @@ const Login: React.FC = () => {
                     ログイン
                   </Button>
                 </Box>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  アカウントをお持ちですか?
-                  {' '}
-                  <Link >
-                    ログイン
-                  </Link>
-                </Typography>
               </form>
             )}
           </Formik>
+          <Box sx={{ py: 2 }}>
+            <Button
+              color="primary"
+              
+              // disabled={isSubmitting}
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+              onClick={()=>handleGustSubmit()}
+            >
+              ゲストログイン
+            </Button>
+          </Box>
         </Container>
       </Box>
     </>

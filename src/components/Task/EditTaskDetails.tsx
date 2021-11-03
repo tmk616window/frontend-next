@@ -99,13 +99,10 @@ const patchTask = async () => {
   const uData = createFormData()
   setEdit(true)
   const { data }  = await updateTask(id, uData)
-  console.log("updateTask(id, data)updateTask(id, data)", data.task)
   patchContent()
-  console.log(data.task)
   setTask(data.task)
   const content = (await getTask(id)).data
   setContent(content.task.contents)
-  console.log("data.taskdata.taskdata.taskdata.task", content.task.contents)
   // router.push({
   //   pathname:"/task",       
   //   query: {id : id} 

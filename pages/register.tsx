@@ -3,9 +3,9 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import Cookies from "js-cookie"
 import { signUp } from "../src/api/login/auth"
-import { SignUpParams } from "../src/type/interfaces"
 import Image from 'next/image'
 import { AuthContext } from "./_app"
+import { useRouter } from 'next/router'
 
 import Regi from '../img/register.png'
 import {
@@ -22,43 +22,41 @@ import {
 
 
 const Register = () => {
-
+  const router = useRouter()
   const { setIsSignedIn, setCurrentUser, currentUser } = useContext(AuthContext)
 
+    let style = {
+    margin: "100px 0px 0px 0px"
+    };
 
-  let style = {
-  margin: "100px 0px 0px 0px"
-};
+  const handleSubmit = async (params:any) => {
+    try {
+      const res = await signUp(params)
+      console.log(res)
 
-const handleSubmit = async (params:any) => {
-  // e.preventDefault()
+      if (res.status === 200) {
 
+        Cookies.set("_access_token", res.headers["access-token"])
+        Cookies.set("_client", res.headers["client"])
+        Cookies.set("_uid", res.headers["uid"])
+        Cookies.set("id", res.data.data.id)
 
-  try {
-    const res = await signUp(params)
-    console.log(res)
+        setIsSignedIn(true)
+        setCurrentUser(res.data)
+        console.log(currentUser)
 
-    if (res.status === 200) {
+        router.push({ pathname: '/profile', query: { id: res.data.data.id } })
 
-      Cookies.set("_access_token", res.headers["access-token"])
-      Cookies.set("_client", res.headers["client"])
-      Cookies.set("_uid", res.headers["uid"])
-
-      setIsSignedIn(true)
-      setCurrentUser(res.data)
-      console.log(currentUser)
-
-      // histroy.push("/")
-
-      console.log("Signed in successfully!")
-    } else {
+        console.log("Signed in successfully!")
+      } else {
+        // setAlertMessageOpen(true)
+      }
+    } catch (err) {
+      console.log(err)
+      alert("すでに登録されているメールアドレスの可能性があります。")
       // setAlertMessageOpen(true)
     }
-  } catch (err) {
-    console.log(err)
-    // setAlertMessageOpen(true)
   }
-}
 
 
 
@@ -177,7 +175,7 @@ const handleSubmit = async (params:any) => {
                 >
                   アカウントをお持ちですか？
                   {' '}
-                  <Link >
+                  <Link href={"/login"}>
                     ログイン
                   </Link>
                 </Typography>
