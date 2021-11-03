@@ -9,7 +9,7 @@ import {
   import Favorite from '@material-ui/icons/Favorite';
   import FavoriteBorderIcon from '@material-ui/icons/Favorite';
   import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-  
+import {useState, useEffect} from 'react'
 
   interface LikesParams{
     likes : Like[]
@@ -19,46 +19,43 @@ import {
   }
 
  const TaskLikes:React.FC<LikesParams> = ({likes, currentId, taskId, setLikes}) => {
-
+  const [slike, setSlike] = useState<number>()
 
   const destroyLike = async (id:number) => {
     deleteLike(id)
     const {data} = await getTask(taskId)
-    console.log(data.task.likes)
     setLikes(data.task.likes)
-    // location.reload();
+    setSlike(0)
   }
 
   const postLike = async () => {
     createLike(taskId,currentId)
     const {data} = await getTask(taskId)
-    console.log(data.task.likes)
     setLikes(data.task.likes)
-    // location.reload();
-  }
-
-
-  const likeButton = () => {
-    const like:number[] = []
-    likes.filter(likes => {
+    console.log("create", data)
+    data.task.likes.filter(likes => {
       if(likes.user_id === currentId) {
-        like.push(likes.id)
+        setSlike(likes.id)
       }
     })
-    if(like.length) {
-      return <Button onClick={() => {destroyLike(like[0])}}><FavoriteBorderIcon color="error" fontSize="large"/>いいね取り消し</Button>
+  }
+
+  useEffect(() => {
+    console.log("swqdwdqaaaaaa")
+    likes.filter(likes => {
+      if(likes.user_id === currentId) {
+        setSlike(likes.id)
+      }
+    })
+  }, [])
+
+  const likeButton = () => {
+    if(slike) {
+      return <Button onClick={() => {destroyLike(slike)}}><FavoriteBorderIcon color="error" fontSize="large"/>いいね取り消し</Button>
     } else {
       return <Button onClick={() => {postLike()}}><FavoriteBorderIcon  fontSize="large"/>いいね</Button>
     }
   }
-
-
-
-  // useEffect(() => {
-  //   location.reload()
-  // },[deleteLike, createLike]) 
-
-
 
   return (
     <>

@@ -46,7 +46,7 @@ import {
 
     useEffect(() => {
       console.log("user", props.task.task.likes)
-    },[]) 
+    }) 
     
     return(
       <>    
