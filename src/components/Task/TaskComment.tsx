@@ -28,11 +28,12 @@ const TaskComment:React.FC<CommentParam> = ({comments, id, user}) => {
   const[comment, setComment] = useState<string[]>([])
   const [form, setForm] = useState<string>("")
   const _uid = Cookies.get("_uid")
+  const currentId = Number(Cookies.get("id"))
 
   const addContent = () => {
     setComment([...comment, form]);
     console.log(comment)
-    createComment(form, id, 1)
+    createComment(form, id, currentId)
     setForm("")
     location.reload();
     };
@@ -42,11 +43,6 @@ const TaskComment:React.FC<CommentParam> = ({comments, id, user}) => {
     location.reload();
   }
   
-  // useEffect(() => {
-  //   console.log("commentsuser", user)
-  // },[]) 
-
-
   const commentForm = () => {
     if (user.email !== _uid) {
       return (
@@ -79,14 +75,6 @@ const TaskComment:React.FC<CommentParam> = ({comments, id, user}) => {
     } 
   };              
 
-  const deleteButton = (index:number) => {
-    // if (user.email === _uid) {
-      if (_uid) {
-      return (
-          < IconButton onClick={() =>deleteComment(index)}><DeleteIcon fontSize="small"/></IconButton>
-      );
-    }
-  }
 
     return (
         <>
@@ -112,7 +100,11 @@ const TaskComment:React.FC<CommentParam> = ({comments, id, user}) => {
                   >    
                     ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{comment.user.email}</Link>
                   </Box>
-                  {deleteButton(index)}
+                  {comment.user.email === _uid
+                    ? < IconButton onClick={() =>deleteComment(index)}><DeleteIcon fontSize="small"/></IconButton>
+                    : <div className='normalButtonInner'></div>
+                  }
+                  
                     </CardContent>
                   </Card>
                   <br/>
