@@ -24,15 +24,11 @@ interface TaskItem {
 
 
  const TaskDetails:React.FC<TaskItem> = ({task, setEdit, contents, user}) => {
-
-  const _access_token = Cookies.get("_access_token")
-  const _client = Cookies.get("_client")
   const _uid = Cookies.get("_uid")
-
-
-  useEffect(() => {
-    console.log("task.logoImage?.url", _uid, user.email)
-  }, [])
+  // useEffect(() => {
+  //   console.log("task.logoImage?.url", _uid, user.email)
+  // }, [])
+  const[pcontests, setPContents] = useState(contents)
   
   const patchButton = () => {
     if (user.email === _uid) {
@@ -68,7 +64,6 @@ interface TaskItem {
               md={12}
               xs={12}
             >
-              {/* <img alt="logo" src={task.logoImage?.url} height="70%" width="100%"/> */}
               <img alt="logo" src={displayImage(`https://enjob.work/${task.logoImage?.url}`)} height="400px" width="100%"/>
             </Grid>
             <Grid
@@ -104,7 +99,7 @@ interface TaskItem {
             <br/>
             <br/>
             <br/>
-            {contents.map((content:Content, index:number) =>
+            {pcontests.map((content:Content, index:number) =>
                   <div className="content" key={index}>
                     <h3>{content.title}</h3>
                     <Divider />

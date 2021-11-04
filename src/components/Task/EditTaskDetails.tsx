@@ -70,15 +70,21 @@ interface TaskItem {
     setImage(file)
   }, [])
 
-const patchContent = () => {
-  console.log(contents)
+const patchContent = async () => {
+  const c:Content[] = []
   for (const content of contents) {
     if(content.id) {
-      updateContent(content['title'], content['text'], task.id, content.id)
+      const a = (await updateContent(content['title'], content['text'], task.id, content.id)).data.content
+      c.push(a)
     } else {
-      createContent(content['title'], content['text'], task.id)
+      const b = (await createContent(content['title'], content['text'], task.id)).data.content
+      c.push(b)
     }
   }
+  console.log("c", c)
+  setContents(c)
+  setContent(c)
+  return c
   
 }
 
@@ -99,14 +105,12 @@ const patchTask = async () => {
   const uData = createFormData()
   setEdit(true)
   const { data }  = await updateTask(id, uData)
-  patchContent()
+  const pc = patchContent()
+  console.log("patchContent()", pc)
   setTask(data.task)
-  const content = (await getTask(id)).data
-  setContent(content.task.contents)
-  // router.push({
-  //   pathname:"/task",       
-  //   query: {id : id} 
-  // });
+  location.reload()
+  // const content = (await getTask(id)).data
+  // setContent(content.task.contents)
   
 }
 
