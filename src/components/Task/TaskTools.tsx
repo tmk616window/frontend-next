@@ -30,34 +30,27 @@ import {
  const TaskTools:React.FC<ToolsParams> = ({tls, id, user, setPtools}) => {
 
     const [toolForm, setToolForm] = useState<string>("")
-    const [tools, setTools] = useState<string[]>([])
+    const [tools, setTools] = useState<Tool[]>(tls)
     const _uid = Cookies.get("_uid")
 
 
-    const deleteContent = async (id:number) => {
-      const {data} = await destroyTool(tls[id].id)
-      const tProlangs = (await getTask(data.tool.task_id)).data
-      setPtools(tProlangs.task.tools)
-      location.reload();
+    const deleteContent = async (index:number, tool:Tool) => {
+      destroyTool(tools[index].id)
+      tools.splice(index, 1)
+      setTools(tools.filter((x:Tool) => x !== tool))
     }
-      
-    useEffect(() => {
-    }, [])
     const addContent = async () => {
-      setTools([...tools, toolForm]);
-      createTool(toolForm, id)
-      const tTools = (await getTask(id)).data
-      setPtools(tTools.task.tools)
+      const tool = (await createTool(toolForm, id)).data.tool
+      setTools([...tools, tool])
       setToolForm("")
-      location.reload();
-      };
+    };
 
       const atools = () => {
         if (user.email === _uid) {
           return (
             <>
-              {tls.map((tool:Tool, index:number) =>
-                    <p key={index} className="toolArticle">{tool.name}< IconButton onClick={() =>deleteContent(index)}><DeleteIcon fontSize="small"/></IconButton></p>
+              {tools.map((tool:Tool, index:number) =>
+                    <p key={index} className="toolArticle">{tool.name}< IconButton onClick={() =>deleteContent(index, tool)}><DeleteIcon fontSize="small"/></IconButton></p>
                   )}
               <Divider />
               <CardActions>

@@ -30,24 +30,18 @@ import {
 
  const TaskProlangs:React.FC<ProLangParam> = ({proL, id, user, setProlangs}) => {  
       const [form, setForm] = useState<string>("")
-      const [proLangs, setProLangs] = useState<any>(proL)
+      const [proLangs, setProLangs] = useState<ProLang[]>(proL)
       const _uid = Cookies.get("_uid")
 
       const destroyContent = async (index:number, proLang:ProLang) => {
-        console.log("proLangs", proLangs)
         destroyProLang(proLangs[index].id)
-        console.log(",dl;,dlp,dle",proLangs.splice(index, 1))
-        
-        setProlangs(proLangs.filter((x:any) => x !== proLang)) 
+        proLangs.splice(index, 1)
+        setProlangs(proLangs.filter((x:ProLang) => x !== proLang)) 
       }
         
       const addContent = async () => {
         const prolong = (await createProLang(form, id)).data.prolong
         setProLangs([...proLangs, prolong]);
-        // const tProlangs = (await getTask(id)).data
-        // console.log("tProlangs", tProlangs)
-        // setProlangs(tProlangs.task.prolongs)
-        // location.reload();
         setForm("")
         };
 
