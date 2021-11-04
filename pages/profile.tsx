@@ -38,14 +38,6 @@ const ProfilePage =(props:any) => {
   const t = props.user.user.task
   const[user, setUser] = useState(u)
 
-
-  useEffect(() => {
-  
-    console.log("props.userprops.user", t)
-  },[])
-
-
-  
   return (
   <>
     <Box

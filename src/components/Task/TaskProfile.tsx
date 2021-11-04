@@ -31,11 +31,9 @@ interface UserParams{
           }}
         >
 
-        {/* <Avatar src={displayImage({user})/> */}
-        <Avatar />
-
-
-
+        <Avatar 
+        src={displayImage(`https://enjob.work/${user.image?.url}`)}
+        />
         
           <Typography
             color="textPrimary"

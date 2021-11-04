@@ -30,22 +30,24 @@ import {
 
  const TaskProlangs:React.FC<ProLangParam> = ({proL, id, user, setProlangs}) => {  
       const [form, setForm] = useState<string>("")
-      const [proLangs, setProLangs] = useState<string[]>([])
+      const [proLangs, setProLangs] = useState<any>(proL)
       const _uid = Cookies.get("_uid")
 
-      const destroyContent = async (id:number) => {
-        const {data} = await destroyProLang(proL[id].id)
-        const tProlangs = (await getTask(data.prolong.task_id)).data
-        setProlangs(tProlangs.task.prolongs)
-        location.reload();
+      const destroyContent = async (index:number, proLang:ProLang) => {
+        console.log("proLangs", proLangs)
+        destroyProLang(proLangs[index].id)
+        console.log(",dl;,dlp,dle",proLangs.splice(index, 1))
+        
+        setProlangs(proLangs.filter((x:any) => x !== proLang)) 
       }
         
       const addContent = async () => {
-        setProLangs([...proLangs, form]);
-        createProLang(form, id)
-        const tProlangs = (await getTask(id)).data
-        setProlangs(tProlangs.task.prolongs)
-        location.reload();
+        const prolong = (await createProLang(form, id)).data.prolong
+        setProLangs([...proLangs, prolong]);
+        // const tProlangs = (await getTask(id)).data
+        // console.log("tProlangs", tProlangs)
+        // setProlangs(tProlangs.task.prolongs)
+        // location.reload();
         setForm("")
         };
 
@@ -54,8 +56,8 @@ import {
           if (user.email === _uid) {
             return (
               <>
-                {proL.map((p:ProLang, index:number) =>
-                    <p key={index} className="article">{p.lange}< IconButton onClick={() =>destroyContent(index)}><DeleteIcon fontSize="small"/></IconButton></p>
+                {proLangs.map((p:ProLang, index:number) =>
+                    <p key={index} className="article">{p.lange}< IconButton onClick={() =>destroyContent(index, p)}><DeleteIcon fontSize="small"/></IconButton></p>
                   )}
                 <Divider />
                   <CardActions>
