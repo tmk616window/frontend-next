@@ -1,13 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image'
-import {createTask} from '../../api/task/CreateTask'
 import {createContent} from '../../api/task/content/CreateContent'
 import {Task, Content} from '../../type/interfaces'
 import {updateTask} from '../../api/task/UpdateTask'
 import {updateContent} from '../../api/task/content/UpdateContent'
 import { useRouter } from 'next/router';
 import {destroyContent} from '../../api/task/content/DestroyContent'
-import {getTask} from '../../api/task/GetTask'
 import {
   Box,
   Button,

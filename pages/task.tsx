@@ -65,7 +65,7 @@ import {
                 item
                 lg={8}
                 md={8}
-                xs={11}
+                xs={12}
               >
                 {edit
                   ? <TaskDetails task={task} setEdit={setEdit} contents={cTask.contents} user={user}/>
@@ -76,7 +76,7 @@ import {
                 item
                 lg={4}
                 md={4}
-                xs={11}
+                xs={12}
               >
                 <TaskProlangs proL={prolangs} id={pTask.id} user={user} setProlangs={setProlangs}/>
                 <br/>
