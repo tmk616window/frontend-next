@@ -20,7 +20,6 @@ import {
   import {createProLang} from '../../api/prolang/CreateProLang'
   import DeleteIcon from '@material-ui/icons/Delete';
   
-  
   interface ProLangParam{
     proL: ProLang[]
     id: number
