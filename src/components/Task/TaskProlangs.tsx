@@ -27,7 +27,6 @@ import {
     setProlangs: any
   }
 
-
  const TaskProlangs:React.FC<ProLangParam> = ({proL, id, user, setProlangs}) => {  
       const [form, setForm] = useState<string>("")
       const [proLangs, setProLangs] = useState<ProLang[]>(proL)
