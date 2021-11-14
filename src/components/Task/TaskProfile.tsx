@@ -32,7 +32,7 @@ interface UserParams{
         >
 
         <Avatar 
-        src={displayImage(`https://enjob.work/${user.image?.url}`)}
+        src={displayImage(`http://localhost/${user.image?.url}`)}
         />
         
           <Typography

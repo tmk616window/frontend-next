@@ -29,7 +29,7 @@ export const TaskList = (props:any) => {
             <Link href={{ pathname: '/task', query: { id: task.id } }}>
             <li key={index} className="list-group-item list-group-item-primary list-item" >
               <div className="item-image">
-                <img src={displayImage(`https://enjob.work/${task.logoImage?.url}`)} alt="..." width = "250" height="250" className="logo-image" />
+                <img src={displayImage(`http://localhost/${task.logoImage?.url}`)} alt="..." width = "250" height="250" className="logo-image" />
               </div>
               <div className="item-content">
                 <h1>{task.title}</h1>

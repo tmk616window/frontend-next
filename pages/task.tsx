@@ -7,7 +7,10 @@ import {
     Container,
     Grid,
   } from '@material-ui/core';
+  import Link from 'next/link'
+
   import TaskProfile from '../src/components/Task/TaskProfile';
+  import ChatPage from './chatPage'
   import TaskDetails from '../src/components/Task/TaskDetails';
   import TaskProlangs from '../src/components/Task/TaskProlangs'
   import TaskTools from '../src/components/Task/TaskTools'
@@ -83,6 +86,9 @@ import {
                 <TaskTools  tls={ptools} id={pTask.id} user={user} setPtools={setPtools}/>
                 <br/>
                 <TaskProfile user={cTask.user}/>
+                <br/>
+                <Link href={{ pathname: '/chatPage', query: { id: user.id } }}>メッセージを送る</Link>
+
               </Grid>
             </Grid>
             <TaskLikes likes={likes} setLikes={setLikes} currentId={currentId} taskId={pTask.id}/>
