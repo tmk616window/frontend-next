@@ -8,6 +8,8 @@ import {useEffect} from 'react'
 import {Task} from '../type/interfaces'
 import {getProLangs} from '../../src/api/prolang/GetProLang'
 import Cookies from 'js-cookie'
+import {displayImage} from '../api/common/DisplayImage'
+
 
 interface RankingParam{
     rTasks: Task[]
@@ -70,22 +72,24 @@ const Top:React.FC<RankingParam> = ({rTasks}) => {
                         </div>
                         <div className="container">
                             <div className="row">
+
                                 {rTasks.map((task:Task, index:number) => 
                                     <div className="col-md-4" key={index}>
                                         <p>{index + 1}位</p>
                                         <div className="card card-1">
-                                        <Image alt="alt" src={Post} width="100%" height="200%" />
+                                        <img src={displayImage(`https://enjob.work/${task.logoImage?.url}`)} alt="..." width="100%" height="200%"  />   
+                                        {/* <Image alt="alt" src={displayImage(`https://enjob.work/${task.logoImage?.url}`)}  /> */}
                                         <div className="cardContent">
-                                            <h3>{task.title}</h3>
-                                            <p className="article" >vue.js</p>
-                                            <p className="article" >vue.js</p>
-                                            <p className="article" >vue.js</p>
-                                            <p className="article" >vue.js</p>
+                                            <h3>タイトル：{task.title}</h3>
+                                            {task.prolongs.map((proLang:any ,index:number)=> (  
+                                                <span className="article" key={index}>{proLang.lange}</span>
+                                                ))}
                                         </div>
-                                        <h4>ユーザー名</h4>
+                                        <h4>{task.user.email}</h4>
+
                                         </div>
                                     </div>
-                                        )}
+                                )}
                             </div>
                         </div>
                     </div>
