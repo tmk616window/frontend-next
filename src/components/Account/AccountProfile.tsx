@@ -1,5 +1,4 @@
 import {User} from '../../type/interfaces'
-import {getPrefectures} from '../../api/user/GetPrefectures'
 import {useEffect} from 'react'
 import {
   Avatar,
@@ -13,19 +12,30 @@ import {
   CardMedia,
   
 } from '@material-ui/core';
-import Image from 'next/image'
 import {displayImage} from '../../api/common/DisplayImage'
-import {} from '@material-ui/core/';
+import Link from 'next/link'
+import {createRoom} from '../../api/chat/room/CreateRoom'
+import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
+
 interface UserProfile {
   user: User
 }
 
  const AccountProfile:React.FC<UserProfile> = ({user}) => {
+  const currentId = Number(Cookies.get("id"))
+  const router = useRouter()
 
   useEffect(() => {
     console.log("user", user.image?.url)
   }, [])
 
+  const postRoom = async () => {
+    const room = (await createRoom(currentId, user.id)).data
+    console.log(room,"dataa")
+    // router.push("/")
+    router.push({ pathname: '/chatroom', query: { id: room.room.id } })
+  }
 
   return (
   <>
@@ -43,7 +53,6 @@ interface UserProfile {
         src={displayImage(`https://enjob.work/${user.image?.url}`)}
         />
         <br/>
-
         <Typography
           color="textPrimary"
           gutterBottom
@@ -71,13 +80,20 @@ interface UserProfile {
     </CardContent>
     <Divider />
     <CardActions>
-      <Button
-        color="secondary"
-        fullWidth
-        variant="text"
-      >
-        スカウトメールを送る
-      </Button>
+    {(() => {
+        if (currentId !== user.id) {
+          return (
+            <Button
+            color="secondary"
+            fullWidth
+            variant="text"
+            onClick={postRoom}
+          >
+              メッセージを送る
+          </Button>    
+          )
+        } 
+      })()}
     </CardActions>
   </Card>
   </>

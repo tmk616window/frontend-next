@@ -87,3 +87,9 @@ export interface Like {
   task_id: number
   user_id: number
 }
+
+export interface Room {
+  id: number
+  user: number
+  chat_id: number
+}

@@ -66,10 +66,8 @@ const PostForm = ({ handleGetPosts }: PostFormProps) => {
   // FormData形式でデータを作成
   const createFormData = (): FormData => {
     const formData = new FormData()
-
     formData.append("content", content)
     if (image) formData.append("image", image)
-
     return formData
   }
 
