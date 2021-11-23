@@ -13,30 +13,45 @@ import {getUser} from '../src/api/user/GetUser'
 import {useEffect, useState} from 'react'
 import Link from 'next/link'
 import {getProLangs} from '../src/api/prolang/GetProLang'
-import {Task} from '../src/type/interfaces'
+import {Task, Message} from '../src/type/interfaces'
+import {getUserMessage} from '../src/api/chat/GetUserMessage'
+import {getRoom} from '../src/api/chat/room/GetRoom'
+import Cookies from 'js-cookie'
+
 
 //サーバーサイドレンダリング
 export async function getServerSideProps(context:any) {
   const id = context.query.id;
   const user = (await getUser(id)).data
   const p = (await getProLangs(id)).data
+  const userMessage = (await getUserMessage(id)).data
+  const rooms = (await getRoom(id)).data
 
   return {
     props: {
       user: user,
       p: p,
-      id: id,                
+      id: id,
+      userMessage:userMessage,
+      rooms:rooms                
     }
   }
 }
 
 
 const ProfilePage =(props:any) => {
-  
   const [edit, setEdit] = useState<boolean>(true)
   const u = props.user.user.user
   const t = props.user.user.task
+  const userMessage = props.userMessage.messages
   const[user, setUser] = useState(u)
+  const rooms = props.rooms.rooms
+  const currentId = Number(Cookies.get("id"))
+
+  
+  // useEffect(() => {
+  //   console.log(rooms)
+  // }, [])
 
   return (
   <>
@@ -57,7 +72,7 @@ const ProfilePage =(props:any) => {
             md={6}
             xs={12}
           >
-            <AccountProfile user={user}/>
+            <AccountProfile user={user} rooms={rooms}/>
             <br/>
             <Card>
               <CardContent>
@@ -80,11 +95,17 @@ const ProfilePage =(props:any) => {
             xs={12}
           >
             {edit
-                  ? <EditAccountProfileDetails user={user} setEdit={setEdit} />
+                  ? <EditAccountProfileDetails user={user} userMessage={userMessage} setEdit={setEdit} />
 
                   
                     : <AccountProfileDetails user={user} setEdit={setEdit} setUser={setUser}/>
                 }
+            
+
+
+
+
+
           </Grid>
         </Grid>
         <Grid
@@ -93,6 +114,8 @@ const ProfilePage =(props:any) => {
             md={6}
             xs={12}
           >
+
+
         </Grid>
       </Container>
     </Box>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Logo from '../../../img/logo.png'
 import Image from 'next/image'
-import {User} from '../../type/interfaces'
+import {User, Message} from '../../type/interfaces'
 import {updateUser} from '../../api/user/UpdateUser'
 import Cookies from 'js-cookie'
 import {
@@ -18,28 +18,11 @@ import {
 
 interface UserProfile {
   user: User
+  userMessage: Message[]
   setEdit: any
 }
 
-
-
-
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
-
- const EditAccountProfileDetails:React.FC<UserProfile> = ({user, setEdit}) => {
+ const EditAccountProfileDetails:React.FC<UserProfile> = ({user, userMessage,setEdit}) => {
 
   const _uid = Cookies.get("_uid")
   useEffect(() => {
@@ -103,7 +86,7 @@ const states = [
               md={12}
               xs={12}
             >
-              {/* <p>{user.name}</p> */}
+              <p>{user.name}</p>
             </Grid>
             <Grid
               item
@@ -149,6 +132,26 @@ const states = [
         </CardContent>
         <Divider />
         {patchButton()}
+
+        <Grid
+            item
+            lg={12}
+            md={12}
+            xs={12}
+          >
+            <p>詳細プロフィール</p>
+            <p>{user.details}</p>
+          </Grid>
+          <br/>
+          <Grid
+            item
+            lg={12}
+            md={12}
+            xs={12}
+          >
+
+
+          </Grid>
       </Card>
       </div>
   );

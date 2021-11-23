@@ -88,28 +88,28 @@ const TaskComment:React.FC<CommentParam> = ({comments, id, user}) => {
               <h3>コメント一覧</h3>     
               {comments.map((comment:Comment, index:number) =>
                 <div key={index}>
-                  <Card>
-                  <CardContent>
-                  <p >{comment.text}</p>
-                  <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    p: 2
-                  }}
-                  >    
-                    ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{comment.user.email}</Link>
-                  </Box>
-                  {comment.user.email === _uid
-                    ? < IconButton onClick={() =>deleteComment(index)}><DeleteIcon fontSize="small"/></IconButton>
-                    : <div className='normalButtonInner'></div>
-                  }
-                  
-                    </CardContent>
-                  </Card>
-                  <br/>
-                </div>
-                )}
+                <Card>
+                <CardContent>
+                <p >{comment.text}</p>
+                <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  p: 2
+                }}
+                >    
+                  ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{comment.user.email}</Link>
+                </Box>
+                {comment.user.email === _uid
+                  ? < IconButton onClick={() =>deleteComment(index)}><DeleteIcon fontSize="small"/></IconButton>
+                  : <div className='normalButtonInner'></div>
+                }
+                
+                  </CardContent>
+                </Card>
+                <br/>
+              </div>
+              )}
             </Grid>
             {commentForm()}
         </>

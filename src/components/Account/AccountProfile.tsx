@@ -1,4 +1,4 @@
-import {User} from '../../type/interfaces'
+import {User, Room} from '../../type/interfaces'
 import {useEffect} from 'react'
 import {
   Avatar,
@@ -20,14 +20,21 @@ import Cookies from 'js-cookie'
 
 interface UserProfile {
   user: User
+  rooms: Room[]
 }
 
- const AccountProfile:React.FC<UserProfile> = ({user}) => {
+ const AccountProfile:React.FC<UserProfile> = ({user, rooms}) => {
   const currentId = Number(Cookies.get("id"))
   const router = useRouter()
 
+  const room = rooms.filter(room => {
+    return room.user === currentId
+  })
+
+
+
   useEffect(() => {
-    console.log("user", user.image?.url)
+    console.log("user", room.length)
   }, [])
 
   const postRoom = async () => {
@@ -76,12 +83,18 @@ interface UserProfile {
           variant="body1"
         >
         </Typography>
+
+
+
+
       </Box>
     </CardContent>
     <Divider />
+
+
     <CardActions>
     {(() => {
-        if (currentId !== user.id) {
+        if (currentId !== user.id && room.length == 0) {
           return (
             <Button
             color="secondary"

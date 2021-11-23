@@ -93,3 +93,11 @@ export interface Room {
   user: number
   chat_id: number
 }
+
+export interface Message {
+  id: number
+  text:string
+  message_id: number
+  chat_id: number
+  user_id:number
+}

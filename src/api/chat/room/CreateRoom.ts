@@ -1,10 +1,10 @@
 import {api} from '../../common/client'
 import {Room} from '../../../type/interfaces'
 
-export const createRoom= (userId:number, currentid:number, ) => {
+export const createRoom= (currentid:number, userId:number ) => {
     return api.post<{room: Room}>("/rooms" , 
     {
-        user: userId,
-        chat_id: currentid,
+        user: currentid,
+        chat_id: userId,
     }
     )}
