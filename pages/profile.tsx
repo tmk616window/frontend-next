@@ -104,6 +104,15 @@ const ProfilePage =(props:any) => {
 
 
 
+            {/* {(() => {
+        if (currentId == user.id ) {
+          return (
+
+            
+
+          )
+        } 
+      })} */}
 
 
           </Grid>

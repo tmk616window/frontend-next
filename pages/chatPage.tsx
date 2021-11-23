@@ -3,7 +3,7 @@ import {
     Container,
     Grid,
   } from '@material-ui/core';
-import {getMessage} from '../src/api/chat/GetMessage'
+import {getMessage} from '../src/api/chat/message/GetMessage'
 import React, { useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 
