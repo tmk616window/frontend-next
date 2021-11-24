@@ -19,9 +19,7 @@ import {
   Typography
 } from '@material-ui/core';
 let style = {
-  // backgroundColor: "#13EEFF",
   margin: "100px 0px 0px 0px",
-  // padding: "200px 0px 190px 0px"
 };
 
 
@@ -47,12 +45,10 @@ const Login: React.FC = () => {
         router.push({ pathname: '/profile', query: { id: res.data.data.id } })
         console.log("Signed in successfully!")
       } else {
-        // setAlertMessageOpen(true)
       }
     } catch (err) {
       console.log(err)
       alert("パスワードとメールアドレスが一致していない可能性があります")
-      // setAlertMessageOpen(true)
     }
 
   }

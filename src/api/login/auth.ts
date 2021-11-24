@@ -15,7 +15,7 @@ export const signIn = (params: SignInParams)  => {
 
 // サインイン（ログイン）
 export const gustSignIn = ()  => {
-  return client.post<{data: SignIn}>("auth/sign_in", {email:"test123@example.com", password:"testtest"})
+  return client.post<{data: SignIn}>("auth/sign_in", {email:"test123@example.com", password:"test123test123"})
 }
 
 // サインアウト（ログアウト）

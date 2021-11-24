@@ -103,16 +103,61 @@ const ProfilePage =(props:any) => {
             
 
 
-
-            {/* {(() => {
-        if (currentId == user.id ) {
+            <h2>メッセージ一覧</h2>
+            {(() => {
+        if (currentId === user.id ) {
           return (
-
-            
-
+            <>
+            {userMessage.map((message:Message, index:number) =>
+                    <Link href={{ pathname: '/chatroom', query: { id: message.message_id } }}>
+                          <div key={index}>
+                          <Card>
+                          <CardContent>
+                          <p >{message.text}</p>
+                          <Box
+                          sx={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            p: 2
+                          }}
+                          >    
+                            {/* ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{comment.user.email}</Link> */}
+                          </Box>
+                          
+                            </CardContent>
+                          </Card>
+                          <br/>
+                        </div>
+                      </Link>
+                      )}
+            </>
           )
         } 
-      })} */}
+      })}
+
+
+{userMessage.map((message:Message, index:number) =>
+                    <Link href={{ pathname: '/chatroom', query: { id: message.message_id } }}>
+                          <div key={index}>
+                          <Card>
+                          <CardContent>
+                          <p >{message.text}</p>
+                          <Box
+                          sx={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            p: 2
+                          }}
+                          >    
+                            {/* ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{comment.user.email}</Link> */}
+                          </Box>
+                          
+                            </CardContent>
+                          </Card>
+                          <br/>
+                        </div>
+                      </Link>
+                      )}
 
 
           </Grid>

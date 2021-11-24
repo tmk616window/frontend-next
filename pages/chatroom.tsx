@@ -38,19 +38,25 @@ import {createMessage} from '../src/api/chat/message/CreateMessage'
     const chatId = Number(props.room.rooms.chat_id)
     const _uid = String(Cookies.get("_uid"))
     const currentId = Number(Cookies.get("id"))
-
+    const userId = Number(props.room.rooms.user)
     const [form, setForm] = useState<string>("")
     const [ms, setMs] = useState<any[]>(messages)
     useEffect(() => {
-      console.log(props.room.rooms.chat_id)
+      console.log("aaaaa",props.room.rooms.user)
     }, [])
 
     const addMessage = async () => {
-      const message = (await createMessage(id, form, currentId, chatId)).data.message
-      setMs([...ms, message]);
-      console.log(message)
-      setForm("")
-
+      if(currentId != chatId) {
+        const message = (await createMessage(id, form, currentId, chatId)).data.message
+        setMs([...ms, message]);
+        console.log(message)
+        setForm("")  
+      } else {
+        const message = (await createMessage(id, form, currentId, userId)).data.message
+        setMs([...ms, message]);
+        console.log(message)
+        setForm("")  
+      }
       };
   
 
