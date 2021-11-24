@@ -28,7 +28,7 @@ interface UserProfile {
   const router = useRouter()
 
   const room = rooms.filter(room => {
-    return room.user === currentId 
+    return room.user === currentId || room.chat_id === currentId
   })
 
 

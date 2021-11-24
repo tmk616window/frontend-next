@@ -90,7 +90,7 @@ export interface Like {
 
 export interface Room {
   id: number
-  user: number
+  user: any
   chat_id: number
 }
 
@@ -100,4 +100,5 @@ export interface Message {
   message_id: number
   chat_id: number
   user_id:number
+  user: User
 }
