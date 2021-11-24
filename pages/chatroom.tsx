@@ -112,10 +112,10 @@ import {createMessage} from '../src/api/chat/message/CreateMessage'
                     >    
                       ユーザー：<Link href={{ pathname: '/profile', query: { id: message.user_id } }}>{message.user.email}</Link>
                     </Box>
-                    {message.user.email === _uid
+                    {/* {message.user.email === _uid
                       ? < IconButton ><DeleteIcon fontSize="small"/></IconButton>
                       : <div className='normalButtonInner'></div>
-                    }
+                    } */}
                     
                       </CardContent>
                     </Card>

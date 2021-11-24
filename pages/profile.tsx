@@ -15,7 +15,7 @@ import Link from 'next/link'
 import {getProLangs} from '../src/api/prolang/GetProLang'
 import {Task, Message} from '../src/type/interfaces'
 import {getUserMessage} from '../src/api/chat/GetUserMessage'
-import {getRoom} from '../src/api/chat/room/GetRoom'
+import {getRooms} from '../src/api/chat/room/GetRooms'
 import Cookies from 'js-cookie'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -32,7 +32,7 @@ export async function getServerSideProps(context:any) {
   const user = (await getUser(id)).data
   const p = (await getProLangs(id)).data
   const userMessage = (await getUserMessage(id)).data
-  const rooms = (await getRoom(id)).data
+  const rooms = (await getRooms()).data
 
   return {
     props: {
