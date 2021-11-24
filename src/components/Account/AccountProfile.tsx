@@ -28,13 +28,13 @@ interface UserProfile {
   const router = useRouter()
 
   const room = rooms.filter(room => {
-    return room.user === currentId
+    return room.user === currentId 
   })
 
 
 
   useEffect(() => {
-    console.log("user", room.length)
+    console.log("user", rooms)
   }, [])
 
   const postRoom = async () => {

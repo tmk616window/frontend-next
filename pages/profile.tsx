@@ -17,6 +17,13 @@ import {Task, Message} from '../src/type/interfaces'
 import {getUserMessage} from '../src/api/chat/GetUserMessage'
 import {getRoom} from '../src/api/chat/room/GetRoom'
 import Cookies from 'js-cookie'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+  customButton: {
+    cursor:"pointer"
+  },
+})
 
 
 //サーバーサイドレンダリング
@@ -47,11 +54,12 @@ const ProfilePage =(props:any) => {
   const[user, setUser] = useState(u)
   const rooms = props.rooms.rooms
   const currentId = Number(Cookies.get("id"))
+  const classes = useStyles()
 
   
-  // useEffect(() => {
-  //   console.log(rooms)
-  // }, [])
+  useEffect(() => {
+    console.log(currentId, user.id)
+  }, [])
 
   return (
   <>
@@ -101,63 +109,39 @@ const ProfilePage =(props:any) => {
                     : <AccountProfileDetails user={user} setEdit={setEdit} setUser={setUser}/>
                 }
             
-
-
             <h2>メッセージ一覧</h2>
             {(() => {
-        if (currentId === user.id ) {
-          return (
-            <>
+                    if (currentId === user.id) {
+                      return (
+                        <>
             {userMessage.map((message:Message, index:number) =>
-                    <Link href={{ pathname: '/chatroom', query: { id: message.message_id } }}>
-                          <div key={index}>
-                          <Card>
-                          <CardContent>
-                          <p >{message.text}</p>
-                          <Box
-                          sx={{
-                            display: 'flex',
-                            justifyContent: 'flex-end',
-                            p: 2
-                          }}
-                          >    
-                            {/* ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{comment.user.email}</Link> */}
-                          </Box>
-                          
-                            </CardContent>
-                          </Card>
-                          <br/>
-                        </div>
-                      </Link>
-                      )}
-            </>
-          )
-        } 
-      })}
+                                <Link href={{ pathname: '/chatroom', query: { id: message.message_id } }} >
+                                      <div key={index} className={classes.customButton}>
+                                      <Card>
+                                      <CardContent>
+                                      <p >{message.text}</p>
+                                      <Box
+                                      sx={{
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        p: 2
+                                      }}
+                                      >    
+                                        ユーザー：<Link href={{ pathname: '/profile', query: { id: message.user_id } }}>{message.user.email}</Link>
+                                      </Box>
+                                      
+                                        </CardContent>
+                                      </Card>
+                                      <br/>
+                                    </div>
+                                  </Link>
+                                  )}
+                        </>
+                      )
+                    } 
+                  })()}
 
 
-{userMessage.map((message:Message, index:number) =>
-                    <Link href={{ pathname: '/chatroom', query: { id: message.message_id } }}>
-                          <div key={index}>
-                          <Card>
-                          <CardContent>
-                          <p >{message.text}</p>
-                          <Box
-                          sx={{
-                            display: 'flex',
-                            justifyContent: 'flex-end',
-                            p: 2
-                          }}
-                          >    
-                            {/* ユーザー：<Link href={{ pathname: '/profile', query: { id: comment.user_id } }}>{comment.user.email}</Link> */}
-                          </Box>
-                          
-                            </CardContent>
-                          </Card>
-                          <br/>
-                        </div>
-                      </Link>
-                      )}
 
 
           </Grid>

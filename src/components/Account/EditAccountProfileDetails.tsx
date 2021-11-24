@@ -133,25 +133,6 @@ interface UserProfile {
         <Divider />
         {patchButton()}
 
-        <Grid
-            item
-            lg={12}
-            md={12}
-            xs={12}
-          >
-            <p>詳細プロフィール</p>
-            <p>{user.details}</p>
-          </Grid>
-          <br/>
-          <Grid
-            item
-            lg={12}
-            md={12}
-            xs={12}
-          >
-
-
-          </Grid>
       </Card>
       </div>
   );
